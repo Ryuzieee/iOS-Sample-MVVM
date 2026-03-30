@@ -22,3 +22,10 @@ struct AppIconButton: View {
         .accessibilityLabel(accessibilityLabel)
     }
 }
+
+#Preview {
+    HStack(spacing: 16) {
+        AppIconButton(systemName: "magnifyingglass", accessibilityLabel: "Search", action: {})
+        AppIconButton(systemName: "heart.fill", accessibilityLabel: "Favorite", action: {}, tint: .red)
+    }
+}

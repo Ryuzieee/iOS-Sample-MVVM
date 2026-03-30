@@ -23,6 +23,11 @@ struct SearchTextField: View {
         }
         .padding(10)
         .background(Color(.systemGray6))
-        .cornerRadius(10)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
+}
+
+#Preview {
+    SearchTextField(text: .constant("pikachu"), placeholder: "Search Pokemon")
+        .padding()
 }

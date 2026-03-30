@@ -17,3 +17,7 @@ struct PokemonIdText: View {
             .foregroundColor(.secondary)
     }
 }
+
+#Preview {
+    PokemonIdText(id: 25)
+}

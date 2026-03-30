@@ -19,3 +19,7 @@ struct LoadingIndicator: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
+
+#Preview {
+    LoadingIndicator()
+}

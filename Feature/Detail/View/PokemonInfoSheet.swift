@@ -69,7 +69,7 @@ struct PokemonInfoSheet: View {
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 2)
                                     .background(Color(.systemGray5))
-                                    .cornerRadius(8)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
                             }
                         }
                         .padding(.horizontal, 16)

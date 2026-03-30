@@ -32,3 +32,10 @@ struct PokemonImage: View {
         .frame(width: size, height: size)
     }
 }
+
+#Preview {
+    PokemonImage(
+        imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+        size: 120
+    )
+}

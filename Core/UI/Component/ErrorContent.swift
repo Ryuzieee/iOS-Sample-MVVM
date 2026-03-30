@@ -69,3 +69,11 @@ struct ErrorContent: View {
         return ""
     }
 }
+
+#Preview("General Error") {
+    ErrorContent(message: "Something went wrong", onRetry: {})
+}
+
+#Preview("Network Error") {
+    ErrorContent(message: "Network error", onRetry: {}, errorType: .network)
+}

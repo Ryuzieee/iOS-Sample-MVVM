@@ -29,15 +29,7 @@ struct ContentView: View {
                 onSearchTap: { showSearch = true },
                 onFavoritesTap: { showFavorites = true }
             )
-            .navigationDestination(for: Route.self) { route in
-                switch route {
-                case let .detail(name):
-                    PokemonDetailView(
-                        viewModel: container.makePokemonDetailViewModel(name: name),
-                        onPokemonTap: { newName in path.append(.detail(newName)) }
-                    )
-                }
-            }
+            .pokemonDetailDestination(container: container, path: $path)
         }
         .sheet(isPresented: $showSearch, onDismiss: { searchPath = [] }) {
             NavigationStack(path: $searchPath) {
@@ -45,15 +37,7 @@ struct ContentView: View {
                     viewModel: container.makeSearchViewModel(),
                     onPokemonTap: { name in searchPath.append(.detail(name)) }
                 )
-                .navigationDestination(for: Route.self) { route in
-                    switch route {
-                    case let .detail(name):
-                        PokemonDetailView(
-                            viewModel: container.makePokemonDetailViewModel(name: name),
-                            onPokemonTap: { newName in searchPath.append(.detail(newName)) }
-                        )
-                    }
-                }
+                .pokemonDetailDestination(container: container, path: $searchPath)
             }
         }
         .sheet(isPresented: $showFavorites, onDismiss: { favoritesPath = [] }) {
@@ -62,15 +46,7 @@ struct ContentView: View {
                     viewModel: container.makeFavoritesViewModel(),
                     onPokemonTap: { name in favoritesPath.append(.detail(name)) }
                 )
-                .navigationDestination(for: Route.self) { route in
-                    switch route {
-                    case let .detail(name):
-                        PokemonDetailView(
-                            viewModel: container.makePokemonDetailViewModel(name: name),
-                            onPokemonTap: { newName in favoritesPath.append(.detail(newName)) }
-                        )
-                    }
-                }
+                .pokemonDetailDestination(container: container, path: $favoritesPath)
             }
         }
         #if MOCK
@@ -95,4 +71,30 @@ struct ContentView: View {
 /// ナビゲーションルート定義。
 enum Route: Hashable {
     case detail(String)
+}
+
+private struct PokemonDetailDestination: ViewModifier {
+    let container: DependencyContainer
+    @Binding var path: [Route]
+
+    func body(content: Content) -> some View {
+        content.navigationDestination(for: Route.self) { route in
+            switch route {
+            case let .detail(name):
+                PokemonDetailView(
+                    viewModel: container.makePokemonDetailViewModel(name: name),
+                    onPokemonTap: { newName in path.append(.detail(newName)) }
+                )
+            }
+        }
+    }
+}
+
+private extension View {
+    func pokemonDetailDestination(
+        container: DependencyContainer,
+        path: Binding<[Route]>
+    ) -> some View {
+        modifier(PokemonDetailDestination(container: container, path: path))
+    }
 }

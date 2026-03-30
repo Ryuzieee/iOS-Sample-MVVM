@@ -92,17 +92,8 @@ struct PokemonDetailView: View {
                         .padding(.top, 2)
                 }
 
-                HStack(spacing: 8) {
-                    ForEach(fullDetail.detail.types, id: \.self) { type in
-                        Text(Strings.Translation.type(type))
-                            .font(.caption)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 4)
-                            .background(Color(.systemGray5))
-                            .cornerRadius(16)
-                    }
-                }
-                .padding(.vertical, 8)
+                TypeBadges(types: fullDetail.detail.types)
+                    .padding(.vertical, 8)
 
                 Text(Strings.Detail.heightWeight(
                     heightCm: fullDetail.detail.height * 10,
@@ -112,7 +103,7 @@ struct PokemonDetailView: View {
                 .padding(.bottom, 16)
 
                 if fullDetail.evolutionChain.count > 1 {
-                    sectionHeader(Strings.Detail.sectionEvolution)
+                    SectionHeader(title: Strings.Detail.sectionEvolution)
                     EvolutionChainView(
                         stages: fullDetail.evolutionChain,
                         currentName: fullDetail.detail.name,
@@ -121,22 +112,51 @@ struct PokemonDetailView: View {
                     .padding(.bottom, 16)
                 }
 
-                sectionHeader(Strings.Detail.sectionBaseStats)
-                ForEach(fullDetail.detail.stats, id: \.name) { stat in
-                    StatRow(stat: stat)
-                }
+                SectionHeader(title: Strings.Detail.sectionBaseStats)
+                BaseStatsSection(stats: fullDetail.detail.stats)
             }
             .padding(.bottom, 32)
         }
     }
+}
 
-    private func sectionHeader(_ title: String) -> some View {
+private struct SectionHeader: View {
+    let title: String
+
+    var body: some View {
         HStack {
             Text(title)
                 .font(.headline)
                 .padding(.leading, 16)
                 .padding(.bottom, 8)
             Spacer()
+        }
+    }
+}
+
+private struct TypeBadges: View {
+    let types: [String]
+
+    var body: some View {
+        HStack(spacing: 8) {
+            ForEach(types, id: \.self) { type in
+                Text(Strings.Translation.type(type))
+                    .font(.caption)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(Color(.systemGray5))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+            }
+        }
+    }
+}
+
+private struct BaseStatsSection: View {
+    let stats: [PokemonDetailModel.Stat]
+
+    var body: some View {
+        ForEach(stats, id: \.name) { stat in
+            StatRow(stat: stat)
         }
     }
 }

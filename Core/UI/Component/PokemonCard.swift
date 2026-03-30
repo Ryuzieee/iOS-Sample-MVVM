@@ -32,9 +32,20 @@ struct PokemonCard: View {
             .frame(maxWidth: .infinity)
             .padding(12)
             .background(Color(.systemBackground))
-            .cornerRadius(12)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
             .shadow(color: .black.opacity(0.1), radius: 4, y: 2)
         }
         .buttonStyle(.plain)
     }
+}
+
+#Preview {
+    PokemonCard(
+        name: "bulbasaur",
+        id: 1,
+        imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+        onTap: {}
+    )
+    .frame(width: 180)
+    .padding()
 }

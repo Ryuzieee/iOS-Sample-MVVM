@@ -28,3 +28,10 @@ struct EmptyContent: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
+
+#Preview {
+    EmptyContent(
+        message: "No data available",
+        subMessage: "Try again later"
+    )
+}

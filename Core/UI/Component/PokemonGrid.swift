@@ -27,14 +27,18 @@ struct PokemonGrid: View {
 
     var body: some View {
         LazyVGrid(columns: columns, spacing: 8) {
-            ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+            ForEach(items) { item in
                 PokemonCard(
                     name: item.name,
                     id: item.id,
                     imageUrl: item.imageUrl,
                     onTap: { onPokemonTap(item.name) }
                 )
-                .onAppear { onItemAppear?(index) }
+                .onAppear {
+                    if let index = items.firstIndex(of: item) {
+                        onItemAppear?(index)
+                    }
+                }
             }
         }
         .padding(.horizontal, 8)
