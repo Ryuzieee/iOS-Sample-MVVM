@@ -31,7 +31,7 @@ final class FavoritesViewModelTests: XCTestCase {
         let viewModel = createViewModel()
         try? await Task.sleep(nanoseconds: 100_000_000)
 
-        if case .success(let data) = viewModel.content {
+        if case let .success(data) = viewModel.content {
             XCTAssertEqual(data.count, 2)
         } else {
             XCTFail("Expected success state")
@@ -57,7 +57,7 @@ final class FavoritesViewModelTests: XCTestCase {
         let viewModel = createViewModel()
         try? await Task.sleep(nanoseconds: 100_000_000)
 
-        if case .success(let data) = viewModel.content {
+        if case let .success(data) = viewModel.content {
             XCTAssertEqual(data.count, 0)
         } else {
             XCTFail("Expected success state")

@@ -17,9 +17,9 @@ struct FavoritesView: View {
             switch viewModel.content {
             case .loading:
                 LoadingIndicator()
-            case .error(let message, let type):
+            case let .error(message, type):
                 ErrorContent(message: message, onRetry: viewModel.retry, errorType: type)
-            case .success(let favorites):
+            case let .success(favorites):
                 if favorites.isEmpty {
                     EmptyContent(
                         message: Strings.Favorites.emptyMessage,

@@ -19,7 +19,8 @@ struct PokemonSummaryModel: Identifiable, Equatable {
             .trimmingCharacters(in: CharacterSet(charactersIn: "/"))
             .split(separator: "/")
             .last,
-              let value = Int(last) else {
+            let value = Int(last)
+        else {
             return 0
         }
         return value

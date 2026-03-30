@@ -25,7 +25,7 @@ final class PokeAPIClient: PokeAPIClientProtocol {
 
     init(session: URLSession = .shared) {
         self.session = session
-        self.decoder = JSONDecoder()
+        decoder = JSONDecoder()
     }
 
     // MARK: - Endpoints
@@ -70,7 +70,7 @@ final class PokeAPIClient: PokeAPIClientProtocol {
 
         AppLogger.logResponse(url: url.absoluteString, statusCode: httpResponse.statusCode)
 
-        guard (200...299).contains(httpResponse.statusCode) else {
+        guard (200 ... 299).contains(httpResponse.statusCode) else {
             if httpResponse.statusCode == 404 {
                 throw AppError.notFound(query: url.absoluteString)
             }

@@ -1,0 +1,36 @@
+# SwiftFormat configuration (ktlintFormat 相当)
+
+# インデント
+--indent 4
+--indentcase false
+--ifdef indent
+
+# 改行
+--linebreaks lf
+--maxwidth 120
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+
+# スペース
+--trimwhitespace always
+--insertlines enabled
+
+# import ソート
+--importgrouping testable-bottom
+
+# セミコロン除去
+--semicolons never
+
+# self の使用
+--self remove
+
+# 末尾カンマ
+--trailingclosures
+--commas always
+
+# 冗長コード除去
+--redundanttype inferred
+
+# 除外
+--exclude Pods,DerivedData,.build

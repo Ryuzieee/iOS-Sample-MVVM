@@ -10,7 +10,7 @@ import SwiftUI
 /// データが空の場合に表示するコンポーネント。
 struct EmptyContent: View {
     let message: String
-    var subMessage: String? = nil
+    var subMessage: String?
 
     var body: some View {
         VStack(spacing: 4) {

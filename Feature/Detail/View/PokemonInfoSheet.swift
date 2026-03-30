@@ -27,12 +27,19 @@ struct PokemonInfoSheet: View {
                         Divider().padding(.vertical, 8)
 
                         InfoRow(label: Strings.Detail.labelCategory, value: species.genus)
-                        InfoRow(label: Strings.Detail.labelGeneration, value: Strings.Translation.generation(species.generation))
+                        InfoRow(
+                            label: Strings.Detail.labelGeneration,
+                            value: Strings.Translation.generation(species.generation)
+                        )
                         if let habitat = species.habitat {
                             InfoRow(label: Strings.Detail.labelHabitat, value: Strings.Translation.habitat(habitat))
                         }
                         InfoRow(label: Strings.Detail.labelCaptureRate, value: "\(species.captureRate)")
-                        InfoRow(label: Strings.Detail.labelEggGroup, value: species.eggGroups.map { Strings.Translation.eggGroup($0) }.joined(separator: Strings.Detail.eggGroupSeparator))
+                        InfoRow(
+                            label: Strings.Detail.labelEggGroup,
+                            value: species.eggGroups.map { Strings.Translation.eggGroup($0) }
+                                .joined(separator: Strings.Detail.eggGroupSeparator)
+                        )
 
                         let genderText: String = {
                             if species.genderRate == -1 {

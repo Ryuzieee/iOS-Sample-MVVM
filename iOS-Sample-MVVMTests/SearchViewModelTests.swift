@@ -56,7 +56,7 @@ final class SearchViewModelTests: XCTestCase {
 
         try? await Task.sleep(nanoseconds: 200_000_000)
 
-        if case .success(let names) = viewModel.content {
+        if case let .success(names) = viewModel.content {
             XCTAssertEqual(names, ["pikachu"])
         } else {
             XCTFail("Expected success state")

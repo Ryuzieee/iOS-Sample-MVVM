@@ -5,8 +5,8 @@
 //  Created by 山下竜二 on 2026/03/30.
 //
 
-import Foundation
 import Combine
+import Foundation
 import SwiftUI
 
 private let debounceMs = 500

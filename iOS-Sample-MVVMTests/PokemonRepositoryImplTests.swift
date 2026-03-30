@@ -125,7 +125,11 @@ final class PokemonRepositoryImplTests: XCTestCase {
     private static func createSpeciesResponse() -> PokemonSpeciesResponse {
         PokemonSpeciesResponse(
             names: [.init(name: "フシギダネ", language: NamedResource(name: "ja"))],
-            flavorTextEntries: [.init(flavorText: "はっぱ", language: NamedResource(name: "ja"), version: NamedResource(name: "red"))],
+            flavorTextEntries: [.init(
+                flavorText: "はっぱ",
+                language: NamedResource(name: "ja"),
+                version: NamedResource(name: "red")
+            )],
             evolutionChain: .init(url: "url"),
             genera: [.init(genus: "たねポケモン", language: NamedResource(name: "ja"))],
             eggGroups: [NamedResource(name: "monster")],
@@ -146,23 +150,23 @@ final class MockPokeAPIClient: PokeAPIClientProtocol {
     var getEvolutionChainResult: Result<EvolutionChainResponse, Error>!
     var getAbilityResult: Result<AbilityResponse, Error>!
 
-    func getPokemonList(limit: Int, offset: Int) async throws -> PokemonListResponse {
+    func getPokemonList(limit _: Int, offset _: Int) async throws -> PokemonListResponse {
         try getPokemonListResult.get()
     }
 
-    func getPokemonDetail(name: String) async throws -> PokemonDetailResponse {
+    func getPokemonDetail(name _: String) async throws -> PokemonDetailResponse {
         try getPokemonDetailResult.get()
     }
 
-    func getPokemonSpecies(name: String) async throws -> PokemonSpeciesResponse {
+    func getPokemonSpecies(name _: String) async throws -> PokemonSpeciesResponse {
         try getPokemonSpeciesResult.get()
     }
 
-    func getEvolutionChain(url: String) async throws -> EvolutionChainResponse {
+    func getEvolutionChain(url _: String) async throws -> EvolutionChainResponse {
         try getEvolutionChainResult.get()
     }
 
-    func getAbility(name: String) async throws -> AbilityResponse {
+    func getAbility(name _: String) async throws -> AbilityResponse {
         try getAbilityResult.get()
     }
 }

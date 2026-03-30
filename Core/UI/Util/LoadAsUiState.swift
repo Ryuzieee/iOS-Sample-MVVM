@@ -26,7 +26,7 @@ extension Error {
             return .network
         case .sessionExpired:
             return .sessionExpired
-        case .forceUpdate(let storeUrl):
+        case let .forceUpdate(storeUrl):
             return .forceUpdate(storeUrl: storeUrl)
         default:
             return .general

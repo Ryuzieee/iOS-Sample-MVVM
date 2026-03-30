@@ -10,9 +10,9 @@ import Foundation
 /// キャッシュ有効期間の設定。
 enum CacheConfig {
     #if DEBUG
-    static let durationSeconds: TimeInterval = 60       // デバッグ: 1分
+        static let durationSeconds: TimeInterval = 60 // デバッグ: 1分
     #else
-    static let durationSeconds: TimeInterval = 300      // リリース: 5分
+        static let durationSeconds: TimeInterval = 300 // リリース: 5分
     #endif
 
     static func isExpired(cachedAt: Date?) -> Bool {

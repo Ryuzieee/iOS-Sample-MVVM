@@ -19,7 +19,7 @@ struct PokemonListView: View {
             switch viewModel.loadState {
             case .loading:
                 LoadingIndicator()
-            case .error(let message, let type):
+            case let .error(message, type):
                 ErrorContent(message: message, onRetry: viewModel.refresh, errorType: type)
             case .success, .idle:
                 pokemonList

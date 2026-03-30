@@ -67,29 +67,29 @@ final class MockPokemonRepository: PokemonRepositoryProtocol {
     var getPokemonDetailCallCount = 0
     var lastForceRefresh = false
 
-    func getPokemonList(offset: Int, limit: Int) async throws -> [PokemonSummaryModel] {
+    func getPokemonList(offset _: Int, limit _: Int) async throws -> [PokemonSummaryModel] {
         try getPokemonListResult.get()
     }
 
-    func getPokemonDetail(name: String, forceRefresh: Bool) async throws -> PokemonDetailModel {
+    func getPokemonDetail(name _: String, forceRefresh: Bool) async throws -> PokemonDetailModel {
         getPokemonDetailCallCount += 1
         lastForceRefresh = forceRefresh
         return try getPokemonDetailResult.get()
     }
 
-    func getPokemonSpecies(name: String) async throws -> PokemonSpeciesModel {
+    func getPokemonSpecies(name _: String) async throws -> PokemonSpeciesModel {
         try getPokemonSpeciesResult.get()
     }
 
-    func getEvolutionChain(url: String) async throws -> [EvolutionStageModel] {
+    func getEvolutionChain(url _: String) async throws -> [EvolutionStageModel] {
         try getEvolutionChainResult.get()
     }
 
-    func getAbilityLocalizedNames(name: String) async throws -> [String: String] {
+    func getAbilityLocalizedNames(name _: String) async throws -> [String: String] {
         try getAbilityLocalizedNamesResult.get()
     }
 
-    func searchPokemonNames(query: String) async throws -> [String] {
+    func searchPokemonNames(query _: String) async throws -> [String] {
         try searchPokemonNamesResult.get()
     }
 }
@@ -105,11 +105,11 @@ final class MockFavoriteRepository: FavoriteRepositoryProtocol {
         try getFavoritesResult.get()
     }
 
-    func isFavorite(id: Int) async throws -> Bool {
+    func isFavorite(id _: Int) async throws -> Bool {
         try isFavoriteResult.get()
     }
 
-    func addFavorite(detail: PokemonDetailModel) async throws {
+    func addFavorite(detail _: PokemonDetailModel) async throws {
         addFavoriteCalled = true
     }
 

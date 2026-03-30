@@ -31,7 +31,11 @@ final class FavoriteRepositoryImplTests: XCTestCase {
     }
 
     func test_お気に入り取得時に例外が発生した場合にunknownエラーになる() async {
-        store.getAllFavoritesResult = .failure(NSError(domain: "test", code: 0, userInfo: [NSLocalizedDescriptionKey: "db error"]))
+        store.getAllFavoritesResult = .failure(NSError(
+            domain: "test",
+            code: 0,
+            userInfo: [NSLocalizedDescriptionKey: "db error"]
+        ))
 
         do {
             _ = try await repository.getFavorites()
@@ -91,7 +95,7 @@ final class MockFavoriteStore: FavoriteStoreProtocol {
         try getAllFavoritesResult.get()
     }
 
-    func isFavorite(id: Int) throws -> Bool {
+    func isFavorite(id _: Int) throws -> Bool {
         try isFavoriteResult.get()
     }
 

@@ -26,8 +26,13 @@ enum Strings {
         static let forceUpdate = "新しいバージョンが利用可能です。アップデートしてください"
         static let unknownError = "不明なエラーが発生しました"
 
-        static func serverError(code: Int) -> String { "サーバーエラー (\(code))" }
-        static func notFound(query: String) -> String { "「\(query)」に一致するポケモンは見つかりませんでした" }
+        static func serverError(code: Int) -> String {
+            "サーバーエラー (\(code))"
+        }
+
+        static func notFound(query: String) -> String {
+            "「\(query)」に一致するポケモンは見つかりませんでした"
+        }
     }
 
     // MARK: - ダイアログ
@@ -140,10 +145,24 @@ enum Strings {
             "generation-vii": "第7世代", "generation-viii": "第8世代", "generation-ix": "第9世代",
         ]
 
-        static func type(_ key: String) -> String { types[key] ?? key }
-        static func stat(_ key: String) -> String { stats[key] ?? key }
-        static func eggGroup(_ key: String) -> String { eggGroups[key] ?? key }
-        static func habitat(_ key: String) -> String { habitats[key] ?? key }
-        static func generation(_ key: String) -> String { generations[key] ?? key }
+        static func type(_ key: String) -> String {
+            types[key] ?? key
+        }
+
+        static func stat(_ key: String) -> String {
+            stats[key] ?? key
+        }
+
+        static func eggGroup(_ key: String) -> String {
+            eggGroups[key] ?? key
+        }
+
+        static func habitat(_ key: String) -> String {
+            habitats[key] ?? key
+        }
+
+        static func generation(_ key: String) -> String {
+            generations[key] ?? key
+        }
     }
 }

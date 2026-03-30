@@ -26,9 +26,9 @@ struct SearchView: View {
                 EmptyContent(message: Strings.Search.searchIdleMessage)
             case .loading:
                 LoadingIndicator()
-            case .error(let message, _):
+            case let .error(message, _):
                 ErrorContent(message: message, onRetry: viewModel.retrySearch)
-            case .success(let names):
+            case let .success(names):
                 List(names, id: \.self) { name in
                     Button(action: { onPokemonTap(name) }) {
                         Text(name.capitalized)

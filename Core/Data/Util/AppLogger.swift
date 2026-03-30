@@ -20,7 +20,7 @@ enum AppLogger {
     /// デバッグビルド時のみ出力する汎用ログ。
     static func debug(_ message: String, category: Logger = data) {
         #if DEBUG
-        category.debug("\(message)")
+            category.debug("\(message)")
         #endif
     }
 
@@ -32,13 +32,13 @@ enum AppLogger {
     /// API リクエスト/レスポンスのログ。デバッグビルド時のみ出力。
     static func logRequest(url: String) {
         #if DEBUG
-        api.debug("→ \(url)")
+            api.debug("→ \(url)")
         #endif
     }
 
     static func logResponse(url: String, statusCode: Int) {
         #if DEBUG
-        api.debug("← \(statusCode) \(url)")
+            api.debug("← \(statusCode) \(url)")
         #endif
     }
 }

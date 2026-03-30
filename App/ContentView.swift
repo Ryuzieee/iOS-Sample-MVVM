@@ -12,7 +12,7 @@ struct ContentView: View {
     private let container = DependencyContainer.shared
     @State private var path: [Route] = []
     #if MOCK
-    @State private var showMockSelector = false
+        @State private var showMockSelector = false
     #endif
 
     var body: some View {
@@ -25,7 +25,7 @@ struct ContentView: View {
             )
             .navigationDestination(for: Route.self) { route in
                 switch route {
-                case .detail(let name):
+                case let .detail(name):
                     PokemonDetailView(
                         viewModel: container.makePokemonDetailViewModel(name: name),
                         onPokemonTap: { newName in path.append(.detail(newName)) }
@@ -45,19 +45,19 @@ struct ContentView: View {
         }
         #if MOCK
         .overlay(alignment: .bottomTrailing) {
-            Button(action: { showMockSelector = true }) {
-                Image(systemName: "ladybug")
-                    .font(.title2)
-                    .padding(12)
-                    .background(Color(.systemBackground))
-                    .clipShape(Circle())
-                    .shadow(radius: 4)
+                Button(action: { showMockSelector = true }) {
+                    Image(systemName: "ladybug")
+                        .font(.title2)
+                        .padding(12)
+                        .background(Color(.systemBackground))
+                        .clipShape(Circle())
+                        .shadow(radius: 4)
+                }
+                .padding(16)
             }
-            .padding(16)
-        }
-        .sheet(isPresented: $showMockSelector) {
-            MockScenarioSelector()
-        }
+            .sheet(isPresented: $showMockSelector) {
+                MockScenarioSelector()
+            }
         #endif
     }
 }

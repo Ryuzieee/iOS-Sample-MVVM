@@ -27,7 +27,8 @@ final class PokemonSpeciesMapperTests: XCTestCase {
                     version: NamedResource(name: "red")
                 ),
             ],
-            evolutionChain: PokemonSpeciesResponse.EvolutionChainRef(url: "https://pokeapi.co/api/v2/evolution-chain/1/"),
+            evolutionChain: PokemonSpeciesResponse
+                .EvolutionChainRef(url: "https://pokeapi.co/api/v2/evolution-chain/1/"),
             genera: [
                 PokemonSpeciesResponse.Genus(genus: "Seed Pokémon", language: NamedResource(name: "en")),
                 PokemonSpeciesResponse.Genus(genus: "たねポケモン", language: NamedResource(name: "ja")),

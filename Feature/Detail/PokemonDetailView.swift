@@ -15,7 +15,8 @@ struct PokemonDetailView: View {
 
     private var displayName: String {
         if let species = viewModel.content.dataOrNil?.species,
-           !species.japaneseName.isEmpty {
+           !species.japaneseName.isEmpty
+        {
             return species.japaneseName
         }
         return viewModel.pokemonName.capitalized
@@ -26,9 +27,9 @@ struct PokemonDetailView: View {
             switch viewModel.content {
             case .loading:
                 LoadingIndicator()
-            case .error(let message, let type):
+            case let .error(message, type):
                 ErrorContent(message: message, onRetry: viewModel.retry, errorType: type)
-            case .success(let fullDetail):
+            case let .success(fullDetail):
                 detailContent(fullDetail)
             case .idle:
                 EmptyView()
@@ -45,7 +46,8 @@ struct PokemonDetailView: View {
                 )
                 AppIconButton(
                     systemName: viewModel.isFavorite ? "heart.fill" : "heart",
-                    accessibilityLabel: viewModel.isFavorite ? Strings.Detail.removeFavoriteDescription : Strings.Detail.addFavoriteDescription,
+                    accessibilityLabel: viewModel.isFavorite ? Strings.Detail.removeFavoriteDescription : Strings.Detail
+                        .addFavoriteDescription,
                     action: viewModel.toggleFavorite,
                     tint: viewModel.isFavorite ? .red : .primary
                 )
@@ -64,7 +66,6 @@ struct PokemonDetailView: View {
         }
     }
 
-    @ViewBuilder
     private func detailContent(_ fullDetail: PokemonFullDetailModel) -> some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -106,8 +107,8 @@ struct PokemonDetailView: View {
                     heightCm: fullDetail.detail.height * 10,
                     weightKg: Double(fullDetail.detail.weight) / 10.0
                 ))
-                    .font(.subheadline)
-                    .padding(.bottom, 16)
+                .font(.subheadline)
+                .padding(.bottom, 16)
 
                 // 進化チェーン
                 if fullDetail.evolutionChain.count > 1 {

@@ -5,8 +5,8 @@
 //  Created by 山下竜二 on 2026/03/30.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 private let pageSize = 20
 
@@ -62,11 +62,11 @@ final class PokemonListViewModel: ObservableObject {
             let state = await loadAsUiState {
                 try await getPokemonList.execute(offset: 0, limit: pageSize)
             }
-            if case .success(let result) = state {
+            if case let .success(result) = state {
                 items = result
                 hasMore = result.count >= pageSize
                 loadState = .success(true)
-            } else if case .error(let message, let type) = state {
+            } else if case let .error(message, type) = state {
                 loadState = .error(message: message, type: type)
             }
         }

@@ -1,0 +1,98 @@
+# SwiftLint configuration (detekt 相当)
+
+# ── 除外パス ──────────────────────────────────────────────
+excluded:
+  - DerivedData
+  - Pods
+  - .build
+  - iOS-Sample-MVVMTests
+
+# ── 無効にするルール ──────────────────────────────────────
+disabled_rules:
+  - trailing_comma         # SwiftFormat 側で管理
+  - todo                   # TODO コメントは許容
+  - orphaned_doc_comment
+  - opening_brace          # SwiftFormat のスタイルと競合するため無効化
+  - multiple_closures_with_trailing_closure  # SwiftUI で頻出するパターン
+
+# ── 有効にする追加ルール ──────────────────────────────────
+opt_in_rules:
+  - empty_count
+  - closure_spacing
+  - contains_over_filter_count
+  - discouraged_optional_boolean
+  - empty_string
+  - fatal_error_message
+  - first_where
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - modifier_order
+  - overridden_super_call
+  - private_action
+  - private_outlet
+  - sorted_first_last
+  - vertical_whitespace_closing_braces
+
+# ── ルールごとの設定 ──────────────────────────────────────
+
+# 1行の最大文字数 (Android: maxLineLength = 120)
+line_length:
+  warning: 120
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
+
+# 関数の行数 (Android: LongMethod threshold = 60)
+function_body_length:
+  warning: 60
+  error: 100
+
+# 関数パラメータ数 (Android: LongParameterList threshold = 10)
+function_parameter_count:
+  warning: 10
+  error: 15
+
+# 型の行数 (Android: TooManyFunctions thresholdInClasses = 15)
+type_body_length:
+  warning: 300
+  error: 500
+
+# ファイルの行数
+file_length:
+  warning: 500
+  error: 800
+
+# サイクロマティック複雑度 (Android: ComplexMethod threshold = 15)
+cyclomatic_complexity:
+  warning: 15
+  error: 25
+
+# ネストの深さ (PokeAPI の DTO 構造上 4 レベルまで許容)
+nesting:
+  type_level: 4
+  function_level: 5
+
+# 識別子の長さ
+identifier_name:
+  min_length:
+    warning: 1
+  max_length:
+    warning: 60
+  excluded:
+    - id
+    - i
+    - x
+    - y
+    - to
+
+# 型名の長さ
+type_name:
+  min_length: 3
+  max_length: 50
+  excluded:
+    - ID
+    - iOS_Sample_MVVMApp
+
+# large_tuple
+large_tuple:
+  warning: 4

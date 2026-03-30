@@ -24,7 +24,8 @@ func handleWithCache<D, E, R>(
     try await appRun {
         if !forceRefresh {
             if let entity = try await load(),
-               !CacheConfig.isExpired(cachedAt: cachedAt?(entity)) {
+               !CacheConfig.isExpired(cachedAt: cachedAt?(entity))
+            {
                 return toModel(entity)
             }
         }
@@ -41,7 +42,7 @@ func handleRemote<D, R>(
     toModel: (R) -> D
 ) async throws -> D {
     try await appRun {
-        toModel(try await fetch())
+        try toModel(await fetch())
     }
 }
 
@@ -51,7 +52,7 @@ func handleLocal<D, E>(
     toModel: (E) -> D
 ) async throws -> D {
     do {
-        return toModel(try await query())
+        return try toModel(await query())
     } catch {
         throw AppError.unknown(error.localizedDescription)
     }

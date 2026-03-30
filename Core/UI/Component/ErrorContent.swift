@@ -63,7 +63,7 @@ struct ErrorContent: View {
     }
 
     private var forceUpdateStoreUrl: String {
-        if case .forceUpdate(let storeUrl) = errorType {
+        if case let .forceUpdate(storeUrl) = errorType {
             return storeUrl
         }
         return ""

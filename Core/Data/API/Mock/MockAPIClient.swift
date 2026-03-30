@@ -19,7 +19,7 @@ final class MockAPIClient: PokeAPIClientProtocol {
 
     func getPokemonList(limit: Int, offset: Int) async throws -> PokemonListResponse {
         try await simulateScenario()
-        return PokemonListResponse(results: (1...min(limit, 20)).map { i in
+        return PokemonListResponse(results: (1 ... min(limit, 20)).map { i in
             let index = offset + i
             return .init(name: "pokemon-\(index)", url: "https://pokeapi.co/api/v2/pokemon/\(index)/")
         })
@@ -35,7 +35,11 @@ final class MockAPIClient: PokeAPIClientProtocol {
             baseExperience: 64,
             types: [.init(type: .init(name: "grass"))],
             abilities: [.init(ability: .init(name: "overgrow"), isHidden: false)],
-            sprites: .init(other: .init(officialArtwork: .init(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"))),
+            sprites: .init(
+                other: .init(officialArtwork: .init(
+                    frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+                ))
+            ),
             stats: [
                 .init(baseStat: 45, stat: .init(name: "hp")),
                 .init(baseStat: 49, stat: .init(name: "attack")),
@@ -44,11 +48,15 @@ final class MockAPIClient: PokeAPIClientProtocol {
         )
     }
 
-    func getPokemonSpecies(name: String) async throws -> PokemonSpeciesResponse {
+    func getPokemonSpecies(name _: String) async throws -> PokemonSpeciesResponse {
         try await simulateScenario()
         return PokemonSpeciesResponse(
             names: [.init(name: "モックポケモン", language: NamedResource(name: "ja"))],
-            flavorTextEntries: [.init(flavorText: "モックの説明文です。", language: NamedResource(name: "ja"), version: NamedResource(name: "red"))],
+            flavorTextEntries: [.init(
+                flavorText: "モックの説明文です。",
+                language: NamedResource(name: "ja"),
+                version: NamedResource(name: "red")
+            )],
             evolutionChain: .init(url: "https://pokeapi.co/api/v2/evolution-chain/1/"),
             genera: [.init(genus: "モックポケモン", language: NamedResource(name: "ja"))],
             eggGroups: [NamedResource(name: "monster")],
@@ -59,7 +67,7 @@ final class MockAPIClient: PokeAPIClientProtocol {
         )
     }
 
-    func getEvolutionChain(url: String) async throws -> EvolutionChainResponse {
+    func getEvolutionChain(url _: String) async throws -> EvolutionChainResponse {
         try await simulateScenario()
         return EvolutionChainResponse(
             id: 1,
@@ -71,7 +79,7 @@ final class MockAPIClient: PokeAPIClientProtocol {
         )
     }
 
-    func getAbility(name: String) async throws -> AbilityResponse {
+    func getAbility(name _: String) async throws -> AbilityResponse {
         try await simulateScenario()
         return AbilityResponse(names: [
             .init(name: "モック特性", language: NamedResource(name: "ja")),
@@ -88,7 +96,7 @@ final class MockAPIClient: PokeAPIClientProtocol {
             return
         case .networkError:
             throw URLError(.notConnectedToInternet)
-        case .customError(let code, _, let storeUrl):
+        case let .customError(code, _, storeUrl):
             throw HTTPResponseError(statusCode: code, storeUrl: storeUrl)
         }
     }

@@ -5,8 +5,8 @@
 //  Created by 山下竜二 on 2026/03/30.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 /// ポケモン詳細画面のViewModel。
 final class PokemonDetailViewModel: ObservableObject {
@@ -29,7 +29,7 @@ final class PokemonDetailViewModel: ObservableObject {
         self.pokemonName = pokemonName
         self.getPokemonFullDetail = getPokemonFullDetail
         self.getIsFavorite = getIsFavorite
-        self.toggleFavoriteUseCase = toggleFavorite
+        toggleFavoriteUseCase = toggleFavorite
         load()
     }
 
@@ -59,7 +59,7 @@ final class PokemonDetailViewModel: ObservableObject {
             }
             content = state
             isRefreshing = false
-            if case .success(let result) = state {
+            if case let .success(result) = state {
                 loadFavorite(pokemonId: result.detail.id)
             }
         }

@@ -13,13 +13,22 @@ final class EvolutionChainMapperTests: XCTestCase {
         let response = EvolutionChainResponse(
             id: 1,
             chain: EvolutionChainResponse.ChainLink(
-                species: EvolutionChainResponse.Species(name: "bulbasaur", url: "https://pokeapi.co/api/v2/pokemon-species/1/"),
+                species: EvolutionChainResponse.Species(
+                    name: "bulbasaur",
+                    url: "https://pokeapi.co/api/v2/pokemon-species/1/"
+                ),
                 evolvesTo: [
                     EvolutionChainResponse.ChainLink(
-                        species: EvolutionChainResponse.Species(name: "ivysaur", url: "https://pokeapi.co/api/v2/pokemon-species/2/"),
+                        species: EvolutionChainResponse.Species(
+                            name: "ivysaur",
+                            url: "https://pokeapi.co/api/v2/pokemon-species/2/"
+                        ),
                         evolvesTo: [
                             EvolutionChainResponse.ChainLink(
-                                species: EvolutionChainResponse.Species(name: "venusaur", url: "https://pokeapi.co/api/v2/pokemon-species/3/"),
+                                species: EvolutionChainResponse.Species(
+                                    name: "venusaur",
+                                    url: "https://pokeapi.co/api/v2/pokemon-species/3/"
+                                ),
                                 evolvesTo: [],
                                 evolutionDetails: [EvolutionChainResponse.EvolutionDetail(minLevel: 32, trigger: nil)]
                             ),

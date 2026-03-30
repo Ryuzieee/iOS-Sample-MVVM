@@ -15,18 +15,20 @@ final class DependencyContainer {
 
     private lazy var apiClient: PokeAPIClientProtocol = {
         #if MOCK
-        return MockAPIClient()
+            return MockAPIClient()
         #else
-        return PokeAPIClient()
+            return PokeAPIClient()
         #endif
     }()
+
     private lazy var coreDataStack = CoreDataStack.shared
     private lazy var favoriteCoreDataStore = FavoriteCoreDataStore(coreDataStack: coreDataStack)
 
     // MARK: - Repositories
 
     private lazy var pokemonRepository: PokemonRepositoryProtocol = PokemonRepositoryImpl(apiClient: apiClient)
-    private lazy var favoriteRepository: FavoriteRepositoryProtocol = FavoriteRepositoryImpl(store: favoriteCoreDataStore)
+    private lazy var favoriteRepository: FavoriteRepositoryProtocol =
+        FavoriteRepositoryImpl(store: favoriteCoreDataStore)
 
     // MARK: - UseCases
 

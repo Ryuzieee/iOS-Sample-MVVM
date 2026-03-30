@@ -28,7 +28,7 @@ struct PokemonDetailModel: Identifiable, Equatable {
     /// ポケモンの特性。
     struct Ability: Equatable {
         let name: String
-        var japaneseName: String = ""
+        var japaneseName = ""
         let isHidden: Bool
     }
 }

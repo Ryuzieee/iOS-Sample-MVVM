@@ -38,7 +38,7 @@ struct UiStateContent<T: Equatable, SuccessContent: View, IdleContent: View>: Vi
         mainContent
             .onChange(of: state) { _ in errorDismissed = false }
             .onChange(of: state) { newState in
-                if case .success(let data) = newState {
+                if case let .success(data) = newState {
                     cachedData = data
                 } else if case .idle = newState {
                     cachedData = nil
@@ -51,7 +51,7 @@ struct UiStateContent<T: Equatable, SuccessContent: View, IdleContent: View>: Vi
     @ViewBuilder
     private var mainContent: some View {
         switch state {
-        case .success(let data):
+        case let .success(data):
             content(data)
 
         case .loading:
@@ -61,7 +61,7 @@ struct UiStateContent<T: Equatable, SuccessContent: View, IdleContent: View>: Vi
                 LoadingIndicator()
             }
 
-        case .error(let message, let type):
+        case let .error(message, type):
             if let cached = cachedData {
                 content(cached)
                     .overlay {
@@ -87,7 +87,7 @@ struct UiStateContent<T: Equatable, SuccessContent: View, IdleContent: View>: Vi
             ErrorContent(message: message, onRetry: onRetry, errorType: type)
         case .sessionExpired:
             Color.clear.onAppear { showSessionExpired = true }
-        case .forceUpdate(let storeUrl):
+        case let .forceUpdate(storeUrl):
             Color.clear.onAppear {
                 forceUpdateUrl = storeUrl
                 showForceUpdate = true
@@ -95,11 +95,11 @@ struct UiStateContent<T: Equatable, SuccessContent: View, IdleContent: View>: Vi
         }
     }
 
-    private func showErrorOverlay(message: String, type: ErrorType) {
+    private func showErrorOverlay(message _: String, type: ErrorType) {
         switch type {
         case .sessionExpired:
             showSessionExpired = true
-        case .forceUpdate(let storeUrl):
+        case let .forceUpdate(storeUrl):
             forceUpdateUrl = storeUrl
             showForceUpdate = true
         default:

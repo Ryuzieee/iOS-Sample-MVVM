@@ -20,9 +20,9 @@ enum AppError: LocalizedError, Equatable {
         switch self {
         case .network:
             return "通信エラーが発生しました。ネットワーク接続を確認してください。"
-        case .server(let code):
+        case let .server(code):
             return "サーバーエラーが発生しました（\(code)）"
-        case .notFound(let query):
+        case let .notFound(query):
             return "「\(query)」は見つかりませんでした"
         case .sessionExpired:
             return "セッションが切れました。再度ログインしてください。"

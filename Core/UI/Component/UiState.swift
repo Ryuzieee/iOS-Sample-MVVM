@@ -18,9 +18,9 @@ enum UiState<T: Equatable>: Equatable {
         switch (lhs, rhs) {
         case (.idle, .idle), (.loading, .loading):
             return true
-        case (.success(let a), .success(let b)):
+        case let (.success(a), .success(b)):
             return a == b
-        case (.error(let m1, let t1), .error(let m2, let t2)):
+        case let (.error(m1, t1), .error(m2, t2)):
             return m1 == m2 && t1 == t2
         default:
             return false
@@ -39,7 +39,7 @@ enum ErrorType: Equatable {
 extension UiState {
     /// Success のデータを返す。それ以外は nil。
     var dataOrNil: T? {
-        if case .success(let data) = self { return data }
+        if case let .success(data) = self { return data }
         return nil
     }
 }

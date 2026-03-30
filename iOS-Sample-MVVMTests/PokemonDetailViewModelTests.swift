@@ -52,7 +52,7 @@ final class PokemonDetailViewModelTests: XCTestCase {
         let viewModel = createViewModel()
         try? await Task.sleep(nanoseconds: 200_000_000)
 
-        if case .success(let data) = viewModel.content {
+        if case let .success(data) = viewModel.content {
             XCTAssertEqual(data.detail.name, "bulbasaur")
             XCTAssertEqual(data.detail.id, 1)
         } else {

@@ -5,8 +5,8 @@
 //  Created by 山下竜二 on 2026/03/30.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 /// CoreData のスタックを管理するクラス。
 final class CoreDataStack {

@@ -5,8 +5,8 @@
 //  Created by 山下竜二 on 2026/03/30.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 /// お気に入りストアのプロトコル。テスト時にモック差し替え可能。
 protocol FavoriteStoreProtocol {

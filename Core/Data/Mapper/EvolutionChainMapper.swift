@@ -38,7 +38,8 @@ enum EvolutionChainMapper {
         guard let last = url.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
             .split(separator: "/")
             .last,
-              let id = Int(last) else {
+            let id = Int(last)
+        else {
             return 0
         }
         return id

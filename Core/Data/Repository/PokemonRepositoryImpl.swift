@@ -28,7 +28,7 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
         )
     }
 
-    func getPokemonDetail(name: String, forceRefresh: Bool) async throws -> PokemonDetailModel {
+    func getPokemonDetail(name: String, forceRefresh _: Bool) async throws -> PokemonDetailModel {
         try await handleRemote(
             fetch: { try await apiClient.getPokemonDetail(name: name) },
             toModel: { PokemonDetailMapper.toModel(from: $0) }
