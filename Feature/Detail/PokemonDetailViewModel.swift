@@ -20,6 +20,7 @@ final class PokemonDetailViewModel: ObservableObject {
     private let getPokemonFullDetail: GetPokemonFullDetailUseCase
     private let getIsFavorite: GetIsFavoriteUseCase
     private let toggleFavoriteUseCase: ToggleFavoriteUseCase
+    private var loadTask: Task<Void, Never>?
 
     init(
         pokemonName: String,
@@ -61,7 +62,8 @@ final class PokemonDetailViewModel: ObservableObject {
     }
 
     private func load(forceRefresh: Bool = false) {
-        Task {
+        loadTask?.cancel()
+        loadTask = Task {
             content = .loading
             isRefreshing = forceRefresh
 

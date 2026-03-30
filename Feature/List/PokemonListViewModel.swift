@@ -20,6 +20,7 @@ final class PokemonListViewModel: ObservableObject {
 
     private let getPokemonList: GetPokemonListUseCase
     private var hasMore = true
+    private var loadTask: Task<Void, Never>?
 
     init(getPokemonList: GetPokemonListUseCase) {
         self.getPokemonList = getPokemonList
@@ -63,7 +64,7 @@ final class PokemonListViewModel: ObservableObject {
 
     private func loadInitialData() {
         loadState = .loading
-        Task {
+        loadTask = Task {
             let state = await loadAsUiState {
                 try await getPokemonList(offset: 0, limit: pageSize)
             }

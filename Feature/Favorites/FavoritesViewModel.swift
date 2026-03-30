@@ -15,6 +15,7 @@ final class FavoritesViewModel: ObservableObject {
     @Published var isRefreshing = false
 
     private let getFavorites: GetFavoritesUseCase
+    private var loadTask: Task<Void, Never>?
 
     init(getFavorites: GetFavoritesUseCase) {
         self.getFavorites = getFavorites
@@ -34,7 +35,8 @@ final class FavoritesViewModel: ObservableObject {
     }
 
     private func load(forceRefresh: Bool = false) {
-        Task {
+        loadTask?.cancel()
+        loadTask = Task {
             isRefreshing = forceRefresh
             content = await loadAsUiState {
                 try await getFavorites()
