@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 /// モックレスポンスのシナリオ。MockAPIClient が返すレスポンスを切り替えるために使用する。
 enum MockScenario: Equatable, Identifiable {
