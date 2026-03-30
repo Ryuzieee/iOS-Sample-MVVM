@@ -75,19 +75,11 @@
 			remoteGlobalIDString = 4635EEAD2F7AAC4E0052FC19;
 			remoteInfo = "iOS-Sample-MVVM";
 		};
-		4635EECB2F7AAC4F0052FC19 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4635EEA62F7AAC4E0052FC19 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4635EEAD2F7AAC4E0052FC19;
-			remoteInfo = "iOS-Sample-MVVM";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4635EEAE2F7AAC4E0052FC19 /* iOS-Sample-MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Sample-MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4635EEC02F7AAC4F0052FC19 /* iOS-Sample-MVVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-Sample-MVVMTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4635EECA2F7AAC4F0052FC19 /* iOS-Sample-MVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-Sample-MVVMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4635EEF72F7AB3690052FC19 /* PokemonSummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSummaryModel.swift; sourceTree = "<group>"; };
 		4635EEF82F7AB3710052FC19 /* PokemonDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailModel.swift; sourceTree = "<group>"; };
 		4635EEFA2F7AB3800052FC19 /* PokemonSpeciesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSpeciesModel.swift; sourceTree = "<group>"; };
@@ -153,11 +145,6 @@
 			path = "iOS-Sample-MVVMTests";
 			sourceTree = "<group>";
 		};
-		4635EECD2F7AAC4F0052FC19 /* iOS-Sample-MVVMUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "iOS-Sample-MVVMUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,13 +162,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4635EEC72F7AAC4F0052FC19 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -193,7 +173,6 @@
 				4635EEE32F7AB1420052FC19 /* Core */,
 				4635EEE22F7AB1300052FC19 /* Feature */,
 				4635EEC32F7AAC4F0052FC19 /* iOS-Sample-MVVMTests */,
-				4635EECD2F7AAC4F0052FC19 /* iOS-Sample-MVVMUITests */,
 				4635EEAF2F7AAC4E0052FC19 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -203,7 +182,6 @@
 			children = (
 				4635EEAE2F7AAC4E0052FC19 /* iOS-Sample-MVVM.app */,
 				4635EEC02F7AAC4F0052FC19 /* iOS-Sample-MVVMTests.xctest */,
-				4635EECA2F7AAC4F0052FC19 /* iOS-Sample-MVVMUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -474,29 +452,6 @@
 			productReference = 4635EEC02F7AAC4F0052FC19 /* iOS-Sample-MVVMTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4635EEC92F7AAC4F0052FC19 /* iOS-Sample-MVVMUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4635EEDA2F7AAC4F0052FC19 /* Build configuration list for PBXNativeTarget "iOS-Sample-MVVMUITests" */;
-			buildPhases = (
-				4635EEC62F7AAC4F0052FC19 /* Sources */,
-				4635EEC72F7AAC4F0052FC19 /* Frameworks */,
-				4635EEC82F7AAC4F0052FC19 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4635EECC2F7AAC4F0052FC19 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				4635EECD2F7AAC4F0052FC19 /* iOS-Sample-MVVMUITests */,
-			);
-			name = "iOS-Sample-MVVMUITests";
-			packageProductDependencies = (
-			);
-			productName = "iOS-Sample-MVVMUITests";
-			productReference = 4635EECA2F7AAC4F0052FC19 /* iOS-Sample-MVVMUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -511,10 +466,6 @@
 						CreatedOnToolsVersion = 26.1.1;
 					};
 					4635EEBF2F7AAC4F0052FC19 = {
-						CreatedOnToolsVersion = 26.1.1;
-						TestTargetID = 4635EEAD2F7AAC4E0052FC19;
-					};
-					4635EEC92F7AAC4F0052FC19 = {
 						CreatedOnToolsVersion = 26.1.1;
 						TestTargetID = 4635EEAD2F7AAC4E0052FC19;
 					};
@@ -536,7 +487,6 @@
 			targets = (
 				4635EEAD2F7AAC4E0052FC19 /* iOS-Sample-MVVM */,
 				4635EEBF2F7AAC4F0052FC19 /* iOS-Sample-MVVMTests */,
-				4635EEC92F7AAC4F0052FC19 /* iOS-Sample-MVVMUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -550,13 +500,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4635EEBE2F7AAC4F0052FC19 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4635EEC82F7AAC4F0052FC19 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -638,13 +581,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4635EEC62F7AAC4F0052FC19 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -652,11 +588,6 @@
 			isa = PBXTargetDependency;
 			target = 4635EEAD2F7AAC4E0052FC19 /* iOS-Sample-MVVM */;
 			targetProxy = 4635EEC12F7AAC4F0052FC19 /* PBXContainerItemProxy */;
-		};
-		4635EECC2F7AAC4F0052FC19 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4635EEAD2F7AAC4E0052FC19 /* iOS-Sample-MVVM */;
-			targetProxy = 4635EECB2F7AAC4F0052FC19 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -896,46 +827,6 @@
 			};
 			name = Release;
 		};
-		4635EEDB2F7AAC4F0052FC19 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 888ADUW3HR;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yamamuto.iOS-Sample-MVVMUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "iOS-Sample-MVVM";
-			};
-			name = Debug;
-		};
-		4635EEDC2F7AAC4F0052FC19 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 888ADUW3HR;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yamamuto.iOS-Sample-MVVMUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "iOS-Sample-MVVM";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -962,15 +853,6 @@
 			buildConfigurations = (
 				4635EED82F7AAC4F0052FC19 /* Debug */,
 				4635EED92F7AAC4F0052FC19 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4635EEDA2F7AAC4F0052FC19 /* Build configuration list for PBXNativeTarget "iOS-Sample-MVVMUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4635EEDB2F7AAC4F0052FC19 /* Debug */,
-				4635EEDC2F7AAC4F0052FC19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

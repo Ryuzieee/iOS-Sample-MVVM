@@ -15,6 +15,7 @@ PokeAPI を使った iOS ポケモン図鑑アプリ。[Android版](https://gith
 | キャッシュ期限管理 | UserDefaults |
 | 画像 | AsyncImage（iOS 15〜標準） |
 | DI | イニシャライザDI |
+| テスト | XCTest + Mock |
 | 最小OS | iOS 15 |
 
 ## アーキテクチャ
@@ -31,6 +32,10 @@ Feature/
   Search/               # リアルタイム検索（500msデバウンス）
   Favorites/            # お気に入り一覧
 ```
+
+## テスト
+
+Mapper / UseCase / ViewModel の3層をカバー。Mock Repositoryを使ったユニットテスト。
 
 ## API
 
