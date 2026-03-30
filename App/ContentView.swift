@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     private let container = DependencyContainer.shared
     @State private var path: [Route] = []
-    #if DEBUG
+    #if MOCK
     @State private var showMockSelector = false
     #endif
 
@@ -43,7 +43,7 @@ struct ContentView: View {
                 }
             }
         }
-        #if DEBUG
+        #if MOCK
         .overlay(alignment: .bottomTrailing) {
             Button(action: { showMockSelector = true }) {
                 Image(systemName: "ladybug")

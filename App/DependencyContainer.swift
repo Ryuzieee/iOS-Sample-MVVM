@@ -14,7 +14,7 @@ final class DependencyContainer {
     // MARK: - Data Layer
 
     private lazy var apiClient: PokeAPIClientProtocol = {
-        #if DEBUG
+        #if MOCK
         return MockAPIClient()
         #else
         return PokeAPIClient()
