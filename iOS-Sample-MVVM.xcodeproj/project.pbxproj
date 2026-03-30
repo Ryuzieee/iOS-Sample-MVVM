@@ -27,14 +27,15 @@
 		4635EEAE2F7AAC4E0052FC19 /* iOS-Sample-MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Sample-MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4635EEC02F7AAC4F0052FC19 /* iOS-Sample-MVVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-Sample-MVVMTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4635EECA2F7AAC4F0052FC19 /* iOS-Sample-MVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-Sample-MVVMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4635EEF72F7AB3690052FC19 /* PokemonSummaryModel..swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSummaryModel..swift; sourceTree = "<group>"; };
+		4635EEF82F7AB3710052FC19 /* PokemonDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailModel.swift; sourceTree = "<group>"; };
+		4635EEFA2F7AB3800052FC19 /* PokemonSpeciesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSpeciesModel.swift; sourceTree = "<group>"; };
+		4635EEFB2F7AB38A0052FC19 /* EvolutionStageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvolutionStageModel.swift; sourceTree = "<group>"; };
+		4635EEFC2F7AB3910052FC19 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
+		4635EEFD2F7AB3980052FC19 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		4635EEB02F7AAC4E0052FC19 /* iOS-Sample-MVVM */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "iOS-Sample-MVVM";
-			sourceTree = "<group>";
-		};
 		4635EEC32F7AAC4F0052FC19 /* iOS-Sample-MVVMTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "iOS-Sample-MVVMTests";
@@ -75,7 +76,9 @@
 		4635EEA52F7AAC4E0052FC19 = {
 			isa = PBXGroup;
 			children = (
-				4635EEB02F7AAC4E0052FC19 /* iOS-Sample-MVVM */,
+				4635EEDE2F7AB0F70052FC19 /* App */,
+				4635EEE32F7AB1420052FC19 /* Core */,
+				4635EEE22F7AB1300052FC19 /* Feature */,
 				4635EEC32F7AAC4F0052FC19 /* iOS-Sample-MVVMTests */,
 				4635EECD2F7AAC4F0052FC19 /* iOS-Sample-MVVMUITests */,
 				4635EEAF2F7AAC4E0052FC19 /* Products */,
@@ -92,6 +95,177 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		4635EEDE2F7AB0F70052FC19 /* App */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		4635EEE22F7AB1300052FC19 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				4635EEEA2F7AB1940052FC19 /* Favorites */,
+				4635EEE92F7AB1800052FC19 /* Search */,
+				4635EEE82F7AB1760052FC19 /* Detail */,
+				4635EEE72F7AB16F0052FC19 /* List */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		4635EEE32F7AB1420052FC19 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4635EEE62F7AB1690052FC19 /* UI */,
+				4635EEE52F7AB1630052FC19 /* Data */,
+				4635EEE42F7AB15C0052FC19 /* Domain */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		4635EEE42F7AB15C0052FC19 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				4635EEED2F7AB3160052FC19 /* UseCase */,
+				4635EEEC2F7AB3100052FC19 /* Repository */,
+				4635EEEB2F7AB3090052FC19 /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		4635EEE52F7AB1630052FC19 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4635EEF42F7AB34C0052FC19 /* Util */,
+				4635EEF32F7AB3450052FC19 /* Repository */,
+				4635EEF22F7AB33F0052FC19 /* Mapper */,
+				4635EEF12F7AB3390052FC19 /* Local */,
+				4635EEEE2F7AB31D0052FC19 /* API */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		4635EEE62F7AB1690052FC19 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				4635EEF52F7AB3520052FC19 /* Component */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		4635EEE72F7AB16F0052FC19 /* List */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		4635EEE82F7AB1760052FC19 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				4635EEF62F7AB35C0052FC19 /* View */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		4635EEE92F7AB1800052FC19 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		4635EEEA2F7AB1940052FC19 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		4635EEEB2F7AB3090052FC19 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4635EEFD2F7AB3980052FC19 /* AppError.swift */,
+				4635EEFC2F7AB3910052FC19 /* FavoriteModel.swift */,
+				4635EEFB2F7AB38A0052FC19 /* EvolutionStageModel.swift */,
+				4635EEFA2F7AB3800052FC19 /* PokemonSpeciesModel.swift */,
+				4635EEF82F7AB3710052FC19 /* PokemonDetailModel.swift */,
+				4635EEF72F7AB3690052FC19 /* PokemonSummaryModel..swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4635EEEC2F7AB3100052FC19 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		4635EEED2F7AB3160052FC19 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		4635EEEE2F7AB31D0052FC19 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				4635EEF02F7AB3340052FC19 /* Response */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		4635EEF02F7AB3340052FC19 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		4635EEF12F7AB3390052FC19 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		4635EEF22F7AB33F0052FC19 /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mapper;
+			sourceTree = "<group>";
+		};
+		4635EEF32F7AB3450052FC19 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		4635EEF42F7AB34C0052FC19 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		4635EEF52F7AB3520052FC19 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		4635EEF62F7AB35C0052FC19 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +280,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				4635EEB02F7AAC4E0052FC19 /* iOS-Sample-MVVM */,
 			);
 			name = "iOS-Sample-MVVM";
 			packageProductDependencies = (
@@ -395,11 +566,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 888ADUW3HR;
+				DEVELOPMENT_TEAM = FCEN7R47VF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Pokédex";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -410,8 +583,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yamamuto.iOS-Sample-MVVM";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yamamuto.iOSSampleMVVM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -427,11 +601,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 888ADUW3HR;
+				DEVELOPMENT_TEAM = FCEN7R47VF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Pokédex";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -442,8 +618,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yamamuto.iOS-Sample-MVVM";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yamamuto.iOSSampleMVVM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
