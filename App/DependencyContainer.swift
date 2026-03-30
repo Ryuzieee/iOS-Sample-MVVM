@@ -13,7 +13,13 @@ final class DependencyContainer {
 
     // MARK: - Data Layer
 
-    private lazy var apiClient = PokeAPIClient()
+    private lazy var apiClient: PokeAPIClientProtocol = {
+        #if DEBUG
+        return MockAPIClient()
+        #else
+        return PokeAPIClient()
+        #endif
+    }()
     private lazy var coreDataStack = CoreDataStack.shared
     private lazy var favoriteCoreDataStore = FavoriteCoreDataStore(coreDataStack: coreDataStack)
 

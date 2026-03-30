@@ -74,6 +74,9 @@
 		4635EFC32F7ACA220052FC19 /* AppIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFC22F7ACA220052FC19 /* AppIconButton.swift */; };
 		4635EFCB2F7ACB750052FC19 /* PokemonNameMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFCA2F7ACB740052FC19 /* PokemonNameMapper.swift */; };
 		4635EFD02F7ACBDE0052FC19 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFCF2F7ACBDE0052FC19 /* AppLogger.swift */; };
+		4635EFD32F7ACC400052FC19 /* MockAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFD22F7ACC3F0052FC19 /* MockAPIClient.swift */; };
+		4635EFD52F7ACC460052FC19 /* MockScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFD42F7ACC450052FC19 /* MockScenario.swift */; };
+		4635EFD72F7ACC4D0052FC19 /* MockScenarioSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFD62F7ACC4C0052FC19 /* MockScenarioSelector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +158,9 @@
 		4635EFC22F7ACA220052FC19 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
 		4635EFCA2F7ACB740052FC19 /* PokemonNameMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonNameMapper.swift; sourceTree = "<group>"; };
 		4635EFCF2F7ACBDE0052FC19 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
+		4635EFD22F7ACC3F0052FC19 /* MockAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIClient.swift; sourceTree = "<group>"; };
+		4635EFD42F7ACC450052FC19 /* MockScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScenario.swift; sourceTree = "<group>"; };
+		4635EFD62F7ACC4C0052FC19 /* MockScenarioSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScenarioSelector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -347,6 +353,7 @@
 		4635EEEE2F7AB31D0052FC19 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				4635EFD12F7ACC350052FC19 /* Mock */,
 				4635EF242F7AB8BD0052FC19 /* PokeAPIClient.swift */,
 				4635EEF02F7AB3340052FC19 /* Response */,
 			);
@@ -440,6 +447,16 @@
 				4635EFB82F7AC8140052FC19 /* LoadAsUiState.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		4635EFD12F7ACC350052FC19 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				4635EFD62F7ACC4C0052FC19 /* MockScenarioSelector.swift */,
+				4635EFD42F7ACC450052FC19 /* MockScenario.swift */,
+				4635EFD22F7ACC3F0052FC19 /* MockAPIClient.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -575,6 +592,7 @@
 				4635EF752F7ABD220052FC19 /* SearchView.swift in Sources */,
 				4635EFBB2F7AC8C60052FC19 /* Strings.swift in Sources */,
 				4635EF722F7ABD1D0052FC19 /* FavoritesViewModel.swift in Sources */,
+				4635EFD52F7ACC460052FC19 /* MockScenario.swift in Sources */,
 				4635EF812F7ABE3E0052FC19 /* iOS_Sample_MVVMApp.swift in Sources */,
 				4635EF732F7ABD1D0052FC19 /* FavoritesView.swift in Sources */,
 				4635EF5D2F7ABACD0052FC19 /* PokemonImage.swift in Sources */,
@@ -590,6 +608,8 @@
 				4635EF7B2F7ABD300052FC19 /* PokemonListViewModel.swift in Sources */,
 				4635EF7E2F7ABE180052FC19 /* ContentView.swift in Sources */,
 				4635EF7F2F7ABE180052FC19 /* DependencyContainer.swift in Sources */,
+				4635EFD72F7ACC4D0052FC19 /* MockScenarioSelector.swift in Sources */,
+				4635EFD32F7ACC400052FC19 /* MockAPIClient.swift in Sources */,
 				4635EF632F7ABACD0052FC19 /* UiState.swift in Sources */,
 				4635EF0B2F7AB77A0052FC19 /* AppError.swift in Sources */,
 				4635EF0C2F7AB77A0052FC19 /* PokemonSummaryModel.swift in Sources */,

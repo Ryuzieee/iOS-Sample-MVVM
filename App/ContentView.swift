@@ -11,6 +11,9 @@ import SwiftUI
 struct ContentView: View {
     private let container = DependencyContainer.shared
     @State private var path: [Route] = []
+    #if DEBUG
+    @State private var showMockSelector = false
+    #endif
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -39,6 +42,18 @@ struct ContentView: View {
                     )
                 }
             }
+            #if DEBUG
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: { showMockSelector = true }) {
+                        Image(systemName: "ladybug")
+                    }
+                }
+            }
+            .sheet(isPresented: $showMockSelector) {
+                MockScenarioSelector()
+            }
+            #endif
         }
     }
 }
