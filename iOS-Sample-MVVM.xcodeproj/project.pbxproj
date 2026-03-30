@@ -78,6 +78,7 @@
 		4635EFD52F7ACC460052FC19 /* MockScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFD42F7ACC450052FC19 /* MockScenario.swift */; };
 		4635EFD72F7ACC4D0052FC19 /* MockScenarioSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFD62F7ACC4C0052FC19 /* MockScenarioSelector.swift */; };
 		4635EFDD2F7AD6880052FC19 /* PokemonCacheStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFDC2F7AD6870052FC19 /* PokemonCacheStore.swift */; };
+		4635EFDF2F7AD8E50052FC19 /* MockPokemons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFDE2F7AD8E40052FC19 /* MockPokemons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +164,7 @@
 		4635EFD42F7ACC450052FC19 /* MockScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScenario.swift; sourceTree = "<group>"; };
 		4635EFD62F7ACC4C0052FC19 /* MockScenarioSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScenarioSelector.swift; sourceTree = "<group>"; };
 		4635EFDC2F7AD6870052FC19 /* PokemonCacheStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCacheStore.swift; sourceTree = "<group>"; };
+		4635EFDE2F7AD8E40052FC19 /* MockPokemons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPokemons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -456,6 +458,7 @@
 		4635EFD12F7ACC350052FC19 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				4635EFDE2F7AD8E40052FC19 /* MockPokemons.swift */,
 				4635EFD42F7ACC450052FC19 /* MockScenario.swift */,
 				4635EFD22F7ACC3F0052FC19 /* MockAPIClient.swift */,
 			);
@@ -628,6 +631,7 @@
 				4635EFC12F7ACA1B0052FC19 /* PokemonTextComponents.swift in Sources */,
 				4635EF602F7ABACD0052FC19 /* SearchTextField.swift in Sources */,
 				4635EFCB2F7ACB750052FC19 /* PokemonNameMapper.swift in Sources */,
+				4635EFDF2F7AD8E50052FC19 /* MockPokemons.swift in Sources */,
 				4635EF612F7ABACD0052FC19 /* PokemonCard.swift in Sources */,
 				4635EF622F7ABACD0052FC19 /* ErrorContent.swift in Sources */,
 				4635EF7A2F7ABD300052FC19 /* PokemonListView.swift in Sources */,

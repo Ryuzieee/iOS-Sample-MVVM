@@ -47,7 +47,7 @@ final class PokemonCacheStore {
 
     // MARK: - Private
 
-    private func save<T: Codable>(_ entry: CachedEntry<T>, filename: String) {
+    private func save(_ entry: CachedEntry<some Codable>, filename: String) {
         let url = cacheDirectory.appendingPathComponent("\(filename).json")
         do {
             let data = try encoder.encode(entry)
