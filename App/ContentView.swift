@@ -11,6 +11,7 @@ import SwiftUI
 /// Detail は push（水平スライド）、Search/Favorites は sheet（下からモーダル）で遷移。
 struct ContentView: View {
     private let container = DependencyContainer.shared
+    @StateObject private var listViewModel = DependencyContainer.shared.makePokemonListViewModel()
     @State private var path: [Route] = []
     @State private var showSearch = false
     @State private var showFavorites = false
@@ -23,7 +24,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $path) {
             PokemonListView(
-                viewModel: container.makePokemonListViewModel(),
+                viewModel: listViewModel,
                 onPokemonTap: { name in path.append(.detail(name)) },
                 onSearchTap: { showSearch = true },
                 onFavoritesTap: { showFavorites = true }
