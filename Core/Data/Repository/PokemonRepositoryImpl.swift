@@ -59,9 +59,9 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
     func searchPokemonNames(query: String) async throws -> [String] {
         if cachedNames.isEmpty || CacheConfig.isExpired(cachedAt: namesCachedAt) {
             let response = try await apiClient.getPokemonList(limit: pokemonListLimit, offset: 0)
-            cachedNames = response.results.map { $0.name }
+            cachedNames = PokemonNameMapper.toNames(from: response)
             namesCachedAt = Date()
         }
-        return cachedNames.filter { $0.localizedCaseInsensitiveContains(query.trimmingCharacters(in: .whitespaces)) }
+        return PokemonNameMapper.filter(names: cachedNames, query: query)
     }
 }

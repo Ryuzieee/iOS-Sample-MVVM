@@ -72,6 +72,7 @@
 		4635EFBF2F7AC9D40052FC19 /* UiStateContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFBE2F7AC9D30052FC19 /* UiStateContent.swift */; };
 		4635EFC12F7ACA1B0052FC19 /* PokemonTextComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFC02F7ACA1B0052FC19 /* PokemonTextComponents.swift */; };
 		4635EFC32F7ACA220052FC19 /* AppIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFC22F7ACA220052FC19 /* AppIconButton.swift */; };
+		4635EFCB2F7ACB750052FC19 /* PokemonNameMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFCA2F7ACB740052FC19 /* PokemonNameMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 		4635EFBE2F7AC9D30052FC19 /* UiStateContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiStateContent.swift; sourceTree = "<group>"; };
 		4635EFC02F7ACA1B0052FC19 /* PokemonTextComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTextComponents.swift; sourceTree = "<group>"; };
 		4635EFC22F7ACA220052FC19 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
+		4635EFCA2F7ACB740052FC19 /* PokemonNameMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonNameMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -373,6 +375,7 @@
 		4635EEF22F7AB33F0052FC19 /* Mapper */ = {
 			isa = PBXGroup;
 			children = (
+				4635EFCA2F7ACB740052FC19 /* PokemonNameMapper.swift */,
 				4635EF3E2F7AB9850052FC19 /* FavoriteMapper.swift */,
 				4635EF3C2F7AB97E0052FC19 /* AbilityMapper.swift */,
 				4635EF3A2F7AB9780052FC19 /* EvolutionChainMapper.swift */,
@@ -576,6 +579,7 @@
 				4635EF5F2F7ABACD0052FC19 /* PokemonGrid.swift in Sources */,
 				4635EFC12F7ACA1B0052FC19 /* PokemonTextComponents.swift in Sources */,
 				4635EF602F7ABACD0052FC19 /* SearchTextField.swift in Sources */,
+				4635EFCB2F7ACB750052FC19 /* PokemonNameMapper.swift in Sources */,
 				4635EF612F7ABACD0052FC19 /* PokemonCard.swift in Sources */,
 				4635EF622F7ABACD0052FC19 /* ErrorContent.swift in Sources */,
 				4635EF7A2F7ABD300052FC19 /* PokemonListView.swift in Sources */,
