@@ -7,7 +7,7 @@
 
 import Foundation
 
-private let mockDelayNanoseconds: UInt64 = 300_000_000
+private let mockDelay: Duration = .milliseconds(300)
 private let artworkBaseUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork"
 
 /// デバッグ用のモック API クライアント。MockScenarioHolder のシナリオに応じてレスポンスを返す。
@@ -79,7 +79,7 @@ final class MockAPIClient: PokeAPIClientProtocol {
     }
 
     private func simulateScenario() async throws {
-        try await Task.sleep(nanoseconds: mockDelayNanoseconds)
+        try await Task.sleep(for: mockDelay)
 
         switch scenarioHolder.current {
         case .success:
