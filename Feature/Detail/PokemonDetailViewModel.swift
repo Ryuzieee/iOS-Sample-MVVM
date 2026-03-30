@@ -54,14 +54,13 @@ final class PokemonDetailViewModel: ObservableObject {
             content = .loading
             isRefreshing = forceRefresh
 
-            do {
-                let result = try await getPokemonFullDetail.execute(name: pokemonName, forceRefresh: forceRefresh)
-                content = .success(result)
-                isRefreshing = false
+            let state = await loadAsUiState {
+                try await getPokemonFullDetail.execute(name: pokemonName, forceRefresh: forceRefresh)
+            }
+            content = state
+            isRefreshing = false
+            if case .success(let result) = state {
                 loadFavorite(pokemonId: result.detail.id)
-            } catch {
-                content = .error(message: error.localizedDescription, type: .general)
-                isRefreshing = false
             }
         }
     }

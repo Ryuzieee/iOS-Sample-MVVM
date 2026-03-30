@@ -59,13 +59,15 @@ final class PokemonListViewModel: ObservableObject {
     private func loadInitial() {
         loadState = .loading
         Task { @MainActor in
-            do {
-                let result = try await getPokemonList.execute(offset: 0, limit: pageSize)
+            let state = await loadAsUiState {
+                try await getPokemonList.execute(offset: 0, limit: pageSize)
+            }
+            if case .success(let result) = state {
                 items = result
                 hasMore = result.count >= pageSize
                 loadState = .success(true)
-            } catch {
-                loadState = .error(message: error.localizedDescription, type: .general)
+            } else if case .error(let message, let type) = state {
+                loadState = .error(message: message, type: type)
             }
         }
     }

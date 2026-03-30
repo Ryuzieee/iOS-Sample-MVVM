@@ -31,11 +31,8 @@ final class FavoritesViewModel: ObservableObject {
     private func load(forceRefresh: Bool = false) {
         Task { @MainActor in
             isRefreshing = forceRefresh
-            do {
-                let result = try await getFavorites.execute()
-                content = .success(result)
-            } catch {
-                content = .error(message: error.localizedDescription, type: .general)
+            content = await loadAsUiState {
+                try await getFavorites.execute()
             }
             isRefreshing = false
         }

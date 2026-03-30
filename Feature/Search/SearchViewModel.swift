@@ -45,11 +45,8 @@ final class SearchViewModel: ObservableObject {
 
         content = .loading
         Task { @MainActor in
-            do {
-                let result = try await searchPokemon.execute(query: trimmed)
-                content = .success(result)
-            } catch {
-                content = .error(message: error.localizedDescription, type: .general)
+            content = await loadAsUiState {
+                try await searchPokemon.execute(query: trimmed)
             }
         }
     }
