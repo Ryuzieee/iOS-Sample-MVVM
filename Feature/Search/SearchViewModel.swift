@@ -12,6 +12,7 @@ import SwiftUI
 private let debounceMs = 500
 
 /// 検索画面のViewModel。クエリ入力に 500ms のデバウンスを適用する。
+@MainActor
 final class SearchViewModel: ObservableObject {
     @Published var query = ""
     @Published var content: UiState<[String]> = .idle
@@ -44,7 +45,7 @@ final class SearchViewModel: ObservableObject {
         }
 
         content = .loading
-        Task { @MainActor in
+        Task {
             content = await loadAsUiState {
                 try await searchPokemon.execute(query: trimmed)
             }

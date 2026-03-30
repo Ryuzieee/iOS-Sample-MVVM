@@ -9,6 +9,7 @@ import Combine
 import Foundation
 
 /// お気に入り一覧画面のViewModel。
+@MainActor
 final class FavoritesViewModel: ObservableObject {
     @Published var content: UiState<[FavoriteModel]> = .loading
     @Published var isRefreshing = false
@@ -29,7 +30,7 @@ final class FavoritesViewModel: ObservableObject {
     }
 
     private func load(forceRefresh: Bool = false) {
-        Task { @MainActor in
+        Task {
             isRefreshing = forceRefresh
             content = await loadAsUiState {
                 try await getFavorites.execute()

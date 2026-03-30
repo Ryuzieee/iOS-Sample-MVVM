@@ -9,6 +9,7 @@ import Combine
 import Foundation
 
 /// ポケモン詳細画面のViewModel。
+@MainActor
 final class PokemonDetailViewModel: ObservableObject {
     @Published var content: UiState<PokemonFullDetailModel> = .loading
     @Published var isFavorite = false
@@ -43,14 +44,14 @@ final class PokemonDetailViewModel: ObservableObject {
 
     func toggleFavorite() {
         guard let fullDetail = content.dataOrNil else { return }
-        Task { @MainActor in
+        Task {
             try? await toggleFavoriteUseCase.execute(detail: fullDetail.detail, isFavorite: isFavorite)
             isFavorite.toggle()
         }
     }
 
     private func load(forceRefresh: Bool = false) {
-        Task { @MainActor in
+        Task {
             content = .loading
             isRefreshing = forceRefresh
 
@@ -66,7 +67,7 @@ final class PokemonDetailViewModel: ObservableObject {
     }
 
     private func loadFavorite(pokemonId: Int) {
-        Task { @MainActor in
+        Task {
             isFavorite = await (try? getIsFavorite.execute(id: pokemonId)) ?? false
         }
     }

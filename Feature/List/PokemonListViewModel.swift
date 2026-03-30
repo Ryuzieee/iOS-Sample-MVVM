@@ -11,6 +11,7 @@ import Foundation
 private let pageSize = 20
 
 /// ポケモン一覧画面のViewModel。
+@MainActor
 final class PokemonListViewModel: ObservableObject {
     @Published var items: [PokemonSummaryModel] = []
     @Published var loadState: UiState<Bool> = .idle
@@ -27,7 +28,7 @@ final class PokemonListViewModel: ObservableObject {
 
     func refresh() {
         isRefreshing = true
-        Task { @MainActor in
+        Task {
             do {
                 let result = try await getPokemonList.execute(offset: 0, limit: pageSize)
                 items = result
@@ -44,7 +45,7 @@ final class PokemonListViewModel: ObservableObject {
         guard !isLoadingMore, hasMore else { return }
 
         isLoadingMore = true
-        Task { @MainActor in
+        Task {
             do {
                 let result = try await getPokemonList.execute(offset: items.count, limit: pageSize)
                 items += result
@@ -58,7 +59,7 @@ final class PokemonListViewModel: ObservableObject {
 
     private func loadInitial() {
         loadState = .loading
-        Task { @MainActor in
+        Task {
             let state = await loadAsUiState {
                 try await getPokemonList.execute(offset: 0, limit: pageSize)
             }
