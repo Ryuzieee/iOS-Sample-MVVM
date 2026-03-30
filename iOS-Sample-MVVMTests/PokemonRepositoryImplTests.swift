@@ -106,8 +106,6 @@ final class PokemonRepositoryImplTests: XCTestCase {
         XCTAssertEqual(result, ["charmander"])
     }
 
-    // MARK: - Helpers
-
     private static func createDetailResponse() -> PokemonDetailResponse {
         PokemonDetailResponse(
             id: 1,
@@ -140,8 +138,6 @@ final class PokemonRepositoryImplTests: XCTestCase {
         )
     }
 }
-
-// MARK: - Mock API Client
 
 final class MockPokeAPIClient: PokeAPIClientProtocol {
     var getPokemonListResult: Result<PokemonListResponse, Error> = .success(PokemonListResponse(results: []))

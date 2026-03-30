@@ -54,8 +54,6 @@ enum TestFixtures {
     )
 }
 
-// MARK: - Mock Repositories
-
 final class MockPokemonRepository: PokemonRepositoryProtocol {
     var getPokemonListResult: Result<[PokemonSummaryModel], Error> = .success([])
     var getPokemonDetailResult: Result<PokemonDetailModel, Error> = .success(TestFixtures.fakePokemonDetail)

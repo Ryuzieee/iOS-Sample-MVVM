@@ -81,8 +81,6 @@ final class FavoriteRepositoryImplTests: XCTestCase {
     }
 }
 
-// MARK: - Mock Store
-
 final class MockFavoriteStore: FavoriteStoreProtocol {
     var getAllFavoritesResult: Result<[FavoriteModel], Error> = .success([])
     var isFavoriteResult: Result<Bool, Error> = .success(false)
