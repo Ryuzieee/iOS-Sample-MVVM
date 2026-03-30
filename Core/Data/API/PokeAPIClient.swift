@@ -28,8 +28,6 @@ final class PokeAPIClient: PokeAPIClientProtocol {
         decoder = JSONDecoder()
     }
 
-    // MARK: - Endpoints
-
     func getPokemonList(limit: Int, offset: Int) async throws -> PokemonListResponse {
         let url = "\(baseURL)pokemon?limit=\(limit)&offset=\(offset)"
         return try await request(url: url)
@@ -53,8 +51,6 @@ final class PokeAPIClient: PokeAPIClientProtocol {
         let url = "\(baseURL)ability/\(name)"
         return try await request(url: url)
     }
-
-    // MARK: - Private
 
     private func request<T: Decodable>(url: String) async throws -> T {
         guard let url = URL(string: url) else {

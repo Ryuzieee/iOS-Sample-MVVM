@@ -18,7 +18,6 @@ struct PokemonInfoSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     if let species {
-                        // 図鑑テキスト
                         Text(species.flavorText)
                             .font(.body)
                             .padding(.horizontal, 16)
@@ -54,7 +53,6 @@ struct PokemonInfoSheet: View {
                         Divider().padding(.vertical, 8)
                     }
 
-                    // 特性
                     Text(Strings.Detail.labelAbilities)
                         .font(.headline)
                         .padding(.horizontal, 16)

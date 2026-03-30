@@ -12,7 +12,7 @@ struct PokemonIdText: View {
     let id: Int
 
     var body: some View {
-        Text("#\(id)")
+        Text("\(Strings.Common.idPrefix)\(id)")
             .font(.caption)
             .foregroundColor(.secondary)
     }

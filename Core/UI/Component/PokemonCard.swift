@@ -25,7 +25,7 @@ struct PokemonCard: View {
                     .font(.caption)
                     .fontWeight(.medium)
                     .foregroundColor(.primary)
-                Text("#\(id)")
+                Text("\(Strings.Common.idPrefix)\(id)")
                     .font(.caption2)
                     .foregroundColor(.secondary)
             }

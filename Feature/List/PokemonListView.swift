@@ -53,7 +53,6 @@ struct PokemonListView: View {
                 },
                 onPokemonTap: onPokemonTap,
                 onItemAppear: { index in
-                    // 末尾付近に到達したら追加読み込み
                     if index >= viewModel.items.count - 4 {
                         viewModel.loadMore()
                     }

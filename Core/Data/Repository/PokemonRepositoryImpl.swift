@@ -62,7 +62,6 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
     }
 
     func searchPokemonNames(query: String) async throws -> [String] {
-        // キャッシュから名前一覧を取得（期限切れならAPIから再取得して保存）
         let names: [String]
         if let cached = cacheStore.getPokemonNames(), !cached.isExpired {
             names = cached.data

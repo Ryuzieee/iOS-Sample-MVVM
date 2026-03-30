@@ -36,11 +36,8 @@ struct MockPokemon {
     let evolutionChainId: Int
 }
 
-// MARK: - Pokemon Data
-
 /// Android 版 MockPokemons.kt と同等のモックポケモン一覧。
 enum MockPokemons {
-    // swiftlint:disable:next function_body_length
     static let all: [MockPokemon] = [
         // ── フシギダネ系 (chain 1) ──
         MockPokemon(
@@ -390,8 +387,6 @@ enum MockPokemons {
     static let byName: [String: MockPokemon] = Dictionary(uniqueKeysWithValues: all.map { ($0.name, $0) })
     static let byId: [Int: MockPokemon] = Dictionary(uniqueKeysWithValues: all.map { ($0.id, $0) })
 
-    // MARK: - Ability Japanese Names
-
     static let abilityJaNames: [String: String] = [
         "overgrow": "しんりょく",
         "chlorophyll": "ようりょくそ",
@@ -432,8 +427,6 @@ enum MockPokemons {
         "pickup": "ものひろい",
         "prankster": "いたずらごころ",
     ]
-
-    // MARK: - Evolution Chains
 
     /// 進化チェーンのマスタ定義。chain ID → EvolutionChainResponse のマップ。
     static let evolutionChains: [Int: EvolutionChainResponse] = {

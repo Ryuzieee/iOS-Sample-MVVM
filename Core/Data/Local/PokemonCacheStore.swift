@@ -23,8 +23,6 @@ final class PokemonCacheStore {
         return dir
     }()
 
-    // MARK: - Pokemon Detail Cache
-
     func getPokemonDetail(name: String) -> CachedEntry<PokemonDetailModel>? {
         load(filename: "detail_\(name)")
     }
@@ -34,8 +32,6 @@ final class PokemonCacheStore {
         save(entry, filename: "detail_\(name)")
     }
 
-    // MARK: - Pokemon Names Cache
-
     func getPokemonNames() -> CachedEntry<[String]>? {
         load(filename: "pokemon_names")
     }
@@ -44,8 +40,6 @@ final class PokemonCacheStore {
         let entry = CachedEntry(data: names, cachedAt: Date())
         save(entry, filename: "pokemon_names")
     }
-
-    // MARK: - Private
 
     private func save(_ entry: CachedEntry<some Codable>, filename: String) {
         let url = cacheDirectory.appendingPathComponent("\(filename).json")

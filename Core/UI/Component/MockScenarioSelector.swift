@@ -15,7 +15,7 @@ struct MockScenarioSelector: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("発生させたいエラーを選択してください。")) {
+                Section(header: Text(Strings.Mock.sectionHeader)) {
                     ForEach(MockScenario.presets, id: \.scenario.id) { preset in
                         Button {
                             holder.current = preset.scenario
@@ -34,7 +34,7 @@ struct MockScenarioSelector: View {
                     }
                 }
             }
-            .navigationTitle("Mock Scenario")
+            .navigationTitle(Strings.Mock.screenTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

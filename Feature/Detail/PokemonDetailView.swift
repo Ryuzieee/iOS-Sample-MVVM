@@ -89,7 +89,6 @@ struct PokemonDetailView: View {
                         .padding(.top, 2)
                 }
 
-                // タイプ
                 HStack(spacing: 8) {
                     ForEach(fullDetail.detail.types, id: \.self) { type in
                         Text(Strings.Translation.type(type))
@@ -102,7 +101,6 @@ struct PokemonDetailView: View {
                 }
                 .padding(.vertical, 8)
 
-                // 身長・体重
                 Text(Strings.Detail.heightWeight(
                     heightCm: fullDetail.detail.height * 10,
                     weightKg: Double(fullDetail.detail.weight) / 10.0
@@ -110,7 +108,6 @@ struct PokemonDetailView: View {
                 .font(.subheadline)
                 .padding(.bottom, 16)
 
-                // 進化チェーン
                 if fullDetail.evolutionChain.count > 1 {
                     sectionHeader(Strings.Detail.sectionEvolution)
                     EvolutionChainView(
@@ -121,7 +118,6 @@ struct PokemonDetailView: View {
                     .padding(.bottom, 16)
                 }
 
-                // 基本ステータス
                 sectionHeader(Strings.Detail.sectionBaseStats)
                 ForEach(fullDetail.detail.stats, id: \.name) { stat in
                     StatRow(stat: stat)

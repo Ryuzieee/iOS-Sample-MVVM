@@ -56,8 +56,6 @@ struct ForceUpdateDialog: ViewModifier {
     }
 }
 
-// MARK: - View Extensions
-
 extension View {
     func errorDialog(message: String, onDismiss: @escaping () -> Void, onRetry: @escaping () -> Void) -> some View {
         modifier(ErrorDialog(message: message, onDismiss: onDismiss, onRetry: onRetry))

@@ -9,15 +9,12 @@ import Foundation
 
 /// アプリ全体で使用する UI 文字列定数。画面ごとにグルーピングして管理する。
 enum Strings {
-    // MARK: - 共通
-
     enum Common {
         static let retry = "リトライ"
         static let close = "閉じる"
         static let errorTitle = "エラー"
+        static let idPrefix = "#"
     }
-
-    // MARK: - エラー
 
     enum Error {
         static let networkMessage = "ネットワークに接続できません"
@@ -35,8 +32,6 @@ enum Strings {
         }
     }
 
-    // MARK: - ダイアログ
-
     enum Dialog {
         static let sessionExpiredTitle = "セッション切れ"
         static let sessionExpiredMessage = "セッションの有効期限が切れました。\n再度ログインしてください。"
@@ -47,15 +42,11 @@ enum Strings {
         static let forceUpdateButton = "ストアを開く"
     }
 
-    // MARK: - 一覧画面
-
     enum List {
         static let screenTitle = "Pokédex"
         static let searchDescription = "検索"
         static let favoritesDescription = "お気に入り"
     }
-
-    // MARK: - 詳細画面
 
     enum Detail {
         static let infoButtonDescription = "詳細情報を表示"
@@ -93,14 +84,10 @@ enum Strings {
         }
     }
 
-    // MARK: - 検索画面
-
     enum Search {
         static let searchPlaceholder = "ポケモン名を入力..."
         static let searchIdleMessage = "ポケモン名を入力してください"
     }
-
-    // MARK: - お気に入り画面
 
     enum Favorites {
         static let screenTitle = "お気に入り"
@@ -108,7 +95,19 @@ enum Strings {
         static let emptySubMessage = "詳細画面のハートアイコンから追加できます"
     }
 
-    // MARK: - PokeAPI 英語→日本語変換
+    enum Mock {
+        static let screenTitle = "Mock Scenario"
+        static let sectionHeader = "発生させたいエラーを選択してください。"
+        static let labelSuccess = "正常系レスポンス"
+        static let labelSessionExpired = "セッション切れ (401)"
+        static let labelForceUpdate = "強制アップデート (426)"
+        static let labelForbidden = "権限なし (403)"
+        static let labelNotFound = "Not Found (404)"
+        static let labelRateLimited = "レート制限 (429)"
+        static let labelServerError = "サーバーエラー (500)"
+        static let labelMaintenance = "メンテナンス (503)"
+        static let labelNetworkError = "ネットワークエラー"
+    }
 
     enum Translation {
         private static let types: [String: String] = [

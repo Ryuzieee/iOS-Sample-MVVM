@@ -96,3 +96,12 @@ type_name:
 # large_tuple
 large_tuple:
   warning: 4
+
+# ── カスタムルール ──────────────────────────────────────────
+custom_rules:
+  no_mark_comment:
+    name: "No MARK Comment"
+    regex: '// MARK:'
+    message: "MARK コメントは使用しない。ファイルが小さいため不要。"
+    severity: warning
+    excluded: ".*Tests\\.swift"

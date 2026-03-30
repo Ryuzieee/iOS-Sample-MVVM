@@ -25,8 +25,6 @@ enum MockScenario: Equatable, Identifiable {
         }
     }
 
-    // MARK: - プリセット
-
     static let sessionExpired = MockScenario.customError(code: 401, message: "Unauthorized", storeUrl: nil)
     static let forceUpdate = MockScenario.customError(
         code: 426,
@@ -41,15 +39,15 @@ enum MockScenario: Equatable, Identifiable {
 
     /// ボトムシートに表示するプリセット一覧。
     static let presets: [(label: String, scenario: MockScenario)] = [
-        ("正常系レスポンス", .success),
-        ("セッション切れ (401)", .sessionExpired),
-        ("強制アップデート (426)", .forceUpdate),
-        ("権限なし (403)", .forbidden),
-        ("Not Found (404)", .notFound),
-        ("レート制限 (429)", .rateLimited),
-        ("サーバーエラー (500)", .serverError),
-        ("メンテナンス (503)", .maintenance),
-        ("ネットワークエラー", .networkError),
+        (Strings.Mock.labelSuccess, .success),
+        (Strings.Mock.labelSessionExpired, .sessionExpired),
+        (Strings.Mock.labelForceUpdate, .forceUpdate),
+        (Strings.Mock.labelForbidden, .forbidden),
+        (Strings.Mock.labelNotFound, .notFound),
+        (Strings.Mock.labelRateLimited, .rateLimited),
+        (Strings.Mock.labelServerError, .serverError),
+        (Strings.Mock.labelMaintenance, .maintenance),
+        (Strings.Mock.labelNetworkError, .networkError),
     ]
 }
 

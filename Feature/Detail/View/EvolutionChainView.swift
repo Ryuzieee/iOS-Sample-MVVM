@@ -23,7 +23,7 @@ struct EvolutionChainView: View {
                                 .font(.title2)
                                 .foregroundColor(.secondary)
                             if let level = stage.minLevel {
-                                Text("Lv.\(level)")
+                                Text("\(Strings.Detail.evolutionLevelPrefix)\(level)")
                                     .font(.caption2)
                                     .foregroundColor(.secondary)
                             }

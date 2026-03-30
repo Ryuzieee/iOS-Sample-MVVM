@@ -11,8 +11,6 @@ import Foundation
 final class DependencyContainer {
     static let shared = DependencyContainer()
 
-    // MARK: - Data Layer
-
     private lazy var apiClient: PokeAPIClientProtocol = {
         #if MOCK
             return MockAPIClient()
@@ -24,13 +22,9 @@ final class DependencyContainer {
     private lazy var coreDataStack = CoreDataStack.shared
     private lazy var favoriteCoreDataStore = FavoriteCoreDataStore(coreDataStack: coreDataStack)
 
-    // MARK: - Repositories
-
     private lazy var pokemonRepository: PokemonRepositoryProtocol = PokemonRepositoryImpl(apiClient: apiClient)
     private lazy var favoriteRepository: FavoriteRepositoryProtocol =
         FavoriteRepositoryImpl(store: favoriteCoreDataStore)
-
-    // MARK: - UseCases
 
     private lazy var getPokemonListUseCase = GetPokemonListUseCase(repository: pokemonRepository)
     private lazy var getPokemonDetailUseCase = GetPokemonDetailUseCase(repository: pokemonRepository)
@@ -50,8 +44,6 @@ final class DependencyContainer {
     private lazy var getFavoritesUseCase = GetFavoritesUseCase(repository: favoriteRepository)
     private lazy var getIsFavoriteUseCase = GetIsFavoriteUseCase(repository: favoriteRepository)
     private lazy var toggleFavoriteUseCase = ToggleFavoriteUseCase(repository: favoriteRepository)
-
-    // MARK: - ViewModels
 
     func makePokemonListViewModel() -> PokemonListViewModel {
         PokemonListViewModel(getPokemonList: getPokemonListUseCase)

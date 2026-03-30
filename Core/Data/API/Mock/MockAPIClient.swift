@@ -31,7 +31,6 @@ final class MockAPIClient: PokeAPIClientProtocol {
     func getPokemonDetail(name: String) async throws -> PokemonDetailResponse {
         try await simulateScenario()
         guard let pokemon = MockPokemons.byName[name] else {
-            // 見つからない場合はフシギダネをフォールバック
             return buildDetailResponse(MockPokemons.all[0], overrideName: name)
         }
         return buildDetailResponse(pokemon)
@@ -61,10 +60,14 @@ final class MockAPIClient: PokeAPIClientProtocol {
 
     func getEvolutionChain(url: String) async throws -> EvolutionChainResponse {
         try await simulateScenario()
-        // URL から chain ID を抽出
         let chainId = extractChainId(from: url)
-        return MockPokemons.evolutionChains[chainId]
-            ?? MockPokemons.evolutionChains.values.first!
+        if let chain = MockPokemons.evolutionChains[chainId] {
+            return chain
+        }
+        return MockPokemons.evolutionChains[1] ?? EvolutionChainResponse(
+            id: chainId,
+            chain: .init(species: .init(name: "unknown", url: ""), evolvesTo: [], evolutionDetails: [])
+        )
     }
 
     func getAbility(name: String) async throws -> AbilityResponse {
@@ -74,8 +77,6 @@ final class MockAPIClient: PokeAPIClientProtocol {
             .init(name: jaName, language: NamedResource(name: "ja")),
         ])
     }
-
-    // MARK: - Private
 
     private func simulateScenario() async throws {
         try await Task.sleep(nanoseconds: mockDelayNanoseconds)
