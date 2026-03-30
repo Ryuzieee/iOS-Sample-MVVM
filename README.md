@@ -16,6 +16,8 @@ PokeAPI を使った iOS ポケモン図鑑アプリ。[Android版](https://gith
 | 画像 | AsyncImage（iOS 15〜標準） |
 | DI | イニシャライザDI（Protocol ベース） |
 | ログ | OSLog (AppLogger) |
+| フォーマット | SwiftFormat |
+| 静的解析 | SwiftLint |
 | テスト | XCTest + Mock |
 | 最小OS | iOS 15 |
 
@@ -47,9 +49,22 @@ Feature/
 
 Mapper / UseCase / ViewModel / Repository 実装の4層をカバー。Protocol ベースの Mock を使ったユニットテスト。
 
-## デバッグ機能
+## ビルドバリアント
 
-DEBUGビルド時、一覧画面左上の🐞アイコンから Mock シナリオセレクターを開き、API レスポンスを切り替え可能（正常系 / ネットワークエラー / 各種 HTTP エラー）。
+| Scheme | 説明 |
+|--------|------|
+| `iOS-Sample-MVVM` | 本番 API を使用する通常ビルド |
+| `iOS-Sample-MVVM-Mock` | MockAPIClient を使用。画面右下の🐞ボタンからシナリオ切替可能 |
+
+Mock スキームでは正常系 / ネットワークエラー / 各種 HTTP エラー（401, 403, 404, 426, 429, 500, 503）を切り替えてテストできる。
+
+## コード品質
+
+| コマンド | 説明 | Android 相当 |
+|---------|------|-------------|
+| `make format` | SwiftFormat で自動フォーマット | `./gradlew ktlintFormat` |
+| `make lint` | SwiftLint で静的解析 | `./gradlew detekt` |
+| `make check` | format + lint を順に実行 | - |
 
 ## API
 
