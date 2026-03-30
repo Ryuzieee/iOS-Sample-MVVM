@@ -8,8 +8,8 @@
 import Foundation
 
 /// PokemonSpeciesResponse → PokemonSpeciesModel への変換。
-enum PokemonSpeciesMapper {
-    static func toModel(from response: PokemonSpeciesResponse) -> PokemonSpeciesModel {
+extension PokemonSpeciesModel {
+    init(from response: PokemonSpeciesResponse) {
         let nameMap = Dictionary(
             response.names.map { ($0.language.name, $0.name) },
             uniquingKeysWith: { first, _ in first }
@@ -30,7 +30,7 @@ enum PokemonSpeciesMapper {
             ?? response.genera.first { $0.language.name == "en" }?.genus
             ?? ""
 
-        return PokemonSpeciesModel(
+        self.init(
             japaneseName: jaName,
             flavorText: jaFlavorText,
             genus: jaGenus,

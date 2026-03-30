@@ -8,10 +8,10 @@
 import Foundation
 
 /// ポケモン名リストの変換・検索フィルタリングを行う Mapper。
-enum PokemonNameMapper {
+extension PokemonListResponse {
     /// レスポンスから名前リストを抽出する。
-    static func toNames(from response: PokemonListResponse) -> [String] {
-        response.results.map(\.name)
+    func toNames() -> [String] {
+        results.map(\.name)
     }
 
     /// 名前リストをクエリでフィルタリングする（大文字小文字区別なし、前後の空白トリム）。

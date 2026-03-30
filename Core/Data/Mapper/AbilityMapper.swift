@@ -8,10 +8,10 @@
 import Foundation
 
 /// AbilityResponse → [言語コード: 名前] の辞書への変換。
-enum AbilityMapper {
-    static func toModel(from response: AbilityResponse) -> [String: String] {
+extension AbilityResponse {
+    func toLocalizedNames() -> [String: String] {
         Dictionary(
-            response.names.map { ($0.language.name, $0.name) },
+            names.map { ($0.language.name, $0.name) },
             uniquingKeysWith: { first, _ in first }
         )
     }

@@ -33,7 +33,7 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
             forceRefresh: forceRefresh,
             load: { self.cacheStore.getPokemonDetail(name: name)?.data },
             fetch: { try await self.apiClient.getPokemonDetail(name: name) },
-            toEntity: { PokemonDetailMapper.toModel(from: $0) },
+            toEntity: { PokemonDetailModel(from: $0) },
             toModel: { $0 },
             cachedAt: { _ in self.cacheStore.getPokemonDetail(name: name)?.cachedAt },
             save: { detail in self.cacheStore.savePokemonDetail(detail, name: name) }
@@ -43,21 +43,21 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
     func getPokemonSpecies(name: String) async throws -> PokemonSpeciesModel {
         try await handleRemote(
             fetch: { try await apiClient.getPokemonSpecies(name: name) },
-            toModel: { PokemonSpeciesMapper.toModel(from: $0) }
+            toModel: { PokemonSpeciesModel(from: $0) }
         )
     }
 
     func getEvolutionChain(url: String) async throws -> [EvolutionStageModel] {
         try await handleRemote(
             fetch: { try await apiClient.getEvolutionChain(url: url) },
-            toModel: { EvolutionChainMapper.toModel(from: $0) }
+            toModel: { [EvolutionStageModel](from: $0) }
         )
     }
 
     func getAbilityLocalizedNames(name: String) async throws -> [String: String] {
         try await handleRemote(
             fetch: { try await apiClient.getAbility(name: name) },
-            toModel: { AbilityMapper.toModel(from: $0) }
+            toModel: { $0.toLocalizedNames() }
         )
     }
 
@@ -67,10 +67,10 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
             names = cached.data
         } else {
             let response = try await apiClient.getPokemonList(limit: pokemonListLimit, offset: 0)
-            let fetched = PokemonNameMapper.toNames(from: response)
+            let fetched = response.toNames()
             cacheStore.savePokemonNames(fetched)
             names = fetched
         }
-        return PokemonNameMapper.filter(names: names, query: query)
+        return PokemonListResponse.filter(names: names, query: query)
     }
 }

@@ -30,7 +30,7 @@ final class FavoriteCoreDataStore: FavoriteStoreProtocol {
         request.sortDescriptors = [NSSortDescriptor(key: "savedAt", ascending: false)]
 
         let entities = try context.fetch(request)
-        return entities.map { FavoriteMapper.toModel(from: $0) }
+        return entities.map { FavoriteModel(from: $0) }
     }
 
     func isFavorite(id: Int) throws -> Bool {
@@ -46,7 +46,7 @@ final class FavoriteCoreDataStore: FavoriteStoreProtocol {
     func addFavorite(detail: PokemonDetailModel) throws {
         let context = coreDataStack.viewContext
         let entity = NSEntityDescription.insertNewObject(forEntityName: "FavoriteEntity", into: context)
-        FavoriteMapper.applyToEntity(entity, from: detail)
+        entity.applyFavorite(from: detail)
         try context.save()
     }
 

@@ -10,11 +10,11 @@ import Foundation
 private let artworkURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
 
 /// EvolutionChainResponse → [EvolutionStageModel] への変換。
-enum EvolutionChainMapper {
-    static func toModel(from response: EvolutionChainResponse) -> [EvolutionStageModel] {
+extension [EvolutionStageModel] {
+    init(from response: EvolutionChainResponse) {
         var stages: [EvolutionStageModel] = []
-        walk(link: response.chain, stages: &stages)
-        return stages
+        Self.walk(link: response.chain, stages: &stages)
+        self = stages
     }
 
     private static func walk(link: EvolutionChainResponse.ChainLink, stages: inout [EvolutionStageModel]) {
