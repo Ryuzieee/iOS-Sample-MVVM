@@ -19,6 +19,7 @@ final class SearchViewModel: ObservableObject {
 
     private let searchPokemon: SearchPokemonUseCase
     private var cancellables = Set<AnyCancellable>()
+    private var searchTask: Task<Void, Never>?
 
     init(searchPokemon: SearchPokemonUseCase) {
         self.searchPokemon = searchPokemon
@@ -45,7 +46,8 @@ final class SearchViewModel: ObservableObject {
         }
 
         content = .loading
-        Task {
+        searchTask?.cancel()
+        searchTask = Task {
             content = await loadAsUiState {
                 try await searchPokemon(query: trimmed)
             }

@@ -31,7 +31,7 @@ final class SearchViewModelTests: XCTestCase {
             XCTFail("Expected idle state")
         }
 
-        try? await Task.sleep(nanoseconds: 100_000_000)
+        try? await Task.sleep(for: .milliseconds(100))
         _ = viewModel
     }
 
@@ -43,7 +43,7 @@ final class SearchViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.query, "pika")
 
         // Combineのdebounce解放を待つ
-        try? await Task.sleep(nanoseconds: 100_000_000)
+        try? await Task.sleep(for: .milliseconds(100))
         _ = viewModel
     }
 
@@ -54,7 +54,7 @@ final class SearchViewModelTests: XCTestCase {
         viewModel.query = "pika"
         viewModel.retrySearch()
 
-        try? await Task.sleep(nanoseconds: 200_000_000)
+        try? await Task.sleep(for: .milliseconds(200))
 
         if case let .success(names) = viewModel.content {
             XCTAssertEqual(names, ["pikachu"])
@@ -73,7 +73,7 @@ final class SearchViewModelTests: XCTestCase {
             XCTFail("Expected idle state")
         }
 
-        try? await Task.sleep(nanoseconds: 100_000_000)
+        try? await Task.sleep(for: .milliseconds(100))
         _ = viewModel
     }
 }

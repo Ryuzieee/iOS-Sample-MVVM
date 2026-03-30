@@ -20,10 +20,15 @@ final class PokemonListViewModel: ObservableObject {
 
     private let getPokemonList: GetPokemonListUseCase
     private var hasMore = true
+    private var loadTask: Task<Void, Never>?
 
     init(getPokemonList: GetPokemonListUseCase) {
         self.getPokemonList = getPokemonList
-        loadInitial()
+    }
+
+    func loadInitial() {
+        guard case .idle = loadState else { return }
+        loadInitialData()
     }
 
     func refresh() {
@@ -33,9 +38,9 @@ final class PokemonListViewModel: ObservableObject {
                 let result = try await getPokemonList(offset: 0, limit: pageSize)
                 items = result
                 loadState = .success(true)
-                hasMore = result.count >= pageSize
+                hasMore = result.count == pageSize
             } catch {
-                // リフレッシュ失敗時は既存データを維持
+                AppLogger.error("Refresh failed: \(error.localizedDescription)", category: AppLogger.ui)
             }
             isRefreshing = false
         }
@@ -49,23 +54,23 @@ final class PokemonListViewModel: ObservableObject {
             do {
                 let result = try await getPokemonList(offset: items.count, limit: pageSize)
                 items += result
-                hasMore = result.count >= pageSize
+                hasMore = result.count == pageSize
             } catch {
-                // 追加読み込み失敗時はスキップ
+                AppLogger.error("Load more failed: \(error.localizedDescription)", category: AppLogger.ui)
             }
             isLoadingMore = false
         }
     }
 
-    private func loadInitial() {
+    private func loadInitialData() {
         loadState = .loading
-        Task {
+        loadTask = Task {
             let state = await loadAsUiState {
                 try await getPokemonList(offset: 0, limit: pageSize)
             }
             if case let .success(result) = state {
                 items = result
-                hasMore = result.count >= pageSize
+                hasMore = result.count == pageSize
                 loadState = .success(true)
             } else if case let .error(message, type) = state {
                 loadState = .error(message: message, type: type)

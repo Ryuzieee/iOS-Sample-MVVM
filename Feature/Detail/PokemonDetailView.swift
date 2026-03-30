@@ -61,6 +61,9 @@ struct PokemonDetailView: View {
                 )
             }
         }
+        .task {
+            viewModel.loadIfNeeded()
+        }
         .refreshable {
             viewModel.refresh()
         }

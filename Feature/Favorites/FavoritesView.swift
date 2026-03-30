@@ -47,6 +47,9 @@ struct FavoritesView: View {
                 Button(Strings.Common.close) { dismiss() }
             }
         }
+        .task {
+            viewModel.loadIfNeeded()
+        }
         .refreshable {
             viewModel.refresh()
         }

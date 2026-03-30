@@ -25,9 +25,9 @@ final class PokemonListViewModelTests: XCTestCase {
         repository.getPokemonListResult = .success(TestFixtures.fakePokemonList)
 
         let viewModel = createViewModel()
+        viewModel.loadInitial()
 
-        // loadInitialのTask完了を待つ
-        try? await Task.sleep(nanoseconds: 100_000_000)
+        try? await Task.sleep(for: .milliseconds(100))
 
         XCTAssertEqual(viewModel.items, TestFixtures.fakePokemonList)
         if case .success = viewModel.loadState {
@@ -41,8 +41,9 @@ final class PokemonListViewModelTests: XCTestCase {
         repository.getPokemonListResult = .failure(AppError.network("timeout"))
 
         let viewModel = createViewModel()
+        viewModel.loadInitial()
 
-        try? await Task.sleep(nanoseconds: 100_000_000)
+        try? await Task.sleep(for: .milliseconds(100))
 
         if case .error = viewModel.loadState {
             // OK
@@ -56,10 +57,11 @@ final class PokemonListViewModelTests: XCTestCase {
         repository.getPokemonListResult = .success(TestFixtures.fakePokemonList)
 
         let viewModel = createViewModel()
-        try? await Task.sleep(nanoseconds: 100_000_000)
+        viewModel.loadInitial()
+        try? await Task.sleep(for: .milliseconds(100))
 
         viewModel.refresh()
-        try? await Task.sleep(nanoseconds: 100_000_000)
+        try? await Task.sleep(for: .milliseconds(100))
 
         XCTAssertEqual(viewModel.items, TestFixtures.fakePokemonList)
         XCTAssertFalse(viewModel.isRefreshing)
