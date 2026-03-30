@@ -111,6 +111,8 @@ path.append(.detail(pokemonName))
 | NavigationStack push | 水平スライド（iOS 標準） | 一覧 → 詳細など通常遷移 |
 | `.sheet()` | 下から上スライド（iOS 標準） | 検索・お気に入りなどモーダル的遷移 |
 
+検索・お気に入りの sheet 内にも独自の NavigationStack を持ち、詳細画面へ push 遷移できる。戻るボタンで元の画面に復帰する。
+
 ---
 
 ## キャッシュ戦略
