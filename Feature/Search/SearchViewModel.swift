@@ -47,7 +47,7 @@ final class SearchViewModel: ObservableObject {
         content = .loading
         Task {
             content = await loadAsUiState {
-                try await searchPokemon.execute(query: trimmed)
+                try await searchPokemon(query: trimmed)
             }
         }
     }

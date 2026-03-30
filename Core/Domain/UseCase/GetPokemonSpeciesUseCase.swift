@@ -15,7 +15,7 @@ final class GetPokemonSpeciesUseCase {
         self.repository = repository
     }
 
-    func execute(name: String) async throws -> PokemonSpeciesModel {
+    func callAsFunction(name: String) async throws -> PokemonSpeciesModel {
         try await repository.getPokemonSpecies(name: name)
     }
 }

@@ -40,7 +40,7 @@ final class EvolutionChainMapperTests: XCTestCase {
             )
         )
 
-        let stages = EvolutionChainMapper.toModel(from: response)
+        let stages = [EvolutionStageModel](from: response)
 
         XCTAssertEqual(stages.count, 3)
         XCTAssertEqual(stages[0].name, "bulbasaur")

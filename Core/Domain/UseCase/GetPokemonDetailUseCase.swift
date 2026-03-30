@@ -15,7 +15,7 @@ final class GetPokemonDetailUseCase {
         self.repository = repository
     }
 
-    func execute(name: String, forceRefresh: Bool = false) async throws -> PokemonDetailModel {
+    func callAsFunction(name: String, forceRefresh: Bool = false) async throws -> PokemonDetailModel {
         try await repository.getPokemonDetail(name: name, forceRefresh: forceRefresh)
     }
 }

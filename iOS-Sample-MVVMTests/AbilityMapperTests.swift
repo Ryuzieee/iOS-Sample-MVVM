@@ -16,7 +16,7 @@ final class AbilityMapperTests: XCTestCase {
             AbilityResponse.Name(name: "おおもり", language: NamedResource(name: "ja-Hrkt")),
         ])
 
-        let result = AbilityMapper.toModel(from: response)
+        let result = response.toLocalizedNames()
 
         XCTAssertEqual(result.count, 3)
         XCTAssertEqual(result["en"], "Overgrow")
@@ -25,7 +25,7 @@ final class AbilityMapperTests: XCTestCase {
 
     func test_namesが空の場合に空のマップを返す() {
         let response = AbilityResponse(names: [])
-        let result = AbilityMapper.toModel(from: response)
+        let result = response.toLocalizedNames()
         XCTAssertTrue(result.isEmpty)
     }
 }

@@ -24,7 +24,7 @@ final class GetFavoritesUseCaseTests: XCTestCase {
         ]
         repository.getFavoritesResult = .success(favorites)
 
-        let result = try await useCase.execute()
+        let result = try await useCase()
 
         XCTAssertEqual(result.count, 2)
         XCTAssertEqual(result[0].name, "bulbasaur")
@@ -34,7 +34,7 @@ final class GetFavoritesUseCaseTests: XCTestCase {
     func test_お気に入りが空の場合は空リストを返す() async throws {
         repository.getFavoritesResult = .success([])
 
-        let result = try await useCase.execute()
+        let result = try await useCase()
 
         XCTAssertTrue(result.isEmpty)
     }

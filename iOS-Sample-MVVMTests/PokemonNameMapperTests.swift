@@ -15,7 +15,7 @@ final class PokemonNameMapperTests: XCTestCase {
             .init(name: "charmander", url: "https://pokeapi.co/api/v2/pokemon/4/"),
         ])
 
-        let names = PokemonNameMapper.toNames(from: response)
+        let names = response.toNames()
 
         XCTAssertEqual(names, ["bulbasaur", "charmander"])
     }
@@ -23,7 +23,7 @@ final class PokemonNameMapperTests: XCTestCase {
     func test_クエリで大文字小文字を区別せずフィルタリングする() {
         let names = ["bulbasaur", "charmander", "charmeleon", "pikachu"]
 
-        let result = PokemonNameMapper.filter(names: names, query: "char")
+        let result = PokemonListResponse.filter(names: names, query: "char")
 
         XCTAssertEqual(result, ["charmander", "charmeleon"])
     }
@@ -31,7 +31,7 @@ final class PokemonNameMapperTests: XCTestCase {
     func test_クエリの前後の空白をトリムしてフィルタリングする() {
         let names = ["pikachu", "raichu"]
 
-        let result = PokemonNameMapper.filter(names: names, query: "  pika  ")
+        let result = PokemonListResponse.filter(names: names, query: "  pika  ")
 
         XCTAssertEqual(result, ["pikachu"])
     }
@@ -39,7 +39,7 @@ final class PokemonNameMapperTests: XCTestCase {
     func test_一致するものがない場合に空リストを返す() {
         let names = ["bulbasaur"]
 
-        let result = PokemonNameMapper.filter(names: names, query: "xyz")
+        let result = PokemonListResponse.filter(names: names, query: "xyz")
 
         XCTAssertEqual(result, [])
     }

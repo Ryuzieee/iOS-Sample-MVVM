@@ -18,7 +18,7 @@ final class ToggleFavoriteUseCaseTests: XCTestCase {
     }
 
     func test_お気に入り登録済みの場合に削除する() async throws {
-        try await useCase.execute(detail: TestFixtures.fakePokemonDetail, isFavorite: true)
+        try await useCase(detail: TestFixtures.fakePokemonDetail, isFavorite: true)
 
         XCTAssertTrue(repository.removeFavoriteCalled)
         XCTAssertEqual(repository.lastRemovedId, 1)
@@ -26,7 +26,7 @@ final class ToggleFavoriteUseCaseTests: XCTestCase {
     }
 
     func test_お気に入り未登録の場合に追加する() async throws {
-        try await useCase.execute(detail: TestFixtures.fakePokemonDetail, isFavorite: false)
+        try await useCase(detail: TestFixtures.fakePokemonDetail, isFavorite: false)
 
         XCTAssertTrue(repository.addFavoriteCalled)
         XCTAssertFalse(repository.removeFavoriteCalled)

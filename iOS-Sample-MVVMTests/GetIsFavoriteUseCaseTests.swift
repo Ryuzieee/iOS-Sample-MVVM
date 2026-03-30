@@ -20,7 +20,7 @@ final class GetIsFavoriteUseCaseTests: XCTestCase {
     func test_お気に入り登録済みの場合にtrueを返す() async throws {
         repository.isFavoriteResult = .success(true)
 
-        let result = try await useCase.execute(id: 1)
+        let result = try await useCase(id: 1)
 
         XCTAssertTrue(result)
     }
@@ -28,7 +28,7 @@ final class GetIsFavoriteUseCaseTests: XCTestCase {
     func test_お気に入り未登録の場合にfalseを返す() async throws {
         repository.isFavoriteResult = .success(false)
 
-        let result = try await useCase.execute(id: 1)
+        let result = try await useCase(id: 1)
 
         XCTAssertFalse(result)
     }

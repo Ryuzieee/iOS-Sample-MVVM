@@ -43,7 +43,7 @@ final class PokemonDetailMapperTests: XCTestCase {
             ]
         )
 
-        let model = PokemonDetailMapper.toModel(from: response)
+        let model = PokemonDetailModel(from: response)
 
         XCTAssertEqual(model.id, 1)
         XCTAssertEqual(model.name, "bulbasaur")

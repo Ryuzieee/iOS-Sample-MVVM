@@ -20,7 +20,7 @@ final class GetAbilityJapaneseNameUseCaseTests: XCTestCase {
     func test_日本語名が存在する場合にjaを返す() async throws {
         repository.getAbilityLocalizedNamesResult = .success(["en": "Overgrow", "ja": "しんりょく"])
 
-        let result = try await useCase.execute(name: "overgrow")
+        let result = try await useCase(name: "overgrow")
 
         XCTAssertEqual(result, "しんりょく")
     }
@@ -28,7 +28,7 @@ final class GetAbilityJapaneseNameUseCaseTests: XCTestCase {
     func test_jaがなくjaHrktがある場合にフォールバックする() async throws {
         repository.getAbilityLocalizedNamesResult = .success(["en": "Overgrow", "ja-Hrkt": "しんりょく"])
 
-        let result = try await useCase.execute(name: "overgrow")
+        let result = try await useCase(name: "overgrow")
 
         XCTAssertEqual(result, "しんりょく")
     }
@@ -36,7 +36,7 @@ final class GetAbilityJapaneseNameUseCaseTests: XCTestCase {
     func test_日本語名がない場合に元の名前を返す() async throws {
         repository.getAbilityLocalizedNamesResult = .success(["en": "Overgrow"])
 
-        let result = try await useCase.execute(name: "overgrow")
+        let result = try await useCase(name: "overgrow")
 
         XCTAssertEqual(result, "overgrow")
     }

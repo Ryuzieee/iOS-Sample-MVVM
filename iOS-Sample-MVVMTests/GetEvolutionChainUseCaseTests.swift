@@ -29,7 +29,7 @@ final class GetEvolutionChainUseCaseTests: XCTestCase {
             EvolutionStageModel(name: "ivysaur", japaneseName: "", id: 2, imageUrl: "url2", minLevel: 16),
         ])
 
-        let result = try await useCase.execute(name: "bulbasaur")
+        let result = try await useCase(name: "bulbasaur")
 
         XCTAssertEqual(result.count, 2)
         XCTAssertEqual(result[0].japaneseName, "フシギダネ")
@@ -40,7 +40,7 @@ final class GetEvolutionChainUseCaseTests: XCTestCase {
         repository.getPokemonSpeciesResult = .failure(AppError.network("timeout"))
 
         do {
-            _ = try await useCase.execute(name: "bulbasaur")
+            _ = try await useCase(name: "bulbasaur")
             XCTFail("Expected error")
         } catch {
             guard case AppError.network = error else {
@@ -55,7 +55,7 @@ final class GetEvolutionChainUseCaseTests: XCTestCase {
         repository.getEvolutionChainResult = .failure(AppError.network("timeout"))
 
         do {
-            _ = try await useCase.execute(name: "bulbasaur")
+            _ = try await useCase(name: "bulbasaur")
             XCTFail("Expected error")
         } catch {
             // エラーが返ればOK

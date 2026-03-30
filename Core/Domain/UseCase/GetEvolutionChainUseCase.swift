@@ -20,14 +20,14 @@ final class GetEvolutionChainUseCase {
         self.repository = repository
     }
 
-    func execute(name: String) async throws -> [EvolutionStageModel] {
-        let species = try await getPokemonSpeciesUseCase.execute(name: name)
+    func callAsFunction(name: String) async throws -> [EvolutionStageModel] {
+        let species = try await getPokemonSpeciesUseCase(name: name)
         let stages = try await repository.getEvolutionChain(url: species.evolutionChainUrl)
 
         return await withTaskGroup(of: (Int, String).self) { group in
             for (index, stage) in stages.enumerated() {
                 group.addTask {
-                    let jaName = try? await self.getPokemonSpeciesUseCase.execute(name: stage.name).japaneseName
+                    let jaName = try? await self.getPokemonSpeciesUseCase(name: stage.name).japaneseName
                     return (index, jaName ?? "")
                 }
             }

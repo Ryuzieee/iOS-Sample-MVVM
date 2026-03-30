@@ -40,7 +40,7 @@ final class PokemonSpeciesMapperTests: XCTestCase {
             generation: NamedResource(name: "generation-i")
         )
 
-        let model = PokemonSpeciesMapper.toModel(from: response)
+        let model = PokemonSpeciesModel(from: response)
 
         XCTAssertEqual(model.japaneseName, "フシギダネ")
         XCTAssertEqual(model.flavorText, "たいようの ひかりを あびるほど からだに ちからが わいてくる。")
@@ -75,7 +75,7 @@ final class PokemonSpeciesMapperTests: XCTestCase {
             generation: NamedResource(name: "generation-i")
         )
 
-        let model = PokemonSpeciesMapper.toModel(from: response)
+        let model = PokemonSpeciesModel(from: response)
 
         XCTAssertEqual(model.flavorText, "A strange seed.")
         XCTAssertEqual(model.genus, "Seed Pokémon")

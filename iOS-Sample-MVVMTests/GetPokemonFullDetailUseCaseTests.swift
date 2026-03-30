@@ -37,7 +37,7 @@ final class GetPokemonFullDetailUseCaseTests: XCTestCase {
         repository.getEvolutionChainResult = .success([])
         repository.getAbilityLocalizedNamesResult = .success(["ja": "しんりょく"])
 
-        let result = try await useCase.execute(name: "bulbasaur")
+        let result = try await useCase(name: "bulbasaur")
 
         XCTAssertEqual(result.detail.name, "bulbasaur")
         XCTAssertNotNil(result.species)
@@ -48,7 +48,7 @@ final class GetPokemonFullDetailUseCaseTests: XCTestCase {
         repository.getPokemonDetailResult = .failure(AppError.network("timeout"))
 
         do {
-            _ = try await useCase.execute(name: "unknown")
+            _ = try await useCase(name: "unknown")
             XCTFail("Expected error")
         } catch {
             guard case AppError.network = error else {
@@ -64,7 +64,7 @@ final class GetPokemonFullDetailUseCaseTests: XCTestCase {
         repository.getEvolutionChainResult = .failure(AppError.network("timeout"))
         repository.getAbilityLocalizedNamesResult = .success(["ja": "しんりょく"])
 
-        let result = try await useCase.execute(name: "bulbasaur")
+        let result = try await useCase(name: "bulbasaur")
 
         XCTAssertNil(result.species)
         XCTAssertTrue(result.evolutionChain.isEmpty)

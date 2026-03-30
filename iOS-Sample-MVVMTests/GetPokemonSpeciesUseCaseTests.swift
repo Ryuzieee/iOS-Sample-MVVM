@@ -20,7 +20,7 @@ final class GetPokemonSpeciesUseCaseTests: XCTestCase {
     func test_種族情報取得成功時にモデルを返す() async throws {
         repository.getPokemonSpeciesResult = .success(TestFixtures.fakeSpecies)
 
-        let result = try await useCase.execute(name: "bulbasaur")
+        let result = try await useCase(name: "bulbasaur")
 
         XCTAssertEqual(result.japaneseName, "フシギダネ")
         XCTAssertEqual(result.genus, "たねポケモン")
@@ -30,7 +30,7 @@ final class GetPokemonSpeciesUseCaseTests: XCTestCase {
         repository.getPokemonSpeciesResult = .failure(AppError.network("timeout"))
 
         do {
-            _ = try await useCase.execute(name: "bulbasaur")
+            _ = try await useCase(name: "bulbasaur")
             XCTFail("Expected error")
         } catch {
             guard case AppError.network = error else {

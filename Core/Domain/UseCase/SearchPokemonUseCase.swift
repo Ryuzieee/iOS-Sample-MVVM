@@ -15,7 +15,7 @@ final class SearchPokemonUseCase {
         self.repository = repository
     }
 
-    func execute(query: String) async throws -> [String] {
+    func callAsFunction(query: String) async throws -> [String] {
         let names = try await repository.searchPokemonNames(query: query)
         if names.isEmpty {
             throw AppError.notFound(query: query)

@@ -30,7 +30,7 @@ final class PokemonListViewModel: ObservableObject {
         isRefreshing = true
         Task {
             do {
-                let result = try await getPokemonList.execute(offset: 0, limit: pageSize)
+                let result = try await getPokemonList(offset: 0, limit: pageSize)
                 items = result
                 loadState = .success(true)
                 hasMore = result.count >= pageSize
@@ -47,7 +47,7 @@ final class PokemonListViewModel: ObservableObject {
         isLoadingMore = true
         Task {
             do {
-                let result = try await getPokemonList.execute(offset: items.count, limit: pageSize)
+                let result = try await getPokemonList(offset: items.count, limit: pageSize)
                 items += result
                 hasMore = result.count >= pageSize
             } catch {
@@ -61,7 +61,7 @@ final class PokemonListViewModel: ObservableObject {
         loadState = .loading
         Task {
             let state = await loadAsUiState {
-                try await getPokemonList.execute(offset: 0, limit: pageSize)
+                try await getPokemonList(offset: 0, limit: pageSize)
             }
             if case let .success(result) = state {
                 items = result

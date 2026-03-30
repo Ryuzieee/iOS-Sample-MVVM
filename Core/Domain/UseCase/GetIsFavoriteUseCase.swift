@@ -15,7 +15,7 @@ final class GetIsFavoriteUseCase {
         self.repository = repository
     }
 
-    func execute(id: Int) async throws -> Bool {
+    func callAsFunction(id: Int) async throws -> Bool {
         try await repository.isFavorite(id: id)
     }
 }

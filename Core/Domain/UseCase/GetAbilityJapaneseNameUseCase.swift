@@ -15,7 +15,7 @@ final class GetAbilityJapaneseNameUseCase {
         self.repository = repository
     }
 
-    func execute(name: String) async throws -> String {
+    func callAsFunction(name: String) async throws -> String {
         let names = try await repository.getAbilityLocalizedNames(name: name)
         return names["ja"] ?? names["ja-Hrkt"] ?? name
     }

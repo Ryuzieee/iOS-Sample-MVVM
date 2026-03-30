@@ -15,7 +15,7 @@ final class GetFavoritesUseCase {
         self.repository = repository
     }
 
-    func execute() async throws -> [FavoriteModel] {
+    func callAsFunction() async throws -> [FavoriteModel] {
         try await repository.getFavorites()
     }
 }

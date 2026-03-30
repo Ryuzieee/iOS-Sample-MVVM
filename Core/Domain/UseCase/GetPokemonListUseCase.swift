@@ -15,7 +15,7 @@ final class GetPokemonListUseCase {
         self.repository = repository
     }
 
-    func execute(offset: Int, limit: Int) async throws -> [PokemonSummaryModel] {
+    func callAsFunction(offset: Int, limit: Int) async throws -> [PokemonSummaryModel] {
         try await repository.getPokemonList(offset: offset, limit: limit)
     }
 }

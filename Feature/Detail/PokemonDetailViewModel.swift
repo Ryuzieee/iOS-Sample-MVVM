@@ -45,7 +45,7 @@ final class PokemonDetailViewModel: ObservableObject {
     func toggleFavorite() {
         guard let fullDetail = content.dataOrNil else { return }
         Task {
-            try? await toggleFavoriteUseCase.execute(detail: fullDetail.detail, isFavorite: isFavorite)
+            try? await toggleFavoriteUseCase(detail: fullDetail.detail, isFavorite: isFavorite)
             isFavorite.toggle()
         }
     }
@@ -56,7 +56,7 @@ final class PokemonDetailViewModel: ObservableObject {
             isRefreshing = forceRefresh
 
             let state = await loadAsUiState {
-                try await getPokemonFullDetail.execute(name: pokemonName, forceRefresh: forceRefresh)
+                try await getPokemonFullDetail(name: pokemonName, forceRefresh: forceRefresh)
             }
             content = state
             isRefreshing = false
@@ -68,7 +68,7 @@ final class PokemonDetailViewModel: ObservableObject {
 
     private func loadFavorite(pokemonId: Int) {
         Task {
-            isFavorite = await (try? getIsFavorite.execute(id: pokemonId)) ?? false
+            isFavorite = await (try? getIsFavorite(id: pokemonId)) ?? false
         }
     }
 }

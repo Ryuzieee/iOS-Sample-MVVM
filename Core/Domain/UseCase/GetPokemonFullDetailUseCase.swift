@@ -26,11 +26,11 @@ final class GetPokemonFullDetailUseCase {
         self.getAbilityJapaneseNameUseCase = getAbilityJapaneseNameUseCase
     }
 
-    func execute(name: String, forceRefresh: Bool = false) async throws -> PokemonFullDetailModel {
-        let detail = try await getPokemonDetailUseCase.execute(name: name, forceRefresh: forceRefresh)
+    func callAsFunction(name: String, forceRefresh: Bool = false) async throws -> PokemonFullDetailModel {
+        let detail = try await getPokemonDetailUseCase(name: name, forceRefresh: forceRefresh)
 
-        async let speciesTask = try? getPokemonSpeciesUseCase.execute(name: name)
-        async let chainTask = try? getEvolutionChainUseCase.execute(name: name)
+        async let speciesTask = try? getPokemonSpeciesUseCase(name: name)
+        async let chainTask = try? getEvolutionChainUseCase(name: name)
         async let abilitiesTask = resolveAbilityNames(detail: detail)
 
         let species = await speciesTask
@@ -48,7 +48,7 @@ final class GetPokemonFullDetailUseCase {
         await withTaskGroup(of: (Int, String).self) { group in
             for (index, ability) in detail.abilities.enumerated() {
                 group.addTask {
-                    let jaName = try? await self.getAbilityJapaneseNameUseCase.execute(name: ability.name)
+                    let jaName = try? await self.getAbilityJapaneseNameUseCase(name: ability.name)
                     return (index, jaName ?? ability.name)
                 }
             }

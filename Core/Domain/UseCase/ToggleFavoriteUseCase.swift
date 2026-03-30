@@ -15,7 +15,7 @@ final class ToggleFavoriteUseCase {
         self.repository = repository
     }
 
-    func execute(detail: PokemonDetailModel, isFavorite: Bool) async throws {
+    func callAsFunction(detail: PokemonDetailModel, isFavorite: Bool) async throws {
         if isFavorite {
             try await repository.removeFavorite(id: detail.id)
         } else {

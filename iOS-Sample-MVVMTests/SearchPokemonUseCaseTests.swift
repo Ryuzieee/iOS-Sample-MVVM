@@ -20,7 +20,7 @@ final class SearchPokemonUseCaseTests: XCTestCase {
     func test_検索成功時に一致する名前リストを返す() async throws {
         repository.searchPokemonNamesResult = .success(["pikachu"])
 
-        let result = try await useCase.execute(query: "pika")
+        let result = try await useCase(query: "pika")
 
         XCTAssertEqual(result, ["pikachu"])
     }
@@ -29,7 +29,7 @@ final class SearchPokemonUseCaseTests: XCTestCase {
         repository.searchPokemonNamesResult = .success([])
 
         do {
-            _ = try await useCase.execute(query: "xyz")
+            _ = try await useCase(query: "xyz")
             XCTFail("Expected error")
         } catch {
             guard case AppError.notFound = error else {
@@ -43,7 +43,7 @@ final class SearchPokemonUseCaseTests: XCTestCase {
         repository.searchPokemonNamesResult = .failure(AppError.network("timeout"))
 
         do {
-            _ = try await useCase.execute(query: "pika")
+            _ = try await useCase(query: "pika")
             XCTFail("Expected error")
         } catch {
             guard case AppError.network = error else {
