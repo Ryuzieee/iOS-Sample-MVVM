@@ -65,6 +65,7 @@
 		4635EF7E2F7ABE180052FC19 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EF7D2F7ABDE50052FC19 /* ContentView.swift */; };
 		4635EF7F2F7ABE180052FC19 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EF7C2F7ABDDB0052FC19 /* DependencyContainer.swift */; };
 		4635EF812F7ABE3E0052FC19 /* iOS_Sample_MVVMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EF802F7ABE3B0052FC19 /* iOS_Sample_MVVMApp.swift */; };
+		4635EFB62F7AC6A50052FC19 /* RepositoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFB52F7AC6A40052FC19 /* RepositoryHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,7 @@
 		4635EF7C2F7ABDDB0052FC19 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		4635EF7D2F7ABDE50052FC19 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4635EF802F7ABE3B0052FC19 /* iOS_Sample_MVVMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_Sample_MVVMApp.swift; sourceTree = "<group>"; };
+		4635EFB52F7AC6A40052FC19 /* RepositoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -378,6 +380,7 @@
 		4635EEF42F7AB34C0052FC19 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				4635EFB52F7AC6A40052FC19 /* RepositoryHandler.swift */,
 				4635EF442F7AB9990052FC19 /* CacheConfig.swift */,
 			);
 			path = Util;
@@ -563,6 +566,7 @@
 				4635EF372F7AB96D0052FC19 /* PokemonDetailMapper.swift in Sources */,
 				4635EF012F7AB7710052FC19 /* FavoriteRepositoryProtocol.swift in Sources */,
 				4635EF2D2F7AB8FA0052FC19 /* PokemonListResponse.swift in Sources */,
+				4635EFB62F7AC6A50052FC19 /* RepositoryHandler.swift in Sources */,
 				4635EF252F7AB8BD0052FC19 /* PokeAPIClient.swift in Sources */,
 				4635EF472F7AB9A00052FC19 /* CoreDataStack.swift in Sources */,
 				4635EF452F7AB9990052FC19 /* CacheConfig.swift in Sources */,

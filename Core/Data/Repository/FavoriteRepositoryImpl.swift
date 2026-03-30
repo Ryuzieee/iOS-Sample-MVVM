@@ -16,18 +16,30 @@ final class FavoriteRepositoryImpl: FavoriteRepositoryProtocol {
     }
 
     func getFavorites() async throws -> [FavoriteModel] {
-        try store.getAllFavorites()
+        try await handleLocal(
+            query: { try self.store.getAllFavorites() },
+            toModel: { $0 }
+        )
     }
 
     func isFavorite(id: Int) async throws -> Bool {
-        try store.isFavorite(id: id)
+        try await handleLocal(
+            query: { try self.store.isFavorite(id: id) },
+            toModel: { $0 }
+        )
     }
 
     func addFavorite(detail: PokemonDetailModel) async throws {
-        try store.addFavorite(detail: detail)
+        try await handleLocal(
+            query: { try self.store.addFavorite(detail: detail) },
+            toModel: { $0 }
+        )
     }
 
     func removeFavorite(id: Int) async throws {
-        try store.removeFavorite(id: id)
+        try await handleLocal(
+            query: { try self.store.removeFavorite(id: id) },
+            toModel: { $0 }
+        )
     }
 }

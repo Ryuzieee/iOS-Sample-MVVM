@@ -62,7 +62,10 @@ final class PokeAPIClient {
             if httpResponse.statusCode == 404 {
                 throw AppError.notFound(query: url.absoluteString)
             }
-            throw AppError.server(code: httpResponse.statusCode)
+            throw HTTPResponseError(
+                statusCode: httpResponse.statusCode,
+                storeUrl: httpResponse.value(forHTTPHeaderField: "X-Store-Url")
+            )
         }
 
         do {

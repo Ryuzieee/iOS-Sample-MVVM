@@ -20,28 +20,40 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
     }
 
     func getPokemonList(offset: Int, limit: Int) async throws -> [PokemonSummaryModel] {
-        let response = try await apiClient.getPokemonList(limit: limit, offset: offset)
-        return response.results.map { PokemonSummaryModel(name: $0.name, url: $0.url) }
+        try await handleRemote(
+            fetch: { try await apiClient.getPokemonList(limit: limit, offset: offset) },
+            toModel: { response in
+                response.results.map { PokemonSummaryModel(name: $0.name, url: $0.url) }
+            }
+        )
     }
 
     func getPokemonDetail(name: String, forceRefresh: Bool) async throws -> PokemonDetailModel {
-        let response = try await apiClient.getPokemonDetail(name: name)
-        return PokemonDetailMapper.toModel(from: response)
+        try await handleRemote(
+            fetch: { try await apiClient.getPokemonDetail(name: name) },
+            toModel: { PokemonDetailMapper.toModel(from: $0) }
+        )
     }
 
     func getPokemonSpecies(name: String) async throws -> PokemonSpeciesModel {
-        let response = try await apiClient.getPokemonSpecies(name: name)
-        return PokemonSpeciesMapper.toModel(from: response)
+        try await handleRemote(
+            fetch: { try await apiClient.getPokemonSpecies(name: name) },
+            toModel: { PokemonSpeciesMapper.toModel(from: $0) }
+        )
     }
 
     func getEvolutionChain(url: String) async throws -> [EvolutionStageModel] {
-        let response = try await apiClient.getEvolutionChain(url: url)
-        return EvolutionChainMapper.toModel(from: response)
+        try await handleRemote(
+            fetch: { try await apiClient.getEvolutionChain(url: url) },
+            toModel: { EvolutionChainMapper.toModel(from: $0) }
+        )
     }
 
     func getAbilityLocalizedNames(name: String) async throws -> [String: String] {
-        let response = try await apiClient.getAbility(name: name)
-        return AbilityMapper.toModel(from: response)
+        try await handleRemote(
+            fetch: { try await apiClient.getAbility(name: name) },
+            toModel: { AbilityMapper.toModel(from: $0) }
+        )
     }
 
     func searchPokemonNames(query: String) async throws -> [String] {
