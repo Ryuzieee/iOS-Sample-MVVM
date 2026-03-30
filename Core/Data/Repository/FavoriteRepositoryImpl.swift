@@ -9,9 +9,9 @@ import Foundation
 
 /// FavoriteRepositoryProtocol の実装クラス。CoreData を使ってお気に入りを永続化する。
 final class FavoriteRepositoryImpl: FavoriteRepositoryProtocol {
-    private let store: FavoriteCoreDataStore
+    private let store: FavoriteStoreProtocol
 
-    init(store: FavoriteCoreDataStore) {
+    init(store: FavoriteStoreProtocol) {
         self.store = store
     }
 

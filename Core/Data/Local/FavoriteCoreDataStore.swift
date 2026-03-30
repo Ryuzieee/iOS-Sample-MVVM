@@ -8,8 +8,16 @@
 import Foundation
 import CoreData
 
+/// お気に入りストアのプロトコル。テスト時にモック差し替え可能。
+protocol FavoriteStoreProtocol {
+    func getAllFavorites() throws -> [FavoriteModel]
+    func isFavorite(id: Int) throws -> Bool
+    func addFavorite(detail: PokemonDetailModel) throws
+    func removeFavorite(id: Int) throws
+}
+
 /// お気に入りポケモンの CRUD 操作を行う CoreData ストア。
-final class FavoriteCoreDataStore {
+final class FavoriteCoreDataStore: FavoriteStoreProtocol {
     private let coreDataStack: CoreDataStack
 
     init(coreDataStack: CoreDataStack = .shared) {

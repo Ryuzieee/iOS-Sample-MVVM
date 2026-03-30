@@ -11,11 +11,11 @@ private let pokemonListLimit = 2000
 
 /// PokemonRepositoryProtocol の実装クラス。
 final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
-    private let apiClient: PokeAPIClient
+    private let apiClient: PokeAPIClientProtocol
     private var cachedNames: [String] = []
     private var namesCachedAt: Date?
 
-    init(apiClient: PokeAPIClient) {
+    init(apiClient: PokeAPIClientProtocol) {
         self.apiClient = apiClient
     }
 

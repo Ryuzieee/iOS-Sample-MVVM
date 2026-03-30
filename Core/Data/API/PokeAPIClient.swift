@@ -7,9 +7,18 @@
 
 import Foundation
 
+/// PokeAPI クライアントのプロトコル。テスト時にモック差し替え可能。
+protocol PokeAPIClientProtocol {
+    func getPokemonList(limit: Int, offset: Int) async throws -> PokemonListResponse
+    func getPokemonDetail(name: String) async throws -> PokemonDetailResponse
+    func getPokemonSpecies(name: String) async throws -> PokemonSpeciesResponse
+    func getEvolutionChain(url: String) async throws -> EvolutionChainResponse
+    func getAbility(name: String) async throws -> AbilityResponse
+}
+
 /// PokeAPI の REST エンドポイントを呼び出すクライアント。
 /// ベースURL: https://pokeapi.co/api/v2/
-final class PokeAPIClient {
+final class PokeAPIClient: PokeAPIClientProtocol {
     private let baseURL = "https://pokeapi.co/api/v2/"
     private let session: URLSession
     private let decoder: JSONDecoder
