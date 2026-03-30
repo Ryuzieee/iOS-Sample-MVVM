@@ -35,7 +35,7 @@ final class PokemonListViewModel: ObservableObject {
                 loadState = .success(true)
                 hasMore = result.count >= pageSize
             } catch {
-                // リフレッシュ失敗時は既存データを維持
+                AppLogger.error("Refresh failed: \(error.localizedDescription)", category: AppLogger.ui)
             }
             isRefreshing = false
         }
@@ -51,7 +51,7 @@ final class PokemonListViewModel: ObservableObject {
                 items += result
                 hasMore = result.count >= pageSize
             } catch {
-                // 追加読み込み失敗時はスキップ
+                AppLogger.error("Load more failed: \(error.localizedDescription)", category: AppLogger.ui)
             }
             isLoadingMore = false
         }
