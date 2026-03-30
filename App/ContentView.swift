@@ -42,19 +42,23 @@ struct ContentView: View {
                     )
                 }
             }
-            #if DEBUG
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: { showMockSelector = true }) {
-                        Image(systemName: "ladybug")
-                    }
-                }
-            }
-            .sheet(isPresented: $showMockSelector) {
-                MockScenarioSelector()
-            }
-            #endif
         }
+        #if DEBUG
+        .overlay(alignment: .bottomTrailing) {
+            Button(action: { showMockSelector = true }) {
+                Image(systemName: "ladybug")
+                    .font(.title2)
+                    .padding(12)
+                    .background(Color(.systemBackground))
+                    .clipShape(Circle())
+                    .shadow(radius: 4)
+            }
+            .padding(16)
+        }
+        .sheet(isPresented: $showMockSelector) {
+            MockScenarioSelector()
+        }
+        #endif
     }
 }
 

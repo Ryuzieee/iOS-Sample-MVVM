@@ -13,7 +13,29 @@ struct ErrorContent: View {
     let onRetry: () -> Void
     var errorType: ErrorType = .general
 
+    @State private var showSessionExpired = false
+    @State private var showForceUpdate = false
+
     var body: some View {
+        Group {
+            switch errorType {
+            case .sessionExpired:
+                Color.clear.onAppear { showSessionExpired = true }
+            case .forceUpdate:
+                Color.clear.onAppear { showForceUpdate = true }
+            default:
+                retryContent
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .sessionExpiredDialog(isPresented: $showSessionExpired)
+        .forceUpdateDialog(
+            storeUrl: forceUpdateStoreUrl,
+            isPresented: $showForceUpdate
+        )
+    }
+
+    private var retryContent: some View {
         VStack(spacing: 16) {
             Spacer()
             Text(displayMessage)
@@ -31,7 +53,6 @@ struct ErrorContent: View {
                 .buttonStyle(.borderedProminent)
             Spacer()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private var displayMessage: String {
@@ -39,5 +60,12 @@ struct ErrorContent: View {
             return Strings.Error.networkMessage
         }
         return message
+    }
+
+    private var forceUpdateStoreUrl: String {
+        if case .forceUpdate(let storeUrl) = errorType {
+            return storeUrl
+        }
+        return ""
     }
 }
