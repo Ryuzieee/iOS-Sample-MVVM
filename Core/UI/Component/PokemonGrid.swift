@@ -18,6 +18,7 @@ struct PokemonGridItem: Identifiable, Equatable {
 struct PokemonGrid: View {
     let items: [PokemonGridItem]
     let onPokemonTap: (String) -> Void
+    var onItemAppear: ((Int) -> Void)?
 
     private let columns = [
         GridItem(.flexible(), spacing: 8),
@@ -26,13 +27,14 @@ struct PokemonGrid: View {
 
     var body: some View {
         LazyVGrid(columns: columns, spacing: 8) {
-            ForEach(items) { item in
+            ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                 PokemonCard(
                     name: item.name,
                     id: item.id,
                     imageUrl: item.imageUrl,
                     onTap: { onPokemonTap(item.name) }
                 )
+                .onAppear { onItemAppear?(index) }
             }
         }
         .padding(.horizontal, 8)

@@ -51,20 +51,19 @@ struct PokemonListView: View {
                 items: viewModel.items.map {
                     PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl)
                 },
-                onPokemonTap: onPokemonTap
+                onPokemonTap: onPokemonTap,
+                onItemAppear: { index in
+                    // 末尾付近に到達したら追加読み込み
+                    if index >= viewModel.items.count - 4 {
+                        viewModel.loadMore()
+                    }
+                }
             )
 
             if viewModel.isLoadingMore {
                 ProgressView()
                     .padding()
             }
-
-            // 無限スクロールトリガー
-            Color.clear
-                .frame(height: 1)
-                .onAppear {
-                    viewModel.loadMore()
-                }
         }
     }
 }
