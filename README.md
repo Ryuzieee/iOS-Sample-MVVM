@@ -14,7 +14,8 @@ PokeAPI を使った iOS ポケモン図鑑アプリ。[Android版](https://gith
 | ローカルDB | CoreData |
 | キャッシュ期限管理 | UserDefaults |
 | 画像 | AsyncImage（iOS 15〜標準） |
-| DI | イニシャライザDI |
+| DI | イニシャライザDI（Protocol ベース） |
+| ログ | OSLog (AppLogger) |
 | テスト | XCTest + Mock |
 | 最小OS | iOS 15 |
 
@@ -24,8 +25,17 @@ PokeAPI を使った iOS ポケモン図鑑アプリ。[Android版](https://gith
 App/                    # エントリーポイント, ナビゲーション, DI
 Core/
   Domain/               # Model, Repository Protocol, UseCase
-  Data/                 # API, CoreData, Mapper, Repository実装
-  UI/Component/         # 共通UIコンポーネント
+  Data/
+    API/                # PokeAPIClient, Response DTO
+    API/Mock/           # MockAPIClient, MockScenario, シナリオ切替UI
+    Local/              # CoreData (FavoriteCoreDataStore)
+    Mapper/             # Response → Model 変換
+    Repository/         # Repository 実装
+    Util/               # RepositoryHandler, CacheConfig, AppLogger
+  UI/
+    Component/          # 共通UIコンポーネント (UiStateContent, ErrorDialog, etc.)
+    Util/               # LoadAsUiState
+    Strings.swift       # 文字列定数
 Feature/
   List/                 # ポケモン一覧（無限スクロール）
   Detail/               # ポケモン詳細（ステータス, 進化チェーン, お気に入り）
@@ -35,7 +45,11 @@ Feature/
 
 ## テスト
 
-Mapper / UseCase / ViewModel の3層をカバー。Mock Repositoryを使ったユニットテスト。
+Mapper / UseCase / ViewModel / Repository 実装の4層をカバー。Protocol ベースの Mock を使ったユニットテスト。
+
+## デバッグ機能
+
+DEBUGビルド時、一覧画面左上の🐞アイコンから Mock シナリオセレクターを開き、API レスポンスを切り替え可能（正常系 / ネットワークエラー / 各種 HTTP エラー）。
 
 ## API
 
