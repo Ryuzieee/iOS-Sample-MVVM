@@ -48,12 +48,16 @@ struct PokemonListView: View {
         }
     }
 
+    private var gridItems: [PokemonGridItem] {
+        viewModel.items.map {
+            PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl)
+        }
+    }
+
     private var pokemonList: some View {
         ScrollView {
             PokemonGrid(
-                items: viewModel.items.map {
-                    PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl)
-                },
+                items: gridItems,
                 onPokemonTap: onPokemonTap,
                 onItemAppear: { index in
                     if index >= viewModel.items.count - 4 {
