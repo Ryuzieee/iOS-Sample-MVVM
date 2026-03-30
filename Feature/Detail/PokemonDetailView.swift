@@ -38,13 +38,17 @@ struct PokemonDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(action: { showInfo = true }) {
-                    Image(systemName: "info.circle")
-                }
-                Button(action: viewModel.toggleFavorite) {
-                    Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
-                        .foregroundColor(viewModel.isFavorite ? .red : .primary)
-                }
+                AppIconButton(
+                    systemName: "info.circle",
+                    accessibilityLabel: Strings.Detail.infoButtonDescription,
+                    action: { showInfo = true }
+                )
+                AppIconButton(
+                    systemName: viewModel.isFavorite ? "heart.fill" : "heart",
+                    accessibilityLabel: viewModel.isFavorite ? Strings.Detail.removeFavoriteDescription : Strings.Detail.addFavoriteDescription,
+                    action: viewModel.toggleFavorite,
+                    tint: viewModel.isFavorite ? .red : .primary
+                )
             }
         }
         .sheet(isPresented: $showInfo) {
@@ -69,9 +73,7 @@ struct PokemonDetailView: View {
                     size: 200
                 )
 
-                Text("#\(fullDetail.detail.id)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                PokemonIdText(id: fullDetail.detail.id)
                     .padding(.top, 4)
 
                 Text(displayName)

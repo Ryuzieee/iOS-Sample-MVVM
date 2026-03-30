@@ -69,6 +69,9 @@
 		4635EFB92F7AC8140052FC19 /* LoadAsUiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFB82F7AC8140052FC19 /* LoadAsUiState.swift */; };
 		4635EFBB2F7AC8C60052FC19 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFBA2F7AC8C60052FC19 /* Strings.swift */; };
 		4635EFBD2F7AC99C0052FC19 /* ErrorDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFBC2F7AC99B0052FC19 /* ErrorDialog.swift */; };
+		4635EFBF2F7AC9D40052FC19 /* UiStateContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFBE2F7AC9D30052FC19 /* UiStateContent.swift */; };
+		4635EFC12F7ACA1B0052FC19 /* PokemonTextComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFC02F7ACA1B0052FC19 /* PokemonTextComponents.swift */; };
+		4635EFC32F7ACA220052FC19 /* AppIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFC22F7ACA220052FC19 /* AppIconButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +148,9 @@
 		4635EFB82F7AC8140052FC19 /* LoadAsUiState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAsUiState.swift; sourceTree = "<group>"; };
 		4635EFBA2F7AC8C60052FC19 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		4635EFBC2F7AC99B0052FC19 /* ErrorDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDialog.swift; sourceTree = "<group>"; };
+		4635EFBE2F7AC9D30052FC19 /* UiStateContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiStateContent.swift; sourceTree = "<group>"; };
+		4635EFC02F7ACA1B0052FC19 /* PokemonTextComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTextComponents.swift; sourceTree = "<group>"; };
+		4635EFC22F7ACA220052FC19 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -397,6 +403,9 @@
 		4635EEF52F7AB3520052FC19 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				4635EFC22F7ACA220052FC19 /* AppIconButton.swift */,
+				4635EFC02F7ACA1B0052FC19 /* PokemonTextComponents.swift */,
+				4635EFBE2F7AC9D30052FC19 /* UiStateContent.swift */,
 				4635EFBC2F7AC99B0052FC19 /* ErrorDialog.swift */,
 				4635EF582F7ABAB40052FC19 /* EmptyContent.swift */,
 				4635EF552F7ABAA20052FC19 /* ErrorContent.swift */,
@@ -553,7 +562,9 @@
 				4635EF0A2F7AB77A0052FC19 /* FavoriteModel.swift in Sources */,
 				4635EF152F7AB7AB0052FC19 /* GetEvolutionChainUseCase.swift in Sources */,
 				4635EF5C2F7ABACD0052FC19 /* LoadingIndicator.swift in Sources */,
+				4635EFC32F7ACA220052FC19 /* AppIconButton.swift in Sources */,
 				4635EF742F7ABD220052FC19 /* SearchViewModel.swift in Sources */,
+				4635EFBF2F7AC9D40052FC19 /* UiStateContent.swift in Sources */,
 				4635EF752F7ABD220052FC19 /* SearchView.swift in Sources */,
 				4635EFBB2F7AC8C60052FC19 /* Strings.swift in Sources */,
 				4635EF722F7ABD1D0052FC19 /* FavoritesViewModel.swift in Sources */,
@@ -563,6 +574,7 @@
 				4635EFB92F7AC8140052FC19 /* LoadAsUiState.swift in Sources */,
 				4635EF5E2F7ABACD0052FC19 /* EmptyContent.swift in Sources */,
 				4635EF5F2F7ABACD0052FC19 /* PokemonGrid.swift in Sources */,
+				4635EFC12F7ACA1B0052FC19 /* PokemonTextComponents.swift in Sources */,
 				4635EF602F7ABACD0052FC19 /* SearchTextField.swift in Sources */,
 				4635EF612F7ABACD0052FC19 /* PokemonCard.swift in Sources */,
 				4635EF622F7ABACD0052FC19 /* ErrorContent.swift in Sources */,

@@ -28,12 +28,16 @@ struct PokemonListView: View {
         .navigationTitle(Strings.List.screenTitle)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(action: onSearchTap) {
-                    Image(systemName: "magnifyingglass")
-                }
-                Button(action: onFavoritesTap) {
-                    Image(systemName: "heart.fill")
-                }
+                AppIconButton(
+                    systemName: "magnifyingglass",
+                    accessibilityLabel: Strings.List.searchDescription,
+                    action: onSearchTap
+                )
+                AppIconButton(
+                    systemName: "heart.fill",
+                    accessibilityLabel: Strings.List.favoritesDescription,
+                    action: onFavoritesTap
+                )
             }
         }
         .refreshable {
