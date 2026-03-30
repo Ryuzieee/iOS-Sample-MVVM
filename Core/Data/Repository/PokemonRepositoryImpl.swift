@@ -12,11 +12,11 @@ private let pokemonListLimit = 2000
 /// PokemonRepositoryProtocol の実装クラス。
 final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
     private let apiClient: PokeAPIClientProtocol
-    private var cachedNames: [String] = []
-    private var namesCachedAt: Date?
+    private let cacheStore: PokemonCacheStore
 
-    init(apiClient: PokeAPIClientProtocol) {
+    init(apiClient: PokeAPIClientProtocol, cacheStore: PokemonCacheStore = .shared) {
         self.apiClient = apiClient
+        self.cacheStore = cacheStore
     }
 
     func getPokemonList(offset: Int, limit: Int) async throws -> [PokemonSummaryModel] {
@@ -28,10 +28,15 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
         )
     }
 
-    func getPokemonDetail(name: String, forceRefresh _: Bool) async throws -> PokemonDetailModel {
-        try await handleRemote(
-            fetch: { try await apiClient.getPokemonDetail(name: name) },
-            toModel: { PokemonDetailMapper.toModel(from: $0) }
+    func getPokemonDetail(name: String, forceRefresh: Bool) async throws -> PokemonDetailModel {
+        try await handleWithCache(
+            forceRefresh: forceRefresh,
+            load: { self.cacheStore.getPokemonDetail(name: name)?.data },
+            fetch: { try await self.apiClient.getPokemonDetail(name: name) },
+            toEntity: { PokemonDetailMapper.toModel(from: $0) },
+            toModel: { $0 },
+            cachedAt: { _ in self.cacheStore.getPokemonDetail(name: name)?.cachedAt },
+            save: { detail in self.cacheStore.savePokemonDetail(detail, name: name) }
         )
     }
 
@@ -57,11 +62,16 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
     }
 
     func searchPokemonNames(query: String) async throws -> [String] {
-        if cachedNames.isEmpty || CacheConfig.isExpired(cachedAt: namesCachedAt) {
+        // キャッシュから名前一覧を取得（期限切れならAPIから再取得して保存）
+        let names: [String]
+        if let cached = cacheStore.getPokemonNames(), !cached.isExpired {
+            names = cached.data
+        } else {
             let response = try await apiClient.getPokemonList(limit: pokemonListLimit, offset: 0)
-            cachedNames = PokemonNameMapper.toNames(from: response)
-            namesCachedAt = Date()
+            let fetched = PokemonNameMapper.toNames(from: response)
+            cacheStore.savePokemonNames(fetched)
+            names = fetched
         }
-        return PokemonNameMapper.filter(names: cachedNames, query: query)
+        return PokemonNameMapper.filter(names: names, query: query)
     }
 }
