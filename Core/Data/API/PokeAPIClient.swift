@@ -61,11 +61,14 @@ final class PokeAPIClient: PokeAPIClientProtocol {
             throw AppError.unknown("Invalid URL")
         }
 
+        AppLogger.logRequest(url: url.absoluteString)
         let (data, response) = try await session.data(from: url)
 
         guard let httpResponse = response as? HTTPURLResponse else {
             throw AppError.unknown("Invalid response")
         }
+
+        AppLogger.logResponse(url: url.absoluteString, statusCode: httpResponse.statusCode)
 
         guard (200...299).contains(httpResponse.statusCode) else {
             if httpResponse.statusCode == 404 {

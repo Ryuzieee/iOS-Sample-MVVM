@@ -73,6 +73,7 @@
 		4635EFC12F7ACA1B0052FC19 /* PokemonTextComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFC02F7ACA1B0052FC19 /* PokemonTextComponents.swift */; };
 		4635EFC32F7ACA220052FC19 /* AppIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFC22F7ACA220052FC19 /* AppIconButton.swift */; };
 		4635EFCB2F7ACB750052FC19 /* PokemonNameMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFCA2F7ACB740052FC19 /* PokemonNameMapper.swift */; };
+		4635EFD02F7ACBDE0052FC19 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFCF2F7ACBDE0052FC19 /* AppLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +154,7 @@
 		4635EFC02F7ACA1B0052FC19 /* PokemonTextComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTextComponents.swift; sourceTree = "<group>"; };
 		4635EFC22F7ACA220052FC19 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
 		4635EFCA2F7ACB740052FC19 /* PokemonNameMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonNameMapper.swift; sourceTree = "<group>"; };
+		4635EFCF2F7ACBDE0052FC19 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -397,6 +399,7 @@
 		4635EEF42F7AB34C0052FC19 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				4635EFCF2F7ACBDE0052FC19 /* AppLogger.swift */,
 				4635EFB52F7AC6A40052FC19 /* RepositoryHandler.swift */,
 				4635EF442F7AB9990052FC19 /* CacheConfig.swift */,
 			);
@@ -554,6 +557,7 @@
 				4635EF762F7ABD270052FC19 /* PokemonDetailView.swift in Sources */,
 				4635EF772F7ABD270052FC19 /* PokemonDetailViewModel.swift in Sources */,
 				4635EF1F2F7AB7CE0052FC19 /* ToggleFavoriteUseCase.swift in Sources */,
+				4635EFD02F7ACBDE0052FC19 /* AppLogger.swift in Sources */,
 				4635EF3F2F7AB9850052FC19 /* FavoriteMapper.swift in Sources */,
 				4635EF2F2F7AB9010052FC19 /* PokemonDetailResponse.swift in Sources */,
 				4635EF192F7AB7BC0052FC19 /* SearchPokemonUseCase.swift in Sources */,

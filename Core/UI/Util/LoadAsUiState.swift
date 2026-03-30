@@ -6,9 +6,6 @@
 //
 
 import Foundation
-import OSLog
-
-private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: "UiState")
 
 /// async throws クロージャを実行し、結果を UiState に変換する。
 func loadAsUiState<T: Equatable>(_ block: () async throws -> T) async -> UiState<T> {
@@ -16,7 +13,7 @@ func loadAsUiState<T: Equatable>(_ block: () async throws -> T) async -> UiState
         let result = try await block()
         return .success(result)
     } catch {
-        logger.error("\(error.localizedDescription)")
+        AppLogger.error(error.localizedDescription, category: AppLogger.ui)
         return .error(message: error.localizedDescription, type: error.toErrorType())
     }
 }
