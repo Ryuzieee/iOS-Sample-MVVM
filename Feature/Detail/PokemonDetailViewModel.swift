@@ -31,6 +31,10 @@ final class PokemonDetailViewModel: ObservableObject {
         self.getPokemonFullDetail = getPokemonFullDetail
         self.getIsFavorite = getIsFavorite
         toggleFavoriteUseCase = toggleFavorite
+    }
+
+    func loadIfNeeded() {
+        guard case .loading = content else { return }
         load()
     }
 

@@ -18,6 +18,10 @@ final class FavoritesViewModel: ObservableObject {
 
     init(getFavorites: GetFavoritesUseCase) {
         self.getFavorites = getFavorites
+    }
+
+    func loadIfNeeded() {
+        guard case .loading = content else { return }
         load()
     }
 

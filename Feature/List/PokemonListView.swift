@@ -40,6 +40,9 @@ struct PokemonListView: View {
                 )
             }
         }
+        .task {
+            viewModel.loadInitial()
+        }
         .refreshable {
             viewModel.refresh()
         }

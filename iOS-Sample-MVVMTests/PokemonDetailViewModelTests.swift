@@ -50,6 +50,7 @@ final class PokemonDetailViewModelTests: XCTestCase {
         pokemonRepository.getAbilityLocalizedNamesResult = .success(["ja": "しんりょく"])
 
         let viewModel = createViewModel()
+        viewModel.loadIfNeeded()
         try? await Task.sleep(for: .milliseconds(200))
 
         if case let .success(data) = viewModel.content {
@@ -64,6 +65,7 @@ final class PokemonDetailViewModelTests: XCTestCase {
         pokemonRepository.getPokemonDetailResult = .failure(AppError.network("timeout"))
 
         let viewModel = createViewModel()
+        viewModel.loadIfNeeded()
         try? await Task.sleep(for: .milliseconds(200))
 
         if case .error = viewModel.content {
@@ -80,6 +82,7 @@ final class PokemonDetailViewModelTests: XCTestCase {
         pokemonRepository.getAbilityLocalizedNamesResult = .success([:])
 
         let viewModel = createViewModel()
+        viewModel.loadIfNeeded()
         try? await Task.sleep(for: .milliseconds(200))
 
         XCTAssertFalse(viewModel.isFavorite)

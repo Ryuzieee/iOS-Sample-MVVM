@@ -29,6 +29,7 @@ final class FavoritesViewModelTests: XCTestCase {
         repository.getFavoritesResult = .success(favorites)
 
         let viewModel = createViewModel()
+        viewModel.loadIfNeeded()
         try? await Task.sleep(for: .milliseconds(100))
 
         if case let .success(data) = viewModel.content {
@@ -42,6 +43,7 @@ final class FavoritesViewModelTests: XCTestCase {
         repository.getFavoritesResult = .failure(AppError.unknown("db error"))
 
         let viewModel = createViewModel()
+        viewModel.loadIfNeeded()
         try? await Task.sleep(for: .milliseconds(100))
 
         if case .error = viewModel.content {
@@ -55,6 +57,7 @@ final class FavoritesViewModelTests: XCTestCase {
         repository.getFavoritesResult = .success([])
 
         let viewModel = createViewModel()
+        viewModel.loadIfNeeded()
         try? await Task.sleep(for: .milliseconds(100))
 
         if case let .success(data) = viewModel.content {

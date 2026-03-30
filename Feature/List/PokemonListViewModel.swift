@@ -23,7 +23,11 @@ final class PokemonListViewModel: ObservableObject {
 
     init(getPokemonList: GetPokemonListUseCase) {
         self.getPokemonList = getPokemonList
-        loadInitial()
+    }
+
+    func loadInitial() {
+        guard case .idle = loadState else { return }
+        loadInitialData()
     }
 
     func refresh() {
@@ -57,7 +61,7 @@ final class PokemonListViewModel: ObservableObject {
         }
     }
 
-    private func loadInitial() {
+    private func loadInitialData() {
         loadState = .loading
         Task {
             let state = await loadAsUiState {
