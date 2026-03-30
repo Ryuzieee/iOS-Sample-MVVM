@@ -48,7 +48,7 @@ final class SearchViewModel: ObservableObject {
         content = .loading
         searchTask?.cancel()
         searchTask = Task {
-            content = await loadAsUiState {
+            content = await .from {
                 try await searchPokemon(query: trimmed)
             }
         }

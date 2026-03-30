@@ -38,7 +38,7 @@ final class FavoritesViewModel: ObservableObject {
         loadTask?.cancel()
         loadTask = Task {
             isRefreshing = forceRefresh
-            content = await loadAsUiState {
+            content = await .from {
                 try await getFavorites()
             }
             isRefreshing = false

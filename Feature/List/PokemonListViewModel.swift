@@ -65,7 +65,7 @@ final class PokemonListViewModel: ObservableObject {
     private func loadInitialData() {
         loadState = .loading
         loadTask = Task {
-            let state = await loadAsUiState {
+            let state: UiState = await .from {
                 try await getPokemonList(offset: 0, limit: pageSize)
             }
             if case let .success(result) = state {

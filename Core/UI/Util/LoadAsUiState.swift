@@ -7,14 +7,16 @@
 
 import Foundation
 
-/// async throws クロージャを実行し、結果を UiState に変換する。
-func loadAsUiState<T: Equatable>(_ block: () async throws -> T) async -> UiState<T> {
-    do {
-        let result = try await block()
-        return .success(result)
-    } catch {
-        AppLogger.error(error.localizedDescription, category: AppLogger.ui)
-        return .error(message: error.localizedDescription, type: error.toErrorType())
+extension UiState {
+    /// async throws クロージャを実行し、結果を UiState に変換する。
+    static func from(_ block: () async throws -> T) async -> UiState<T> {
+        do {
+            let result = try await block()
+            return .success(result)
+        } catch {
+            AppLogger.error(error.localizedDescription, category: AppLogger.ui)
+            return .error(message: error.localizedDescription, type: error.toErrorType())
+        }
     }
 }
 

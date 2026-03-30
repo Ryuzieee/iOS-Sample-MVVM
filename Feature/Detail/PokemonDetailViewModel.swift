@@ -67,7 +67,7 @@ final class PokemonDetailViewModel: ObservableObject {
             content = .loading
             isRefreshing = forceRefresh
 
-            let state = await loadAsUiState {
+            let state: UiState = await .from {
                 try await getPokemonFullDetail(name: pokemonName, forceRefresh: forceRefresh)
             }
             content = state
