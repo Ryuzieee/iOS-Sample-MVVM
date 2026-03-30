@@ -16,14 +16,14 @@ struct SearchView: View {
         VStack(spacing: 0) {
             SearchTextField(
                 text: $viewModel.query,
-                placeholder: "ポケモンの名前を入力"
+                placeholder: Strings.Search.searchPlaceholder
             )
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
 
             switch viewModel.content {
             case .idle:
-                EmptyContent(message: "ポケモンの名前を入力して検索")
+                EmptyContent(message: Strings.Search.searchIdleMessage)
             case .loading:
                 LoadingIndicator()
             case .error(let message, _):
@@ -38,7 +38,7 @@ struct SearchView: View {
                 .listStyle(.plain)
             }
         }
-        .navigationTitle("けんさく")
+        .navigationTitle(Strings.List.searchDescription)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

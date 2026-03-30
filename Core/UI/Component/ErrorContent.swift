@@ -22,12 +22,12 @@ struct ErrorContent: View {
                 .padding(.horizontal, 32)
 
             if errorType == .network {
-                Text("ネットワーク接続を確認してください。")
+                Text(Strings.Error.networkSubMessage)
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
 
-            Button("リトライ", action: onRetry)
+            Button(Strings.Common.retry, action: onRetry)
                 .buttonStyle(.borderedProminent)
             Spacer()
         }
@@ -36,7 +36,7 @@ struct ErrorContent: View {
 
     private var displayMessage: String {
         if errorType == .network {
-            return "通信エラーが発生しました。"
+            return Strings.Error.networkMessage
         }
         return message
     }

@@ -89,7 +89,7 @@ struct PokemonDetailView: View {
                 // タイプ
                 HStack(spacing: 8) {
                     ForEach(fullDetail.detail.types, id: \.self) { type in
-                        Text(type.capitalized)
+                        Text(Strings.Translation.type(type))
                             .font(.caption)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 4)
@@ -100,13 +100,16 @@ struct PokemonDetailView: View {
                 .padding(.vertical, 8)
 
                 // 身長・体重
-                Text("身長: \(fullDetail.detail.height * 10)cm　体重: \(String(format: "%.1f", Double(fullDetail.detail.weight) / 10.0))kg")
+                Text(Strings.Detail.heightWeight(
+                    heightCm: fullDetail.detail.height * 10,
+                    weightKg: Double(fullDetail.detail.weight) / 10.0
+                ))
                     .font(.subheadline)
                     .padding(.bottom, 16)
 
                 // 進化チェーン
                 if fullDetail.evolutionChain.count > 1 {
-                    sectionHeader("しんか")
+                    sectionHeader(Strings.Detail.sectionEvolution)
                     EvolutionChainView(
                         stages: fullDetail.evolutionChain,
                         currentName: fullDetail.detail.name,
@@ -116,7 +119,7 @@ struct PokemonDetailView: View {
                 }
 
                 // 基本ステータス
-                sectionHeader("きほんステータス")
+                sectionHeader(Strings.Detail.sectionBaseStats)
                 ForEach(fullDetail.detail.stats, id: \.name) { stat in
                     StatRow(stat: stat)
                 }
@@ -141,7 +144,7 @@ private struct StatRow: View {
 
     var body: some View {
         HStack {
-            Text(stat.name.capitalized)
+            Text(Strings.Translation.stat(stat.name))
                 .font(.caption)
                 .frame(width: 80, alignment: .leading)
             ProgressView(value: Double(stat.value), total: 255)

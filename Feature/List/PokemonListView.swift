@@ -25,7 +25,7 @@ struct PokemonListView: View {
                 pokemonList
             }
         }
-        .navigationTitle("ポケモン図鑑")
+        .navigationTitle(Strings.List.screenTitle)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: onSearchTap) {

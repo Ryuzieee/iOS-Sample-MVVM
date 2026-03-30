@@ -66,6 +66,8 @@
 		4635EF7F2F7ABE180052FC19 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EF7C2F7ABDDB0052FC19 /* DependencyContainer.swift */; };
 		4635EF812F7ABE3E0052FC19 /* iOS_Sample_MVVMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EF802F7ABE3B0052FC19 /* iOS_Sample_MVVMApp.swift */; };
 		4635EFB62F7AC6A50052FC19 /* RepositoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFB52F7AC6A40052FC19 /* RepositoryHandler.swift */; };
+		4635EFB92F7AC8140052FC19 /* LoadAsUiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFB82F7AC8140052FC19 /* LoadAsUiState.swift */; };
+		4635EFBB2F7AC8C60052FC19 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFBA2F7AC8C60052FC19 /* Strings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +141,8 @@
 		4635EF7D2F7ABDE50052FC19 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4635EF802F7ABE3B0052FC19 /* iOS_Sample_MVVMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_Sample_MVVMApp.swift; sourceTree = "<group>"; };
 		4635EFB52F7AC6A40052FC19 /* RepositoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryHandler.swift; sourceTree = "<group>"; };
+		4635EFB82F7AC8140052FC19 /* LoadAsUiState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAsUiState.swift; sourceTree = "<group>"; };
+		4635EFBA2F7AC8C60052FC19 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -244,6 +248,8 @@
 		4635EEE62F7AB1690052FC19 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4635EFBA2F7AC8C60052FC19 /* Strings.swift */,
+				4635EFB72F7AC80E0052FC19 /* Util */,
 				4635EEF52F7AB3520052FC19 /* Component */,
 			);
 			path = UI;
@@ -410,6 +416,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4635EFB72F7AC80E0052FC19 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				4635EFB82F7AC8140052FC19 /* LoadAsUiState.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -538,10 +552,12 @@
 				4635EF5C2F7ABACD0052FC19 /* LoadingIndicator.swift in Sources */,
 				4635EF742F7ABD220052FC19 /* SearchViewModel.swift in Sources */,
 				4635EF752F7ABD220052FC19 /* SearchView.swift in Sources */,
+				4635EFBB2F7AC8C60052FC19 /* Strings.swift in Sources */,
 				4635EF722F7ABD1D0052FC19 /* FavoritesViewModel.swift in Sources */,
 				4635EF812F7ABE3E0052FC19 /* iOS_Sample_MVVMApp.swift in Sources */,
 				4635EF732F7ABD1D0052FC19 /* FavoritesView.swift in Sources */,
 				4635EF5D2F7ABACD0052FC19 /* PokemonImage.swift in Sources */,
+				4635EFB92F7AC8140052FC19 /* LoadAsUiState.swift in Sources */,
 				4635EF5E2F7ABACD0052FC19 /* EmptyContent.swift in Sources */,
 				4635EF5F2F7ABACD0052FC19 /* PokemonGrid.swift in Sources */,
 				4635EF602F7ABACD0052FC19 /* SearchTextField.swift in Sources */,

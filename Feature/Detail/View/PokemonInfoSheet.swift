@@ -26,29 +26,29 @@ struct PokemonInfoSheet: View {
 
                         Divider().padding(.vertical, 8)
 
-                        InfoRow(label: "分類", value: species.genus)
-                        InfoRow(label: "世代", value: species.generation)
+                        InfoRow(label: Strings.Detail.labelCategory, value: species.genus)
+                        InfoRow(label: Strings.Detail.labelGeneration, value: Strings.Translation.generation(species.generation))
                         if let habitat = species.habitat {
-                            InfoRow(label: "生息地", value: habitat)
+                            InfoRow(label: Strings.Detail.labelHabitat, value: Strings.Translation.habitat(habitat))
                         }
-                        InfoRow(label: "捕獲率", value: "\(species.captureRate)")
-                        InfoRow(label: "タマゴグループ", value: species.eggGroups.joined(separator: " / "))
+                        InfoRow(label: Strings.Detail.labelCaptureRate, value: "\(species.captureRate)")
+                        InfoRow(label: Strings.Detail.labelEggGroup, value: species.eggGroups.map { Strings.Translation.eggGroup($0) }.joined(separator: Strings.Detail.eggGroupSeparator))
 
                         let genderText: String = {
                             if species.genderRate == -1 {
-                                return "性別なし"
+                                return Strings.Detail.labelNoGender
                             }
-                            let female = species.genderRate * 125 / 10
-                            let male = 1000 - female
-                            return "♂ \(String(format: "%.1f", Double(male) / 10))% / ♀ \(String(format: "%.1f", Double(female) / 10))%"
+                            let female = Double(species.genderRate * 125) / 10.0
+                            let male = 100.0 - female
+                            return Strings.Detail.genderRatio(femalePercent: female, malePercent: male)
                         }()
-                        InfoRow(label: "性別比", value: genderText)
+                        InfoRow(label: Strings.Detail.labelGenderRatio, value: genderText)
 
                         Divider().padding(.vertical, 8)
                     }
 
                     // 特性
-                    Text("とくせい")
+                    Text(Strings.Detail.labelAbilities)
                         .font(.headline)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 4)
@@ -59,7 +59,7 @@ struct PokemonInfoSheet: View {
                                 .font(.body)
                             Spacer()
                             if ability.isHidden {
-                                Text("かくれとくせい")
+                                Text(Strings.Detail.labelHiddenAbility)
                                     .font(.caption)
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 2)
@@ -71,16 +71,16 @@ struct PokemonInfoSheet: View {
                         .padding(.vertical, 4)
                     }
 
-                    InfoRow(label: "基礎経験値", value: "\(detail.baseExperience)")
+                    InfoRow(label: Strings.Detail.labelBaseExperience, value: "\(detail.baseExperience)")
                         .padding(.top, 8)
                 }
                 .padding(.bottom, 16)
             }
-            .navigationTitle("くわしい情報")
+            .navigationTitle(Strings.Detail.bottomSheetTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("閉じる") { dismiss() }
+                    Button(Strings.Common.close) { dismiss() }
                 }
             }
         }

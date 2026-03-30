@@ -22,8 +22,8 @@ struct FavoritesView: View {
             case .success(let favorites):
                 if favorites.isEmpty {
                     EmptyContent(
-                        message: "お気に入りはまだありません",
-                        subMessage: "詳細画面の♡ボタンで追加できます"
+                        message: Strings.Favorites.emptyMessage,
+                        subMessage: Strings.Favorites.emptySubMessage
                     )
                 } else {
                     ScrollView {
@@ -39,7 +39,7 @@ struct FavoritesView: View {
                 EmptyView()
             }
         }
-        .navigationTitle("おきにいり")
+        .navigationTitle(Strings.Favorites.screenTitle)
         .navigationBarTitleDisplayMode(.inline)
         .refreshable {
             viewModel.refresh()
