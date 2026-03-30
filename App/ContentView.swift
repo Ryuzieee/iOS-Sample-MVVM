@@ -8,9 +8,12 @@
 import SwiftUI
 
 /// アプリのルートナビゲーション。
+/// Detail は push（水平スライド）、Search/Favorites は sheet（下からモーダル）で遷移。
 struct ContentView: View {
     private let container = DependencyContainer.shared
     @State private var path: [Route] = []
+    @State private var showSearch = false
+    @State private var showFavorites = false
     #if MOCK
         @State private var showMockSelector = false
     #endif
@@ -20,8 +23,8 @@ struct ContentView: View {
             PokemonListView(
                 viewModel: container.makePokemonListViewModel(),
                 onPokemonTap: { name in path.append(.detail(name)) },
-                onSearchTap: { path.append(.search) },
-                onFavoritesTap: { path.append(.favorites) }
+                onSearchTap: { showSearch = true },
+                onFavoritesTap: { showFavorites = true }
             )
             .navigationDestination(for: Route.self) { route in
                 switch route {
@@ -30,17 +33,29 @@ struct ContentView: View {
                         viewModel: container.makePokemonDetailViewModel(name: name),
                         onPokemonTap: { newName in path.append(.detail(newName)) }
                     )
-                case .search:
-                    SearchView(
-                        viewModel: container.makeSearchViewModel(),
-                        onPokemonTap: { name in path.append(.detail(name)) }
-                    )
-                case .favorites:
-                    FavoritesView(
-                        viewModel: container.makeFavoritesViewModel(),
-                        onPokemonTap: { name in path.append(.detail(name)) }
-                    )
                 }
+            }
+        }
+        .sheet(isPresented: $showSearch) {
+            NavigationStack {
+                SearchView(
+                    viewModel: container.makeSearchViewModel(),
+                    onPokemonTap: { name in
+                        showSearch = false
+                        path.append(.detail(name))
+                    }
+                )
+            }
+        }
+        .sheet(isPresented: $showFavorites) {
+            NavigationStack {
+                FavoritesView(
+                    viewModel: container.makeFavoritesViewModel(),
+                    onPokemonTap: { name in
+                        showFavorites = false
+                        path.append(.detail(name))
+                    }
+                )
             }
         }
         #if MOCK
@@ -65,6 +80,4 @@ struct ContentView: View {
 /// ナビゲーションルート定義。
 enum Route: Hashable {
     case detail(String)
-    case search
-    case favorites
 }

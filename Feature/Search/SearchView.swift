@@ -9,6 +9,7 @@ import SwiftUI
 
 /// ポケモン検索画面。
 struct SearchView: View {
+    @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: SearchViewModel
     let onPokemonTap: (String) -> Void
 
@@ -40,5 +41,10 @@ struct SearchView: View {
         }
         .navigationTitle(Strings.List.searchDescription)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(Strings.Common.close) { dismiss() }
+            }
+        }
     }
 }
