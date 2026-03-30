@@ -19,17 +19,6 @@ enum Strings {
     enum Error {
         static let networkMessage = "ネットワークに接続できません"
         static let networkSubMessage = "接続を確認してリトライしてください"
-        static let sessionExpired = "セッションの有効期限が切れました。再度ログインしてください"
-        static let forceUpdate = "新しいバージョンが利用可能です。アップデートしてください"
-        static let unknownError = "不明なエラーが発生しました"
-
-        static func serverError(code: Int) -> String {
-            "サーバーエラー (\(code))"
-        }
-
-        static func notFound(query: String) -> String {
-            "「\(query)」に一致するポケモンは見つかりませんでした"
-        }
     }
 
     enum Dialog {

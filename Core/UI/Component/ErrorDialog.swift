@@ -7,22 +7,6 @@
 
 import SwiftUI
 
-/// コンテンツの上にオーバーレイ表示するエラーダイアログ。
-struct ErrorDialog: ViewModifier {
-    let message: String
-    let onDismiss: () -> Void
-    let onRetry: () -> Void
-
-    func body(content: Content) -> some View {
-        content.alert(Strings.Common.errorTitle, isPresented: .constant(true)) {
-            Button(Strings.Common.retry, action: onRetry)
-            Button(Strings.Common.close, role: .cancel, action: onDismiss)
-        } message: {
-            Text(message)
-        }
-    }
-}
-
 /// セッション切れダイアログ。閉じることはできない。
 struct SessionExpiredDialog: ViewModifier {
     @Binding var isPresented: Bool
@@ -57,10 +41,6 @@ struct ForceUpdateDialog: ViewModifier {
 }
 
 extension View {
-    func errorDialog(message: String, onDismiss: @escaping () -> Void, onRetry: @escaping () -> Void) -> some View {
-        modifier(ErrorDialog(message: message, onDismiss: onDismiss, onRetry: onRetry))
-    }
-
     func sessionExpiredDialog(isPresented: Binding<Bool>) -> some View {
         modifier(SessionExpiredDialog(isPresented: isPresented))
     }
