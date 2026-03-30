@@ -68,6 +68,7 @@
 		4635EFB62F7AC6A50052FC19 /* RepositoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFB52F7AC6A40052FC19 /* RepositoryHandler.swift */; };
 		4635EFB92F7AC8140052FC19 /* LoadAsUiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFB82F7AC8140052FC19 /* LoadAsUiState.swift */; };
 		4635EFBB2F7AC8C60052FC19 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFBA2F7AC8C60052FC19 /* Strings.swift */; };
+		4635EFBD2F7AC99C0052FC19 /* ErrorDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4635EFBC2F7AC99B0052FC19 /* ErrorDialog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,7 @@
 		4635EFB52F7AC6A40052FC19 /* RepositoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryHandler.swift; sourceTree = "<group>"; };
 		4635EFB82F7AC8140052FC19 /* LoadAsUiState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAsUiState.swift; sourceTree = "<group>"; };
 		4635EFBA2F7AC8C60052FC19 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		4635EFBC2F7AC99B0052FC19 /* ErrorDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDialog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -395,6 +397,7 @@
 		4635EEF52F7AB3520052FC19 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				4635EFBC2F7AC99B0052FC19 /* ErrorDialog.swift */,
 				4635EF582F7ABAB40052FC19 /* EmptyContent.swift */,
 				4635EF552F7ABAA20052FC19 /* ErrorContent.swift */,
 				4635EF532F7ABA9C0052FC19 /* LoadingIndicator.swift */,
@@ -580,6 +583,7 @@
 				4635EF232F7AB8810052FC19 /* PokemonFullDetailModel.swift in Sources */,
 				4635EF022F7AB7750052FC19 /* PokemonRepositoryProtocol.swift in Sources */,
 				4635EF372F7AB96D0052FC19 /* PokemonDetailMapper.swift in Sources */,
+				4635EFBD2F7AC99C0052FC19 /* ErrorDialog.swift in Sources */,
 				4635EF012F7AB7710052FC19 /* FavoriteRepositoryProtocol.swift in Sources */,
 				4635EF2D2F7AB8FA0052FC19 /* PokemonListResponse.swift in Sources */,
 				4635EFB62F7AC6A50052FC19 /* RepositoryHandler.swift in Sources */,
