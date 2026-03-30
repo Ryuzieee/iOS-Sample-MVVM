@@ -19,17 +19,17 @@ enum AppError: LocalizedError, Equatable {
     var errorDescription: String? {
         switch self {
         case .network:
-            return "通信エラーが発生しました。ネットワーク接続を確認してください。"
+            "通信エラーが発生しました。ネットワーク接続を確認してください。"
         case let .server(code):
-            return "サーバーエラーが発生しました（\(code)）"
+            "サーバーエラーが発生しました（\(code)）"
         case let .notFound(query):
-            return "「\(query)」は見つかりませんでした"
+            "「\(query)」は見つかりませんでした"
         case .sessionExpired:
-            return "セッションが切れました。再度ログインしてください。"
+            "セッションが切れました。再度ログインしてください。"
         case .forceUpdate:
-            return "アプリの更新が必要です。"
+            "アプリの更新が必要です。"
         case .unknown:
-            return "不明なエラーが発生しました。"
+            "不明なエラーが発生しました。"
         }
     }
 }

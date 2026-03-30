@@ -16,7 +16,7 @@ enum PokemonDetailMapper {
             height: response.height,
             weight: response.weight,
             baseExperience: response.baseExperience,
-            types: response.types.map { $0.type.name },
+            types: response.types.map(\.type.name),
             abilities: response.abilities.map {
                 PokemonDetailModel.Ability(
                     name: $0.ability.name,

@@ -11,7 +11,7 @@ import Foundation
 enum PokemonNameMapper {
     /// レスポンスから名前リストを抽出する。
     static func toNames(from response: PokemonListResponse) -> [String] {
-        response.results.map { $0.name }
+        response.results.map(\.name)
     }
 
     /// 名前リストをクエリでフィルタリングする（大文字小文字区別なし、前後の空白トリム）。

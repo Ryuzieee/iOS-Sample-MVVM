@@ -17,13 +17,13 @@ enum UiState<T: Equatable>: Equatable {
     static func == (lhs: UiState<T>, rhs: UiState<T>) -> Bool {
         switch (lhs, rhs) {
         case (.idle, .idle), (.loading, .loading):
-            return true
+            true
         case let (.success(a), .success(b)):
-            return a == b
+            a == b
         case let (.error(m1, t1), .error(m2, t2)):
-            return m1 == m2 && t1 == t2
+            m1 == m2 && t1 == t2
         default:
-            return false
+            false
         }
     }
 }

@@ -18,7 +18,7 @@ struct EmptyContent: View {
             Text(message)
                 .font(.body)
                 .foregroundColor(.secondary)
-            if let subMessage = subMessage {
+            if let subMessage {
                 Text(subMessage)
                     .font(.caption)
                     .foregroundColor(.secondary)

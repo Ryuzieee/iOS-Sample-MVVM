@@ -67,7 +67,7 @@ final class PokemonDetailViewModel: ObservableObject {
 
     private func loadFavorite(pokemonId: Int) {
         Task { @MainActor in
-            isFavorite = (try? await getIsFavorite.execute(id: pokemonId)) ?? false
+            isFavorite = await (try? getIsFavorite.execute(id: pokemonId)) ?? false
         }
     }
 }

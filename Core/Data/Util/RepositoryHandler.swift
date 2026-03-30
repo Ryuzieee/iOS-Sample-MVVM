@@ -42,7 +42,7 @@ func handleRemote<D, R>(
     toModel: (R) -> D
 ) async throws -> D {
     try await appRun {
-        try toModel(await fetch())
+        try await toModel(fetch())
     }
 }
 
@@ -52,7 +52,7 @@ func handleLocal<D, E>(
     toModel: (E) -> D
 ) async throws -> D {
     do {
-        return try toModel(await query())
+        return try await toModel(query())
     } catch {
         throw AppError.unknown(error.localizedDescription)
     }

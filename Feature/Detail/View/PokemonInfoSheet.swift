@@ -17,7 +17,7 @@ struct PokemonInfoSheet: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    if let species = species {
+                    if let species {
                         // 図鑑テキスト
                         Text(species.flavorText)
                             .font(.body)

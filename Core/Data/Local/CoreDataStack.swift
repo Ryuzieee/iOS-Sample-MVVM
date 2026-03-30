@@ -17,7 +17,7 @@ final class CoreDataStack {
     private init() {
         container = NSPersistentContainer(name: "iOS_Sample_MVVM")
         container.loadPersistentStores { _, error in
-            if let error = error {
+            if let error {
                 fatalError("CoreData load failed: \(error)")
             }
         }

@@ -466,6 +466,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4635EED42F7AAC4F0052FC19 /* Build configuration list for PBXNativeTarget "iOS-Sample-MVVM" */;
 			buildPhases = (
+				4635EFDB2F7AD1EF0052FC19 /* SwiftFormat & SwiftLint */,
 				4635EEAA2F7AAC4E0052FC19 /* Sources */,
 				4635EEAB2F7AAC4E0052FC19 /* Frameworks */,
 				4635EEAC2F7AAC4E0052FC19 /* Resources */,
@@ -559,6 +560,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4635EFDB2F7AD1EF0052FC19 /* SwiftFormat & SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftFormat & SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nswiftformat .\nswiftlint lint --quiet\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4635EEAA2F7AAC4E0052FC19 /* Sources */ = {
@@ -787,6 +810,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FCEN7R47VF;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pokédex";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -822,6 +846,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FCEN7R47VF;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pokédex";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -965,6 +990,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FCEN7R47VF;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pokédex";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

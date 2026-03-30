@@ -34,7 +34,7 @@ enum PokemonSpeciesMapper {
             japaneseName: jaName,
             flavorText: jaFlavorText,
             genus: jaGenus,
-            eggGroups: response.eggGroups.map { $0.name },
+            eggGroups: response.eggGroups.map(\.name),
             genderRate: response.genderRate,
             captureRate: response.captureRate,
             habitat: response.habitat?.name,

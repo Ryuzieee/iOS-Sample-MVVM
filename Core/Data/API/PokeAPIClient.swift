@@ -46,7 +46,7 @@ final class PokeAPIClient: PokeAPIClientProtocol {
     }
 
     func getEvolutionChain(url: String) async throws -> EvolutionChainResponse {
-        return try await request(url: url)
+        try await request(url: url)
     }
 
     func getAbility(name: String) async throws -> AbilityResponse {

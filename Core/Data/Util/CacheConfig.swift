@@ -16,7 +16,7 @@ enum CacheConfig {
     #endif
 
     static func isExpired(cachedAt: Date?) -> Bool {
-        guard let cachedAt = cachedAt else { return true }
+        guard let cachedAt else { return true }
         return Date().timeIntervalSince(cachedAt) >= durationSeconds
     }
 }

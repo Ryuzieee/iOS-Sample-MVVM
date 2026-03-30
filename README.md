@@ -60,6 +60,8 @@ Mock スキームでは正常系 / ネットワークエラー / 各種 HTTP エ
 
 ## コード品質
 
+Xcode の Build Phase に SwiftFormat + SwiftLint を組み込み済み。ビルド（⌘B）するだけで自動フォーマット＆静的解析が走る。
+
 | コマンド | 説明 | Android 相当 |
 |---------|------|-------------|
 | `make format` | SwiftFormat で自動フォーマット | `./gradlew ktlintFormat` |

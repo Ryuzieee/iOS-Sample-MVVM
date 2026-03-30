@@ -19,9 +19,9 @@ enum MockScenario: Equatable, Identifiable {
 
     var id: String {
         switch self {
-        case .success: return "success"
-        case .networkError: return "networkError"
-        case let .customError(code, _, _): return "error-\(code)"
+        case .success: "success"
+        case .networkError: "networkError"
+        case let .customError(code, _, _): "error-\(code)"
         }
     }
 
