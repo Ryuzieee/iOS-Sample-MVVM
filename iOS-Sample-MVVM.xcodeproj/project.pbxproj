@@ -428,6 +428,7 @@
 				4635EF4D2F7ABA6D0052FC19 /* PokemonImage.swift */,
 				4635EF4C2F7ABA6D0052FC19 /* PokemonCard.swift */,
 				4635EF4A2F7ABA580052FC19 /* UiState.swift */,
+				4635EFD62F7ACC4C0052FC19 /* MockScenarioSelector.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -452,7 +453,6 @@
 		4635EFD12F7ACC350052FC19 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				4635EFD62F7ACC4C0052FC19 /* MockScenarioSelector.swift */,
 				4635EFD42F7ACC450052FC19 /* MockScenario.swift */,
 				4635EFD22F7ACC3F0052FC19 /* MockAPIClient.swift */,
 			);
