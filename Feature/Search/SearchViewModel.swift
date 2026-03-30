@@ -1,0 +1,56 @@
+//
+//  SearchViewModel.swift
+//  iOS-Sample-MVVM
+//
+//  Created by 山下竜二 on 2026/03/30.
+//
+
+import Foundation
+import Combine
+import SwiftUI
+
+private let debounceMs = 500
+
+/// 検索画面のViewModel。クエリ入力に 500ms のデバウンスを適用する。
+final class SearchViewModel: ObservableObject {
+    @Published var query = ""
+    @Published var content: UiState<[String]> = .idle
+
+    private let searchPokemon: SearchPokemonUseCase
+    private var cancellables = Set<AnyCancellable>()
+
+    init(searchPokemon: SearchPokemonUseCase) {
+        self.searchPokemon = searchPokemon
+
+        $query
+            .debounce(for: .milliseconds(debounceMs), scheduler: RunLoop.main)
+            .removeDuplicates()
+            .sink { [weak self] query in
+                self?.search(query: query)
+            }
+            .store(in: &cancellables)
+    }
+
+    func retrySearch() {
+        guard !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        search(query: query)
+    }
+
+    private func search(query: String) {
+        let trimmed = query.trimmingCharacters(in: .whitespaces)
+        guard !trimmed.isEmpty else {
+            content = .idle
+            return
+        }
+
+        content = .loading
+        Task { @MainActor in
+            do {
+                let result = try await searchPokemon.execute(query: trimmed)
+                content = .success(result)
+            } catch {
+                content = .error(message: error.localizedDescription, type: .general)
+            }
+        }
+    }
+}
