@@ -7,6 +7,16 @@
 
 import Foundation
 
+/// PokeAPI のスプライト画像 URL を管理する定数。
+enum SpriteURL {
+    private static let base = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+
+    /// 一覧用の小さいスプライト画像 URL。
+    static func sprite(id: Int) -> String { "\(base)\(id).png" }
+    /// 詳細用の公式アートワーク画像 URL。
+    static func artwork(id: Int) -> String { "\(base)other/official-artwork/\(id).png" }
+}
+
 /// キャッシュ有効期間の設定。
 enum CacheConfig {
     #if DEBUG

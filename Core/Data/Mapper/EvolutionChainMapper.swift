@@ -7,8 +7,6 @@
 
 import Foundation
 
-private let artworkURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
-
 /// EvolutionChainResponse → [EvolutionStageModel] への変換。
 extension [EvolutionStageModel] {
     init(from response: EvolutionChainResponse) {
@@ -25,7 +23,7 @@ extension [EvolutionStageModel] {
             name: link.species.name,
             japaneseName: "",
             id: id,
-            imageUrl: "\(artworkURL)\(id).png",
+            imageUrl: SpriteURL.artwork(id: id),
             minLevel: minLevel
         ))
 
