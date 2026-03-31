@@ -11,12 +11,13 @@ import Foundation
 /// ポケモン一覧画面のViewModel。
 @MainActor
 final class PokemonListViewModel: ObservableObject {
-    @Published var items: [PokemonSummaryModel] = []
-    @Published var loadState: UiState<Bool> = .idle
+    @Published var content: UiState<[PokemonSummaryModel]> = .idle
     @Published var isLoadingMore = false
-    @Published var isRefreshing = false
-    @Published var refreshError: AppError?
     @Published var loadMoreError: AppError?
+
+    var items: [PokemonSummaryModel] {
+        content.dataOrNil ?? []
+    }
 
     var gridItems: [PokemonGridItem] {
         items.map { PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl) }
@@ -35,25 +36,16 @@ final class PokemonListViewModel: ObservableObject {
     }
 
     func loadInitial() {
-        guard case .idle = loadState else { return }
-        loadInitialData()
+        guard case .idle = content else { return }
+        load()
+    }
+
+    func retry() {
+        load()
     }
 
     func refresh() {
-        isRefreshing = true
-        refreshError = nil
-        Task {
-            do {
-                let result = try await getPokemonList(offset: 0, limit: AppConfig.pageSize)
-                items = result
-                loadState = .loaded
-                hasMore = result.count == AppConfig.pageSize
-            } catch {
-                refreshError = error.toAppError()
-                AppLogger.error("Refresh failed: \(error.localizedDescription)", category: AppLogger.ui)
-            }
-            isRefreshing = false
-        }
+        load(forceRefresh: true)
     }
 
     func loadMore() {
@@ -64,7 +56,9 @@ final class PokemonListViewModel: ObservableObject {
         Task {
             do {
                 let result = try await getPokemonList(offset: items.count, limit: AppConfig.pageSize)
-                items += result
+                if case let .success(current) = content {
+                    content = .success(current + result)
+                }
                 hasMore = result.count == AppConfig.pageSize
             } catch {
                 loadMoreError = error.toAppError()
@@ -74,18 +68,18 @@ final class PokemonListViewModel: ObservableObject {
         }
     }
 
-    private func loadInitialData() {
-        loadState = .loading
+    private func load(forceRefresh: Bool = false) {
+        loadTask?.cancel()
         loadTask = Task {
-            let state: UiState = await .from {
-                try await getPokemonList(offset: 0, limit: AppConfig.pageSize)
+            if !forceRefresh {
+                content = .loading
             }
+            let state: UiState = await .from {
+                try await self.getPokemonList(offset: 0, limit: AppConfig.pageSize)
+            }
+            content = state
             if case let .success(result) = state {
-                items = result
                 hasMore = result.count == AppConfig.pageSize
-                loadState = .loaded
-            } else if case let .error(appError) = state {
-                loadState = .error(appError)
             }
         }
     }

@@ -30,7 +30,7 @@ final class PokemonListViewModelTests: XCTestCase {
         try? await Task.sleep(for: .milliseconds(100))
 
         XCTAssertEqual(viewModel.items, TestFixtures.fakePokemonList)
-        if case .success = viewModel.loadState {
+        if case .success = viewModel.content {
             // OK
         } else {
             XCTFail("Expected success state")
@@ -45,7 +45,7 @@ final class PokemonListViewModelTests: XCTestCase {
 
         try? await Task.sleep(for: .milliseconds(100))
 
-        if case .error = viewModel.loadState {
+        if case .error = viewModel.content {
             // OK
         } else {
             XCTFail("Expected error state")
@@ -53,7 +53,7 @@ final class PokemonListViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.items.isEmpty)
     }
 
-    func test_refreshでリストがリセットされる() async {
+    func test_refreshでリストが更新される() async {
         repository.getPokemonListResult = .success(TestFixtures.fakePokemonList)
 
         let viewModel = createViewModel()
@@ -64,6 +64,5 @@ final class PokemonListViewModelTests: XCTestCase {
         try? await Task.sleep(for: .milliseconds(100))
 
         XCTAssertEqual(viewModel.items, TestFixtures.fakePokemonList)
-        XCTAssertFalse(viewModel.isRefreshing)
     }
 }

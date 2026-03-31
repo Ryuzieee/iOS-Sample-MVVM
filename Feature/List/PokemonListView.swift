@@ -15,14 +15,25 @@ struct PokemonListView: View {
     let onFavoritesTap: () -> Void
 
     var body: some View {
-        Group {
-            switch viewModel.loadState {
-            case .loading:
-                LoadingIndicator()
-            case let .error(appError):
-                ErrorContent(error: appError, onRetry: viewModel.refresh)
-            case .success, .idle:
-                pokemonList
+        UiStateContent(
+            state: viewModel.content,
+            onRetry: viewModel.retry
+        ) { items in
+            ScrollView {
+                PokemonGrid(
+                    items: viewModel.gridItems,
+                    onPokemonTap: onPokemonTap,
+                    onItemAppear: { index in
+                        if index >= items.count - AppConfig.paginationThreshold {
+                            viewModel.loadMore()
+                        }
+                    }
+                )
+
+                if viewModel.isLoadingMore {
+                    ProgressView()
+                        .padding()
+                }
             }
         }
         .navigationTitle(Strings.List.screenTitle)
@@ -48,15 +59,6 @@ struct PokemonListView: View {
         }
         .alert(
             Strings.Common.errorTitle,
-            isPresented: refreshErrorBinding
-        ) {
-            Button(Strings.Common.retry) { viewModel.refresh() }
-            Button(Strings.Common.close, role: .cancel) {}
-        } message: {
-            Text(viewModel.refreshError?.errorDescription ?? Strings.Common.errorTitle)
-        }
-        .alert(
-            Strings.Common.errorTitle,
             isPresented: loadMoreErrorBinding
         ) {
             Button(Strings.Common.retry) { viewModel.loadMore() }
@@ -66,36 +68,10 @@ struct PokemonListView: View {
         }
     }
 
-    private var refreshErrorBinding: Binding<Bool> {
-        Binding(
-            get: { viewModel.refreshError != nil },
-            set: { if !$0 { viewModel.refreshError = nil } }
-        )
-    }
-
     private var loadMoreErrorBinding: Binding<Bool> {
         Binding(
             get: { viewModel.loadMoreError != nil },
             set: { if !$0 { viewModel.loadMoreError = nil } }
         )
-    }
-
-    private var pokemonList: some View {
-        ScrollView {
-            PokemonGrid(
-                items: viewModel.gridItems,
-                onPokemonTap: onPokemonTap,
-                onItemAppear: { index in
-                    if index >= viewModel.items.count - AppConfig.paginationThreshold {
-                        viewModel.loadMore()
-                    }
-                }
-            )
-
-            if viewModel.isLoadingMore {
-                ProgressView()
-                    .padding()
-            }
-        }
     }
 }
