@@ -57,9 +57,9 @@ struct PokemonSpeciesResponse: Decodable {
 /// 汎用の名前+URL リソース。
 struct NamedResource: Decodable {
     let name: String
-    let url: String
+    let url: String?
 
-    init(name: String, url: String = "") {
+    init(name: String, url: String? = nil) {
         self.name = name
         self.url = url
     }
