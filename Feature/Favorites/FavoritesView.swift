@@ -29,9 +29,7 @@ struct FavoritesView: View {
                 } else {
                     ScrollView {
                         PokemonGrid(
-                            items: favorites.map {
-                                PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl)
-                            },
+                            items: viewModel.gridItems,
                             onPokemonTap: onPokemonTap
                         )
                     }
