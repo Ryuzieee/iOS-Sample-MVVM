@@ -17,6 +17,15 @@ final class PokemonDetailViewModel: ObservableObject {
 
     let pokemonName: String
 
+    var displayName: String {
+        if let species = content.dataOrNil?.species,
+           !species.japaneseName.isEmpty
+        {
+            return species.japaneseName
+        }
+        return pokemonName.capitalized
+    }
+
     private let getPokemonFullDetail: GetPokemonFullDetailUseCase
     private let getIsFavorite: GetIsFavoriteUseCase
     private let toggleFavoriteUseCase: ToggleFavoriteUseCase

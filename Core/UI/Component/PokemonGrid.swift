@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+/// アプリ全体で共有するデザイントークン。
+enum DesignTokens {
+    static let cardCornerRadius: CGFloat = 12
+    static let badgeCornerRadius: CGFloat = 16
+    static let searchFieldCornerRadius: CGFloat = 10
+    static let cardPadding: CGFloat = 12
+    static let gridSpacing: CGFloat = 8
+    static let sectionHorizontalPadding: CGFloat = 16
+    static let cardShadowOpacity: CGFloat = 0.1
+    static let cardShadowRadius: CGFloat = 4
+    static let cardShadowY: CGFloat = 2
+}
+
 /// PokemonCard をグリッド表示するための共通データ。
 struct PokemonGridItem: Identifiable, Equatable {
     let id: Int
@@ -21,12 +34,12 @@ struct PokemonGrid: View {
     var onItemAppear: ((Int) -> Void)?
 
     private let columns = [
-        GridItem(.flexible(), spacing: 8),
-        GridItem(.flexible(), spacing: 8),
+        GridItem(.flexible(), spacing: DesignTokens.gridSpacing),
+        GridItem(.flexible(), spacing: DesignTokens.gridSpacing),
     ]
 
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 8) {
+        LazyVGrid(columns: columns, spacing: DesignTokens.gridSpacing) {
             ForEach(items) { item in
                 PokemonCard(
                     name: item.name,
@@ -41,6 +54,6 @@ struct PokemonGrid: View {
                 }
             }
         }
-        .padding(.horizontal, 8)
+        .padding(.horizontal, DesignTokens.gridSpacing)
     }
 }

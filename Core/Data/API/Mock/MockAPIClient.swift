@@ -8,7 +8,7 @@
 import Foundation
 
 private let mockDelay: Duration = .milliseconds(300)
-private let artworkBaseUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork"
+// Sprite URL は SpriteURL enum で一元管理
 
 /// デバッグ用のモック API クライアント。MockScenarioHolder のシナリオに応じてレスポンスを返す。
 /// Android 版 MockData / MockInterceptor 相当。実際のポケモンデータを返す。
@@ -108,7 +108,7 @@ final class MockAPIClient: PokeAPIClientProtocol {
             types: pokemon.types.map { .init(type: .init(name: $0)) },
             abilities: abilitySlots,
             sprites: .init(other: .init(officialArtwork: .init(
-                frontDefault: "\(artworkBaseUrl)/\(pokemon.id).png"
+                frontDefault: SpriteURL.artwork(id: pokemon.id)
             ))),
             stats: [
                 .init(baseStat: pokemon.hp, stat: .init(name: "hp")),
@@ -122,8 +122,6 @@ final class MockAPIClient: PokeAPIClientProtocol {
     }
 
     private func extractChainId(from url: String) -> Int {
-        // "https://pokeapi.co/api/v2/evolution-chain/1/" → 1
-        let components = url.trimmingCharacters(in: CharacterSet(charactersIn: "/")).components(separatedBy: "/")
-        return Int(components.last ?? "") ?? 1
+        url.extractTrailingId(fallback: 1)
     }
 }

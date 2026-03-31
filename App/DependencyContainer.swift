@@ -8,6 +8,8 @@
 import Foundation
 
 /// アプリ全体の依存関係を管理するDIコンテナ。
+/// @MainActor でスレッド安全性を保証し、lazy プロパティの競合を防ぐ。
+@MainActor
 final class DependencyContainer {
     static let shared = DependencyContainer()
 

@@ -47,7 +47,7 @@ final class PokemonCacheStore {
             let data = try encoder.encode(entry)
             try data.write(to: url, options: .atomic)
         } catch {
-            AppLogger.error("Cache save failed: \(error.localizedDescription)")
+            AppLogger.error("Cache save failed: \(error.localizedDescription)", category: AppLogger.data)
         }
     }
 

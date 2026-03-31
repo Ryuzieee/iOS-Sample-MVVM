@@ -23,7 +23,7 @@ struct SearchTextField: View {
         }
         .padding(10)
         .background(Color(.systemGray6))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .clipShape(RoundedRectangle(cornerRadius: DesignTokens.searchFieldCornerRadius))
     }
 }
 

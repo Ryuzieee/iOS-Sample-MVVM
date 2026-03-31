@@ -7,26 +7,16 @@
 
 import Foundation
 
-private let spriteURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
-
 /// ポケモンの一覧表示に必要な最小限のデータを表すドメインモデル。
 struct PokemonSummaryModel: Identifiable, Equatable {
     let name: String
     let url: String
 
     var id: Int {
-        guard let last = url
-            .trimmingCharacters(in: CharacterSet(charactersIn: "/"))
-            .split(separator: "/")
-            .last,
-            let value = Int(last)
-        else {
-            return 0
-        }
-        return value
+        url.extractTrailingId()
     }
 
     var imageUrl: String {
-        "\(spriteURL)\(id).png"
+        SpriteURL.sprite(id: id)
     }
 }

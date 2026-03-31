@@ -9,9 +9,7 @@ import Combine
 import Foundation
 import SwiftUI
 
-private let debounceMs = 500
-
-/// 検索画面のViewModel。クエリ入力に 500ms のデバウンスを適用する。
+/// 検索画面のViewModel。クエリ入力にデバウンスを適用する。
 @MainActor
 final class SearchViewModel: ObservableObject {
     @Published var query = ""
@@ -25,7 +23,7 @@ final class SearchViewModel: ObservableObject {
         self.searchPokemon = searchPokemon
 
         $query
-            .debounce(for: .milliseconds(debounceMs), scheduler: RunLoop.main)
+            .debounce(for: .milliseconds(AppConfig.searchDebounceMs), scheduler: RunLoop.main)
             .removeDuplicates()
             .sink { [weak self] query in
                 self?.search(query: query)
