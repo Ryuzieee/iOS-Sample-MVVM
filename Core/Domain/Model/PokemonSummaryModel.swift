@@ -8,7 +8,7 @@
 import Foundation
 
 /// ポケモンの一覧表示に必要な最小限のデータを表すドメインモデル。
-struct PokemonSummaryModel: Identifiable, Equatable, Sendable {
+struct PokemonSummaryModel: Identifiable, Equatable {
     let name: String
     let url: String
 

@@ -8,7 +8,7 @@
 import Foundation
 
 /// アプリ内で使用するエラー種別。
-enum AppError: LocalizedError, Equatable, Sendable {
+enum AppError: LocalizedError, Equatable {
     case network(String)
     case server(code: Int)
     case notFound(query: String)

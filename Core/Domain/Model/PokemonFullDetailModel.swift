@@ -8,7 +8,7 @@
 import Foundation
 
 /// 詳細画面に必要な全データをまとめたモデル。
-struct PokemonFullDetailModel: Equatable, Sendable {
+struct PokemonFullDetailModel: Equatable {
     let detail: PokemonDetailModel
     let species: PokemonSpeciesModel?
     let evolutionChain: [EvolutionStageModel]

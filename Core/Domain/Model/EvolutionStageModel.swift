@@ -8,7 +8,7 @@
 import Foundation
 
 /// 進化チェーンの1段階を表す。
-struct EvolutionStageModel: Identifiable, Equatable, Sendable {
+struct EvolutionStageModel: Identifiable, Equatable {
     let name: String
     let japaneseName: String
     let id: Int

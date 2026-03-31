@@ -33,7 +33,11 @@ struct PokemonCard: View {
             .padding(DesignTokens.cardPadding)
             .background(Color(.systemBackground))
             .clipShape(RoundedRectangle(cornerRadius: DesignTokens.cardCornerRadius))
-            .shadow(color: .black.opacity(DesignTokens.cardShadowOpacity), radius: DesignTokens.cardShadowRadius, y: DesignTokens.cardShadowY)
+            .shadow(
+                color: .black.opacity(DesignTokens.cardShadowOpacity),
+                radius: DesignTokens.cardShadowRadius,
+                y: DesignTokens.cardShadowY
+            )
         }
         .buttonStyle(.plain)
     }

@@ -119,7 +119,7 @@ extension String {
 }
 
 /// HTTP ステータスコードエラー。PokeAPIClient から throw する。
-struct HTTPResponseError: Error, Sendable {
+struct HTTPResponseError: Error {
     let statusCode: Int
     let storeUrl: String?
 
