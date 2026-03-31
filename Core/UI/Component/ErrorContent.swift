@@ -9,16 +9,15 @@ import SwiftUI
 
 /// エラー表示とリトライボタンを備えた共通コンポーネント。
 struct ErrorContent: View {
-    let message: String
+    let error: AppError
     let onRetry: () -> Void
-    var errorType: ErrorType = .general
 
     @State private var showSessionExpired = false
     @State private var showForceUpdate = false
 
     var body: some View {
         Group {
-            switch errorType {
+            switch error {
             case .sessionExpired:
                 Color.clear.onAppear { showSessionExpired = true }
             case .forceUpdate:
@@ -43,7 +42,7 @@ struct ErrorContent: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
 
-            if errorType == .network {
+            if case .network = error {
                 Text(Strings.Error.networkSubMessage)
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -56,14 +55,14 @@ struct ErrorContent: View {
     }
 
     private var displayMessage: String {
-        if errorType == .network {
+        if case .network = error {
             return Strings.Error.networkMessage
         }
-        return message
+        return error.errorDescription ?? Strings.Common.errorTitle
     }
 
     private var forceUpdateStoreUrl: String {
-        if case let .forceUpdate(storeUrl) = errorType {
+        if case let .forceUpdate(storeUrl) = error {
             return storeUrl
         }
         return ""
@@ -71,9 +70,9 @@ struct ErrorContent: View {
 }
 
 #Preview("General Error") {
-    ErrorContent(message: "Something went wrong", onRetry: {})
+    ErrorContent(error: .unknown("Something went wrong"), onRetry: {})
 }
 
 #Preview("Network Error") {
-    ErrorContent(message: "Network error", onRetry: {}, errorType: .network)
+    ErrorContent(error: .network("Network error"), onRetry: {})
 }

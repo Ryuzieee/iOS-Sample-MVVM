@@ -27,8 +27,8 @@ struct PokemonDetailView: View {
             switch viewModel.content {
             case .loading:
                 LoadingIndicator()
-            case let .error(message, type):
-                ErrorContent(message: message, onRetry: viewModel.retry, errorType: type)
+            case let .error(appError):
+                ErrorContent(error: appError, onRetry: viewModel.retry)
             case let .success(fullDetail):
                 detailContent(fullDetail)
             case .idle:

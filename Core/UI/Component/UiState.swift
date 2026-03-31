@@ -12,7 +12,7 @@ enum UiState<T: Equatable>: Equatable {
     case idle
     case loading
     case success(T)
-    case error(message: String, type: ErrorType)
+    case error(AppError)
 
     static func == (lhs: UiState<T>, rhs: UiState<T>) -> Bool {
         switch (lhs, rhs) {
@@ -20,20 +20,12 @@ enum UiState<T: Equatable>: Equatable {
             true
         case let (.success(a), .success(b)):
             a == b
-        case let (.error(m1, t1), .error(m2, t2)):
-            m1 == m2 && t1 == t2
+        case let (.error(e1), .error(e2)):
+            e1 == e2
         default:
             false
         }
     }
-}
-
-/// UiState.Error の種別。
-enum ErrorType: Equatable {
-    case general
-    case network
-    case sessionExpired
-    case forceUpdate(storeUrl: String)
 }
 
 extension UiState {

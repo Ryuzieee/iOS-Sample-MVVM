@@ -72,8 +72,8 @@ final class PokemonListViewModel: ObservableObject {
                 items = result
                 hasMore = result.count == pageSize
                 loadState = .success(true)
-            } else if case let .error(message, type) = state {
-                loadState = .error(message: message, type: type)
+            } else if case let .error(appError) = state {
+                loadState = .error(appError)
             }
         }
     }

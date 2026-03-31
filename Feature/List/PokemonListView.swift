@@ -19,8 +19,8 @@ struct PokemonListView: View {
             switch viewModel.loadState {
             case .loading:
                 LoadingIndicator()
-            case let .error(message, type):
-                ErrorContent(message: message, onRetry: viewModel.refresh, errorType: type)
+            case let .error(appError):
+                ErrorContent(error: appError, onRetry: viewModel.refresh)
             case .success, .idle:
                 pokemonList
             }

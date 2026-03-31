@@ -15,23 +15,7 @@ extension UiState {
             return .success(result)
         } catch {
             AppLogger.error(error.localizedDescription, category: AppLogger.ui)
-            return .error(message: error.localizedDescription, type: error.toErrorType())
-        }
-    }
-}
-
-extension Error {
-    func toErrorType() -> ErrorType {
-        guard let appError = self as? AppError else { return .general }
-        switch appError {
-        case .network:
-            return .network
-        case .sessionExpired:
-            return .sessionExpired
-        case let .forceUpdate(storeUrl):
-            return .forceUpdate(storeUrl: storeUrl)
-        default:
-            return .general
+            return .error(error.toAppError())
         }
     }
 }

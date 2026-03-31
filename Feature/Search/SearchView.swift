@@ -27,8 +27,8 @@ struct SearchView: View {
                 EmptyContent(message: Strings.Search.searchIdleMessage)
             case .loading:
                 LoadingIndicator()
-            case let .error(message, _):
-                ErrorContent(message: message, onRetry: viewModel.retrySearch)
+            case let .error(appError):
+                ErrorContent(error: appError, onRetry: viewModel.retrySearch)
             case let .success(names):
                 List(names, id: \.self) { name in
                     Button(action: { onPokemonTap(name) }) {
