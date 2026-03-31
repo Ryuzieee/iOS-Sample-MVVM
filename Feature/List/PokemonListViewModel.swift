@@ -17,6 +17,8 @@ final class PokemonListViewModel: ObservableObject {
     @Published var loadState: UiState<Bool> = .idle
     @Published var isLoadingMore = false
     @Published var isRefreshing = false
+    @Published var refreshError: AppError?
+    @Published var loadMoreError: AppError?
 
     var gridItems: [PokemonGridItem] {
         items.map { PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl) }
@@ -41,6 +43,7 @@ final class PokemonListViewModel: ObservableObject {
 
     func refresh() {
         isRefreshing = true
+        refreshError = nil
         Task {
             do {
                 let result = try await getPokemonList(offset: 0, limit: pageSize)
@@ -48,6 +51,7 @@ final class PokemonListViewModel: ObservableObject {
                 loadState = .loaded
                 hasMore = result.count == pageSize
             } catch {
+                refreshError = error.toAppError()
                 AppLogger.error("Refresh failed: \(error.localizedDescription)", category: AppLogger.ui)
             }
             isRefreshing = false
@@ -58,12 +62,14 @@ final class PokemonListViewModel: ObservableObject {
         guard !isLoadingMore, hasMore else { return }
 
         isLoadingMore = true
+        loadMoreError = nil
         Task {
             do {
                 let result = try await getPokemonList(offset: items.count, limit: pageSize)
                 items += result
                 hasMore = result.count == pageSize
             } catch {
+                loadMoreError = error.toAppError()
                 AppLogger.error("Load more failed: \(error.localizedDescription)", category: AppLogger.ui)
             }
             isLoadingMore = false
