@@ -7,7 +7,6 @@
 
 import Combine
 import Foundation
-import SwiftUI
 
 /// 検索画面のViewModel。クエリ入力にデバウンスを適用する。
 @MainActor
