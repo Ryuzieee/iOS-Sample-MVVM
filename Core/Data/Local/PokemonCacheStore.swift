@@ -9,9 +9,11 @@ import Foundation
 
 /// ポケモンデータのローカルキャッシュ。Codable + FileManager ベース。
 /// Android の Room (PokemonDetailEntity / PokemonNameEntity) に相当。
-final class PokemonCacheStore {
+/// シリアルキューでファイル I/O を直列化し、スレッド安全性を保証する。
+final class PokemonCacheStore: @unchecked Sendable {
     static let shared = PokemonCacheStore()
 
+    private let queue = DispatchQueue(label: "PokemonCacheStore")
     private let fileManager = FileManager.default
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
@@ -42,19 +44,23 @@ final class PokemonCacheStore {
     }
 
     private func save(_ entry: CachedEntry<some Codable>, filename: String) {
-        let url = cacheDirectory.appendingPathComponent("\(filename).json")
-        do {
-            let data = try encoder.encode(entry)
-            try data.write(to: url, options: .atomic)
-        } catch {
-            AppLogger.error("Cache save failed: \(error.localizedDescription)", category: AppLogger.data)
+        queue.sync {
+            let url = cacheDirectory.appendingPathComponent("\(filename).json")
+            do {
+                let data = try encoder.encode(entry)
+                try data.write(to: url, options: .atomic)
+            } catch {
+                AppLogger.error("Cache save failed: \(error.localizedDescription)", category: AppLogger.data)
+            }
         }
     }
 
     private func load<T: Codable>(filename: String) -> CachedEntry<T>? {
-        let url = cacheDirectory.appendingPathComponent("\(filename).json")
-        guard let data = try? Data(contentsOf: url) else { return nil }
-        return try? decoder.decode(CachedEntry<T>.self, from: data)
+        queue.sync {
+            let url = cacheDirectory.appendingPathComponent("\(filename).json")
+            guard let data = try? Data(contentsOf: url) else { return nil }
+            return try? decoder.decode(CachedEntry<T>.self, from: data)
+        }
     }
 }
 
