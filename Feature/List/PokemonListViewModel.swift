@@ -8,8 +8,6 @@
 import Combine
 import Foundation
 
-private let pageSize = 20
-
 /// ポケモン一覧画面のViewModel。
 @MainActor
 final class PokemonListViewModel: ObservableObject {
@@ -46,10 +44,10 @@ final class PokemonListViewModel: ObservableObject {
         refreshError = nil
         Task {
             do {
-                let result = try await getPokemonList(offset: 0, limit: pageSize)
+                let result = try await getPokemonList(offset: 0, limit: AppConfig.pageSize)
                 items = result
                 loadState = .loaded
-                hasMore = result.count == pageSize
+                hasMore = result.count == AppConfig.pageSize
             } catch {
                 refreshError = error.toAppError()
                 AppLogger.error("Refresh failed: \(error.localizedDescription)", category: AppLogger.ui)
@@ -65,9 +63,9 @@ final class PokemonListViewModel: ObservableObject {
         loadMoreError = nil
         Task {
             do {
-                let result = try await getPokemonList(offset: items.count, limit: pageSize)
+                let result = try await getPokemonList(offset: items.count, limit: AppConfig.pageSize)
                 items += result
-                hasMore = result.count == pageSize
+                hasMore = result.count == AppConfig.pageSize
             } catch {
                 loadMoreError = error.toAppError()
                 AppLogger.error("Load more failed: \(error.localizedDescription)", category: AppLogger.ui)
@@ -80,11 +78,11 @@ final class PokemonListViewModel: ObservableObject {
         loadState = .loading
         loadTask = Task {
             let state: UiState = await .from {
-                try await getPokemonList(offset: 0, limit: pageSize)
+                try await getPokemonList(offset: 0, limit: AppConfig.pageSize)
             }
             if case let .success(result) = state {
                 items = result
-                hasMore = result.count == pageSize
+                hasMore = result.count == AppConfig.pageSize
                 loadState = .loaded
             } else if case let .error(appError) = state {
                 loadState = .error(appError)

@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-/// 次ページ読み込みを開始する残りアイテム数の閾値。
-private let paginationThreshold = 4
-
 /// ポケモン一覧画面。
 struct PokemonListView: View {
     @ObservedObject var viewModel: PokemonListViewModel
@@ -57,7 +54,7 @@ struct PokemonListView: View {
                 items: viewModel.gridItems,
                 onPokemonTap: onPokemonTap,
                 onItemAppear: { index in
-                    if index >= viewModel.items.count - paginationThreshold {
+                    if index >= viewModel.items.count - AppConfig.paginationThreshold {
                         viewModel.loadMore()
                     }
                 }
