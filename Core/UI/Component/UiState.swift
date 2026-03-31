@@ -35,3 +35,8 @@ extension UiState {
         return nil
     }
 }
+
+extension UiState where T == Bool {
+    /// 値を持たない成功状態。UiState<Bool> を読み込み状態の追跡に使う場合用。
+    static var loaded: UiState { .success(true) }
+}

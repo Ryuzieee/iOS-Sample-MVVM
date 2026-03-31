@@ -45,7 +45,7 @@ final class PokemonListViewModel: ObservableObject {
             do {
                 let result = try await getPokemonList(offset: 0, limit: pageSize)
                 items = result
-                loadState = .success(true)
+                loadState = .loaded
                 hasMore = result.count == pageSize
             } catch {
                 AppLogger.error("Refresh failed: \(error.localizedDescription)", category: AppLogger.ui)
@@ -79,7 +79,7 @@ final class PokemonListViewModel: ObservableObject {
             if case let .success(result) = state {
                 items = result
                 hasMore = result.count == pageSize
-                loadState = .success(true)
+                loadState = .loaded
             } else if case let .error(appError) = state {
                 loadState = .error(appError)
             }
