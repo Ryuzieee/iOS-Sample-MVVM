@@ -26,6 +26,10 @@ final class PokemonListViewModel: ObservableObject {
         self.getPokemonList = getPokemonList
     }
 
+    deinit {
+        loadTask?.cancel()
+    }
+
     func loadInitial() {
         guard case .idle = loadState else { return }
         loadInitialData()

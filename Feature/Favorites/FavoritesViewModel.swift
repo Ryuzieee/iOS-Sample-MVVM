@@ -21,6 +21,10 @@ final class FavoritesViewModel: ObservableObject {
         self.getFavorites = getFavorites
     }
 
+    deinit {
+        loadTask?.cancel()
+    }
+
     func loadIfNeeded() {
         guard case .loading = content else { return }
         load()

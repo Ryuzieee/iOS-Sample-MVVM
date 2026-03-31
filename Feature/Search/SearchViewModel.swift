@@ -33,6 +33,10 @@ final class SearchViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
+    deinit {
+        searchTask?.cancel()
+    }
+
     func retrySearch() {
         guard !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         search(query: query)
