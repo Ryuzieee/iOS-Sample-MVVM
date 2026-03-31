@@ -8,7 +8,7 @@
 import Foundation
 
 /// ポケモン詳細画面で表示するデータを表すドメインモデル。
-struct PokemonDetailModel: Identifiable, Equatable, Codable {
+struct PokemonDetailModel: Identifiable, Equatable, Codable, Sendable {
     let id: Int
     let name: String
     let height: Int
@@ -20,13 +20,13 @@ struct PokemonDetailModel: Identifiable, Equatable, Codable {
     let stats: [Stat]
 
     /// ポケモンの各種基本ステータス（HP・攻撃力など）。
-    struct Stat: Equatable, Codable {
+    struct Stat: Equatable, Codable, Sendable {
         let name: String
         let value: Int
     }
 
     /// ポケモンの特性。
-    struct Ability: Equatable, Codable {
+    struct Ability: Equatable, Codable, Sendable {
         let name: String
         var japaneseName = ""
         let isHidden: Bool

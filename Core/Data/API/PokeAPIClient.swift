@@ -19,7 +19,7 @@ protocol PokeAPIClientProtocol {
 /// PokeAPI の REST エンドポイントを呼び出すクライアント。
 /// ベースURL: https://pokeapi.co/api/v2/
 final class PokeAPIClient: PokeAPIClientProtocol {
-    private let baseURL = "https://pokeapi.co/api/v2/"
+    private let baseURL = AppConfig.apiBaseURL
     private let session: URLSession
     private let decoder: JSONDecoder
 

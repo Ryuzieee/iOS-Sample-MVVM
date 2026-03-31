@@ -14,6 +14,12 @@ final class FavoritesViewModel: ObservableObject {
     @Published var content: UiState<[FavoriteModel]> = .loading
     @Published var isRefreshing = false
 
+    var gridItems: [PokemonGridItem] {
+        (content.dataOrNil ?? []).map {
+            PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl)
+        }
+    }
+
     private let getFavorites: GetFavoritesUseCase
     private var loadTask: Task<Void, Never>?
 

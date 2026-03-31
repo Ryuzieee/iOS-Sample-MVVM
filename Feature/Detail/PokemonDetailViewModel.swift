@@ -64,11 +64,11 @@ final class PokemonDetailViewModel: ObservableObject {
         guard let fullDetail = content.dataOrNil else { return }
         let currentState = isFavorite
         isFavorite.toggle()
-        Task {
+        Task { [weak self] in
             do {
-                try await toggleFavoriteUseCase(detail: fullDetail.detail, isFavorite: currentState)
+                try await self?.toggleFavoriteUseCase(detail: fullDetail.detail, isFavorite: currentState)
             } catch {
-                isFavorite = currentState
+                self?.isFavorite = currentState
                 AppLogger.error("Toggle favorite failed: \(error.localizedDescription)", category: AppLogger.ui)
             }
         }
@@ -92,7 +92,8 @@ final class PokemonDetailViewModel: ObservableObject {
     }
 
     private func loadFavorite(pokemonId: Int) {
-        Task {
+        Task { [weak self] in
+            guard let self else { return }
             isFavorite = await (try? getIsFavorite(id: pokemonId)) ?? false
         }
     }

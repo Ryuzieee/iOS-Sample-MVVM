@@ -8,7 +8,7 @@
 import Foundation
 
 /// お気に入り登録されたポケモンを表すドメインモデル。
-struct FavoriteModel: Identifiable, Equatable {
+struct FavoriteModel: Identifiable, Equatable, Sendable {
     let id: Int
     let name: String
     let imageUrl: String

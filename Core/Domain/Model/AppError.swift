@@ -8,13 +8,18 @@
 import Foundation
 
 /// アプリ内で使用するエラー種別。
-enum AppError: LocalizedError, Equatable {
+enum AppError: LocalizedError, Equatable, Sendable {
     case network(String)
     case server(code: Int)
     case notFound(query: String)
     case sessionExpired
     case forceUpdate(storeUrl: String)
     case unknown(String)
+
+    var isForceUpdate: Bool {
+        if case .forceUpdate = self { return true }
+        return false
+    }
 
     var errorDescription: String? {
         switch self {

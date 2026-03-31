@@ -15,6 +15,10 @@ enum AppConfig {
     static let searchDebounceMs = 500
     /// 次ページ読み込みを開始する残りアイテム数の閾値。
     static let paginationThreshold = 4
+    /// 言語フォールバックの優先順位。
+    static let languagePriority = ["ja-Hrkt", "ja", "en"]
+    /// API ベース URL。
+    static let apiBaseURL = "https://pokeapi.co/api/v2/"
 }
 
 /// PokeAPI のスプライト画像 URL を管理する定数。

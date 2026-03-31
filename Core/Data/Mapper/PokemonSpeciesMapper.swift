@@ -7,9 +7,6 @@
 
 import Foundation
 
-/// 言語フォールバックの優先順位: ja-Hrkt → ja → en
-private let languagePriority = ["ja-Hrkt", "ja", "en"]
-
 /// PokemonSpeciesResponse → PokemonSpeciesModel への変換。
 extension PokemonSpeciesModel {
     init(from response: PokemonSpeciesResponse) {
@@ -17,7 +14,7 @@ extension PokemonSpeciesModel {
             response.names.map { ($0.language.name, $0.name) },
             uniquingKeysWith: { first, _ in first }
         )
-        let jaName = languagePriority.firstMap { nameMap[$0] } ?? ""
+        let jaName = AppConfig.languagePriority.compactMap { nameMap[$0] }.first ?? ""
 
         let jaFlavorText = response.flavorTextEntries
             .last { $0.language.name == "ja" }?
@@ -44,17 +41,5 @@ extension PokemonSpeciesModel {
             generation: response.generation.name,
             evolutionChainUrl: response.evolutionChain.url
         )
-    }
-}
-
-private extension Array {
-    /// 各要素に transform を適用し、最初に non-nil を返した結果を返す。
-    func firstMap<R>(_ transform: (Element) -> R?) -> R? {
-        for element in self {
-            if let result = transform(element) {
-                return result
-            }
-        }
-        return nil
     }
 }
