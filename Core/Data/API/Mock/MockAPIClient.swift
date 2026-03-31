@@ -122,8 +122,6 @@ final class MockAPIClient: PokeAPIClientProtocol {
     }
 
     private func extractChainId(from url: String) -> Int {
-        // "https://pokeapi.co/api/v2/evolution-chain/1/" → 1
-        let components = url.trimmingCharacters(in: CharacterSet(charactersIn: "/")).components(separatedBy: "/")
-        return Int(components.last ?? "") ?? 1
+        url.extractTrailingId(fallback: 1)
     }
 }

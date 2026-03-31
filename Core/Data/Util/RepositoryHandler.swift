@@ -88,6 +88,21 @@ extension Error {
     }
 }
 
+extension String {
+    /// URL 末尾のパスコンポーネントを Int として抽出する。
+    /// 例: "https://pokeapi.co/api/v2/pokemon/25/" → 25
+    func extractTrailingId(fallback: Int = 0) -> Int {
+        guard let last = trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+            .split(separator: "/")
+            .last,
+            let value = Int(last)
+        else {
+            return fallback
+        }
+        return value
+    }
+}
+
 /// HTTP ステータスコードエラー。PokeAPIClient から throw する。
 struct HTTPResponseError: Error {
     let statusCode: Int

@@ -35,13 +35,6 @@ extension [EvolutionStageModel] {
     }
 
     private static func extractId(from url: String) -> Int {
-        guard let last = url.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
-            .split(separator: "/")
-            .last,
-            let id = Int(last)
-        else {
-            return 0
-        }
-        return id
+        url.extractTrailingId()
     }
 }

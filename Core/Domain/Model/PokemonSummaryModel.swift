@@ -15,15 +15,7 @@ struct PokemonSummaryModel: Identifiable, Equatable {
     let url: String
 
     var id: Int {
-        guard let last = url
-            .trimmingCharacters(in: CharacterSet(charactersIn: "/"))
-            .split(separator: "/")
-            .last,
-            let value = Int(last)
-        else {
-            return 0
-        }
-        return value
+        url.extractTrailingId()
     }
 
     var imageUrl: String {
