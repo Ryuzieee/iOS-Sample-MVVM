@@ -24,23 +24,23 @@ final class GetEvolutionChainUseCase {
         let species = try await getPokemonSpeciesUseCase(name: name)
         let stages = try await repository.getEvolutionChain(url: species.evolutionChainUrl)
 
-        return await withTaskGroup(of: (Int, String).self) { group in
-            for (index, stage) in stages.enumerated() {
+        return await withTaskGroup(of: (String, String).self) { group in
+            for stage in stages {
                 group.addTask {
                     let jaName = try? await self.getPokemonSpeciesUseCase(name: stage.name).japaneseName
-                    return (index, jaName ?? "")
+                    return (stage.name, jaName ?? "")
                 }
             }
 
-            var jaNames = Array(repeating: "", count: stages.count)
-            for await (index, jaName) in group {
-                jaNames[index] = jaName
+            var jaNamesByName: [String: String] = [:]
+            for await (name, jaName) in group {
+                jaNamesByName[name] = jaName
             }
 
-            return zip(stages, jaNames).map { stage, jaName in
+            return stages.map { stage in
                 EvolutionStageModel(
                     name: stage.name,
-                    japaneseName: jaName,
+                    japaneseName: jaNamesByName[stage.name] ?? "",
                     id: stage.id,
                     imageUrl: stage.imageUrl,
                     minLevel: stage.minLevel
