@@ -12,25 +12,36 @@ struct ErrorContent: View {
     let error: AppError
     let onRetry: () -> Void
 
-    @State private var showSessionExpired = false
-    @State private var showForceUpdate = false
+    @State private var showDialog = false
 
     var body: some View {
         Group {
             switch error {
-            case .sessionExpired:
-                Color.clear.onAppear { showSessionExpired = true }
-            case .forceUpdate:
-                Color.clear.onAppear { showForceUpdate = true }
+            case .sessionExpired, .forceUpdate:
+                Color.clear.onAppear { showDialog = true }
             default:
                 retryContent
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .sessionExpiredDialog(isPresented: $showSessionExpired)
+        .sessionExpiredDialog(isPresented: sessionExpiredBinding)
         .forceUpdateDialog(
             storeUrl: forceUpdateStoreUrl,
-            isPresented: $showForceUpdate
+            isPresented: forceUpdateBinding
+        )
+    }
+
+    private var sessionExpiredBinding: Binding<Bool> {
+        Binding(
+            get: { showDialog && error == .sessionExpired },
+            set: { showDialog = $0 }
+        )
+    }
+
+    private var forceUpdateBinding: Binding<Bool> {
+        Binding(
+            get: { showDialog && error.isForceUpdate },
+            set: { showDialog = $0 }
         )
     }
 

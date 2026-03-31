@@ -16,6 +16,11 @@ enum AppError: LocalizedError, Equatable, Sendable {
     case forceUpdate(storeUrl: String)
     case unknown(String)
 
+    var isForceUpdate: Bool {
+        if case .forceUpdate = self { return true }
+        return false
+    }
+
     var errorDescription: String? {
         switch self {
         case .network:
