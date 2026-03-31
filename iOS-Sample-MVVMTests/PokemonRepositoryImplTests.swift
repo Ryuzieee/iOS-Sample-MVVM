@@ -14,7 +14,8 @@ final class PokemonRepositoryImplTests: XCTestCase {
 
     override func setUp() {
         apiClient = MockPokeAPIClient()
-        repository = PokemonRepositoryImpl(apiClient: apiClient)
+        let testCache = PokemonCacheStore(subdirectory: "PokemonCacheTest_\(UUID().uuidString)")
+        repository = PokemonRepositoryImpl(apiClient: apiClient, cacheStore: testCache)
     }
 
     func test_ポケモン一覧を正しく取得する() async throws {

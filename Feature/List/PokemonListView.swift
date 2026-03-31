@@ -18,13 +18,13 @@ struct PokemonListView: View {
         UiStateContent(
             state: viewModel.content,
             onRetry: viewModel.retry
-        ) { items in
+        ) { _ in
             ScrollView {
                 PokemonGrid(
                     items: viewModel.gridItems,
                     onPokemonTap: onPokemonTap,
                     onItemAppear: { index in
-                        if index >= items.count - AppConfig.paginationThreshold {
+                        if index >= viewModel.lastItems.count - AppConfig.paginationThreshold {
                             viewModel.loadMore()
                         }
                     }

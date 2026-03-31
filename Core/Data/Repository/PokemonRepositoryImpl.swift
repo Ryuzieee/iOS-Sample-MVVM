@@ -32,9 +32,9 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
         try await handleWithCache(
             forceRefresh: forceRefresh,
             cache: CacheStrategy(
-                load: { self.cacheStore.getPokemonDetail(name: name)?.data },
-                cachedAt: { _ in self.cacheStore.getPokemonDetail(name: name)?.cachedAt },
-                save: { detail in self.cacheStore.savePokemonDetail(detail, name: name) }
+                load: { await self.cacheStore.getPokemonDetail(name: name)?.data },
+                cachedAt: { _ in await self.cacheStore.getPokemonDetail(name: name)?.cachedAt },
+                save: { detail in await self.cacheStore.savePokemonDetail(detail, name: name) }
             ),
             fetch: { try await self.apiClient.getPokemonDetail(name: name) },
             toEntity: { PokemonDetailModel(from: $0) },
@@ -65,12 +65,12 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
 
     func searchPokemonNames(query: String) async throws -> [String] {
         let names: [String]
-        if let cached = cacheStore.getPokemonNames(), !cached.isExpired {
+        if let cached = await cacheStore.getPokemonNames(), !cached.isExpired {
             names = cached.data
         } else {
             let response = try await apiClient.getPokemonList(limit: pokemonListLimit, offset: 0)
             let fetched = response.toNames()
-            cacheStore.savePokemonNames(fetched)
+            await cacheStore.savePokemonNames(fetched)
             names = fetched
         }
         return PokemonListResponse.filter(names: names, query: query)

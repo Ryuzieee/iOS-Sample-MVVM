@@ -77,7 +77,9 @@ final class PokemonDetailViewModel: ObservableObject {
     private func load(forceRefresh: Bool = false) {
         loadTask?.cancel()
         loadTask = Task {
-            content = .loading
+            if !forceRefresh {
+                content = .loading
+            }
             isRefreshing = forceRefresh
 
             let state: UiState = await .from {

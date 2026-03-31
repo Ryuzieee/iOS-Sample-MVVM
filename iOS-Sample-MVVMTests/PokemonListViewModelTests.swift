@@ -29,7 +29,7 @@ final class PokemonListViewModelTests: XCTestCase {
 
         try? await Task.sleep(for: .milliseconds(100))
 
-        XCTAssertEqual(viewModel.items, TestFixtures.fakePokemonList)
+        XCTAssertEqual(viewModel.lastItems, TestFixtures.fakePokemonList)
         if case .success = viewModel.content {
             // OK
         } else {
@@ -50,7 +50,7 @@ final class PokemonListViewModelTests: XCTestCase {
         } else {
             XCTFail("Expected error state")
         }
-        XCTAssertTrue(viewModel.items.isEmpty)
+        XCTAssertTrue(viewModel.lastItems.isEmpty)
     }
 
     func test_refreshでリストが更新される() async {
@@ -63,6 +63,26 @@ final class PokemonListViewModelTests: XCTestCase {
         viewModel.refresh()
         try? await Task.sleep(for: .milliseconds(100))
 
-        XCTAssertEqual(viewModel.items, TestFixtures.fakePokemonList)
+        XCTAssertEqual(viewModel.lastItems, TestFixtures.fakePokemonList)
+    }
+
+    func test_リフレッシュ失敗時にデータが維持される() async {
+        repository.getPokemonListResult = .success(TestFixtures.fakePokemonList)
+
+        let viewModel = createViewModel()
+        viewModel.loadInitial()
+        try? await Task.sleep(for: .milliseconds(100))
+
+        repository.getPokemonListResult = .failure(AppError.network("timeout"))
+        viewModel.refresh()
+        try? await Task.sleep(for: .milliseconds(100))
+
+        // content は .error だが lastItems は前回データを維持
+        if case .error = viewModel.content {
+            // OK
+        } else {
+            XCTFail("Expected error state")
+        }
+        XCTAssertEqual(viewModel.lastItems, TestFixtures.fakePokemonList)
     }
 }

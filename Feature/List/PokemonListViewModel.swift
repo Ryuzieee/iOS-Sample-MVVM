@@ -15,12 +15,12 @@ final class PokemonListViewModel: ObservableObject {
     @Published var isLoadingMore = false
     @Published var loadMoreError: AppError?
 
-    var items: [PokemonSummaryModel] {
-        content.dataOrNil ?? []
-    }
+    /// 最後に成功したアイテム一覧。loadMore の offset 計算に使用。
+    private(set) var lastItems: [PokemonSummaryModel] = []
 
     var gridItems: [PokemonGridItem] {
-        items.map { PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl) }
+        let items = content.dataOrNil ?? lastItems
+        return items.map { PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl) }
     }
 
     private let getPokemonList: GetPokemonListUseCase
@@ -55,10 +55,10 @@ final class PokemonListViewModel: ObservableObject {
         loadMoreError = nil
         Task {
             do {
-                let result = try await getPokemonList(offset: items.count, limit: AppConfig.pageSize)
-                if case let .success(current) = content {
-                    content = .success(current + result)
-                }
+                let result = try await getPokemonList(offset: lastItems.count, limit: AppConfig.pageSize)
+                let merged = lastItems + result
+                lastItems = merged
+                content = .success(merged)
                 hasMore = result.count == AppConfig.pageSize
             } catch {
                 loadMoreError = error.toAppError()
@@ -79,6 +79,7 @@ final class PokemonListViewModel: ObservableObject {
             }
             content = state
             if case let .success(result) = state {
+                lastItems = result
                 hasMore = result.count == AppConfig.pageSize
             }
         }

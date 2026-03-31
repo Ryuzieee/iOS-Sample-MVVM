@@ -14,12 +14,12 @@ private let defaultStoreUrl = "https://apps.apple.com"
 /// キャッシュ読み書きの操作をまとめた型。handleWithCache の引数を整理する。
 struct CacheStrategy<E> {
     let load: () async throws -> E?
-    let cachedAt: ((E) -> Date?)?
+    let cachedAt: ((E) async -> Date?)?
     let save: ((E) async throws -> Void)?
 
     init(
         load: @escaping () async throws -> E?,
-        cachedAt: ((E) -> Date?)? = nil,
+        cachedAt: ((E) async -> Date?)? = nil,
         save: ((E) async throws -> Void)? = nil
     ) {
         self.load = load
@@ -39,7 +39,7 @@ func handleWithCache<D, E, R>(
     try await appRun {
         if !forceRefresh {
             if let entity = try await cache.load(),
-               !CacheConfig.isExpired(cachedAt: cache.cachedAt?(entity))
+               await !CacheConfig.isExpired(cachedAt: cache.cachedAt?(entity))
             {
                 return toModel(entity)
             }
