@@ -26,26 +26,16 @@ struct UiStateContent<T: Equatable, SuccessView: View, IdleView: View>: View {
                 onRetry: onRetry
             )
             .onChange(of: state) {
-                if case let .success(data) = state {
-                    cachedData = data
-                } else if case .idle = state {
-                    cachedData = nil
-                }
-                showErrorDialog = false
-                if case .error = state, cachedData != nil {
-                    showErrorDialog = true
-                }
+                updateCache()
+                // エラーダイアログは状態遷移ごとにリセットし、キャッシュありエラーなら再表示
+                showErrorDialog = overlayError != nil
             }
     }
 
     @ViewBuilder
     private var mainContent: some View {
-        if case let .success(data) = state {
-            successContent(data)
-        } else if case .loading = state, let cached = cachedData {
-            successContent(cached)
-        } else if case .error = state, let cached = cachedData {
-            successContent(cached)
+        if let displayData {
+            successContent(displayData)
         } else if case .loading = state {
             LoadingIndicator()
         } else if case let .error(appError) = state {
@@ -55,11 +45,27 @@ struct UiStateContent<T: Equatable, SuccessView: View, IdleView: View>: View {
         }
     }
 
+    /// Success のデータ、またはキャッシュ済みデータ（Loading/Error 時に維持）
+    private var displayData: T? {
+        if case let .success(data) = state { return data }
+        if cachedData != nil, case .loading = state { return cachedData }
+        if cachedData != nil, case .error = state { return cachedData }
+        return nil
+    }
+
     private var overlayError: AppError? {
         if case let .error(appError) = state, cachedData != nil {
             return appError
         }
         return nil
+    }
+
+    private func updateCache() {
+        if case let .success(data) = state {
+            cachedData = data
+        } else if case .idle = state {
+            cachedData = nil
+        }
     }
 }
 

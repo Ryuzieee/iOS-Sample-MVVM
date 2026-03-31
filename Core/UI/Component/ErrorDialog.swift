@@ -47,62 +47,51 @@ struct ErrorOverlayDialog: ViewModifier {
     @Binding var isPresented: Bool
     let onRetry: () -> Void
 
-    @State private var showSessionExpired = false
-    @State private var showForceUpdate = false
-
     func body(content: Content) -> some View {
         content
-            .alert(
-                Strings.Common.errorTitle,
-                isPresented: generalErrorBinding
-            ) {
-                Button(Strings.Common.retry) { onRetry() }
-                Button(Strings.Common.close, role: .cancel) {}
+            .alert(alertTitle, isPresented: $isPresented) {
+                alertActions
             } message: {
-                Text(generalErrorMessage)
-            }
-            .sessionExpiredDialog(isPresented: $showSessionExpired)
-            .forceUpdateDialog(storeUrl: forceUpdateStoreUrl, isPresented: $showForceUpdate)
-            .onChange(of: isPresented) {
-                guard isPresented, let error else { return }
-                switch error {
-                case .sessionExpired:
-                    showSessionExpired = true
-                case .forceUpdate:
-                    showForceUpdate = true
-                default:
-                    break
-                }
+                Text(alertMessage)
             }
     }
 
-    private var generalErrorBinding: Binding<Bool> {
-        Binding(
-            get: {
-                guard isPresented, let error else { return false }
-                switch error {
-                case .sessionExpired, .forceUpdate:
-                    return false
-                default:
-                    return true
+    private var alertTitle: String {
+        guard let error else { return Strings.Common.errorTitle }
+        switch error {
+        case .sessionExpired: return Strings.Dialog.sessionExpiredTitle
+        case .forceUpdate: return Strings.Dialog.forceUpdateTitle
+        default: return Strings.Common.errorTitle
+        }
+    }
+
+    private var alertMessage: String {
+        guard let error else { return Strings.Common.errorTitle }
+        switch error {
+        case .sessionExpired: return Strings.Dialog.sessionExpiredMessage
+        case .forceUpdate: return Strings.Dialog.forceUpdateMessage
+        case .network: return Strings.Error.networkMessage
+        default: return error.errorDescription ?? Strings.Common.errorTitle
+        }
+    }
+
+    @ViewBuilder
+    private var alertActions: some View {
+        switch error {
+        case .sessionExpired:
+            Button(Strings.Dialog.sessionExpiredButton) {
+                // TODO: ログイン画面へ遷移
+            }
+        case let .forceUpdate(storeUrl):
+            Button(Strings.Dialog.forceUpdateButton) {
+                if let url = URL(string: storeUrl) {
+                    UIApplication.shared.open(url)
                 }
-            },
-            set: { isPresented = $0 }
-        )
-    }
-
-    private var generalErrorMessage: String {
-        if let error, case .network = error {
-            return Strings.Error.networkMessage
+            }
+        default:
+            Button(Strings.Common.retry) { onRetry() }
+            Button(Strings.Common.close, role: .cancel) {}
         }
-        return error?.errorDescription ?? Strings.Common.errorTitle
-    }
-
-    private var forceUpdateStoreUrl: String {
-        if let error, case let .forceUpdate(storeUrl) = error {
-            return storeUrl
-        }
-        return ""
     }
 }
 
