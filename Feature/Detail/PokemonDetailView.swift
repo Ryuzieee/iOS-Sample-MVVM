@@ -96,8 +96,8 @@ struct PokemonDetailView: View {
                     .padding(.vertical, 8)
 
                 Text(Strings.Detail.heightWeight(
-                    heightCm: fullDetail.detail.height * 10,
-                    weightKg: Double(fullDetail.detail.weight) / 10.0
+                    heightCm: fullDetail.detail.heightCm,
+                    weightKg: fullDetail.detail.weightKg
                 ))
                 .font(.subheadline)
                 .padding(.bottom, 16)

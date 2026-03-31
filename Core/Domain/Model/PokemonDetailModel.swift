@@ -31,4 +31,14 @@ struct PokemonDetailModel: Identifiable, Equatable, Codable {
         var japaneseName = ""
         let isHidden: Bool
     }
+
+    /// 身長（cm）。API の height は dm 単位。
+    var heightCm: Int {
+        height * 10
+    }
+
+    /// 体重（kg）。API の weight は hg 単位。
+    var weightKg: Double {
+        Double(weight) / 10.0
+    }
 }

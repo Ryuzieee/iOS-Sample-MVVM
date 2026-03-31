@@ -40,16 +40,7 @@ struct PokemonInfoSheet: View {
                                 .joined(separator: Strings.Detail.eggGroupSeparator)
                         )
 
-                        let genderText: String = {
-                            if species.genderRate == -1 {
-                                return Strings.Detail.labelNoGender
-                            }
-                            // PokeAPI の genderRate は 0〜8 の値（1単位 = 12.5%）
-                            let femalePercent = Double(species.genderRate) * 12.5
-                            let malePercent = 100.0 - femalePercent
-                            return Strings.Detail.genderRatio(femalePercent: femalePercent, malePercent: malePercent)
-                        }()
-                        InfoRow(label: Strings.Detail.labelGenderRatio, value: genderText)
+                        InfoRow(label: Strings.Detail.labelGenderRatio, value: species.genderText)
 
                         Divider().padding(.vertical, 8)
                     }
