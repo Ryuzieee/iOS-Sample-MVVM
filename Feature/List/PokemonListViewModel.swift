@@ -18,6 +18,10 @@ final class PokemonListViewModel: ObservableObject {
     @Published var isLoadingMore = false
     @Published var isRefreshing = false
 
+    var gridItems: [PokemonGridItem] {
+        items.map { PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl) }
+    }
+
     private let getPokemonList: GetPokemonListUseCase
     private var hasMore = true
     private var loadTask: Task<Void, Never>?

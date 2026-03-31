@@ -13,15 +13,6 @@ struct PokemonDetailView: View {
     let onPokemonTap: (String) -> Void
     @State private var showInfo = false
 
-    private var displayName: String {
-        if let species = viewModel.content.dataOrNil?.species,
-           !species.japaneseName.isEmpty
-        {
-            return species.japaneseName
-        }
-        return viewModel.pokemonName.capitalized
-    }
-
     var body: some View {
         Group {
             switch viewModel.content {
@@ -35,7 +26,7 @@ struct PokemonDetailView: View {
                 EmptyView()
             }
         }
-        .navigationTitle(displayName)
+        .navigationTitle(viewModel.displayName)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -80,7 +71,7 @@ struct PokemonDetailView: View {
                 PokemonIdText(id: fullDetail.detail.id)
                     .padding(.top, 4)
 
-                Text(displayName)
+                Text(viewModel.displayName)
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(.top, 4)
