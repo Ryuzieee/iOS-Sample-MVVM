@@ -7,9 +7,6 @@
 
 import Foundation
 
-/// 言語フォールバックの優先順位: ja-Hrkt → ja → en
-private let languagePriority = ["ja-Hrkt", "ja", "en"]
-
 /// PokemonSpeciesResponse → PokemonSpeciesModel への変換。
 extension PokemonSpeciesModel {
     init(from response: PokemonSpeciesResponse) {
@@ -17,7 +14,7 @@ extension PokemonSpeciesModel {
             response.names.map { ($0.language.name, $0.name) },
             uniquingKeysWith: { first, _ in first }
         )
-        let jaName = languagePriority.firstMap { nameMap[$0] } ?? ""
+        let jaName = AppConfig.languagePriority.firstMap { nameMap[$0] } ?? ""
 
         let jaFlavorText = response.flavorTextEntries
             .last { $0.language.name == "ja" }?
