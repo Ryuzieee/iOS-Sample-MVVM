@@ -30,29 +30,29 @@ final class PokeAPIClient: PokeAPIClientProtocol {
 
     func getPokemonList(limit: Int, offset: Int) async throws -> PokemonListResponse {
         let url = "\(baseURL)pokemon?limit=\(limit)&offset=\(offset)"
-        return try await request(url: url)
+        return try await request(url: url, queryHint: "pokemon list")
     }
 
     func getPokemonDetail(name: String) async throws -> PokemonDetailResponse {
         let url = "\(baseURL)pokemon/\(name)"
-        return try await request(url: url)
+        return try await request(url: url, queryHint: name)
     }
 
     func getPokemonSpecies(name: String) async throws -> PokemonSpeciesResponse {
         let url = "\(baseURL)pokemon-species/\(name)"
-        return try await request(url: url)
+        return try await request(url: url, queryHint: name)
     }
 
     func getEvolutionChain(url: String) async throws -> EvolutionChainResponse {
-        try await request(url: url)
+        try await request(url: url, queryHint: url)
     }
 
     func getAbility(name: String) async throws -> AbilityResponse {
         let url = "\(baseURL)ability/\(name)"
-        return try await request(url: url)
+        return try await request(url: url, queryHint: name)
     }
 
-    private func request<T: Decodable>(url: String) async throws -> T {
+    private func request<T: Decodable>(url: String, queryHint: String) async throws -> T {
         guard let url = URL(string: url) else {
             throw AppError.unknown("Invalid URL")
         }
@@ -68,7 +68,7 @@ final class PokeAPIClient: PokeAPIClientProtocol {
 
         guard (200 ... 299).contains(httpResponse.statusCode) else {
             if httpResponse.statusCode == 404 {
-                throw AppError.notFound(query: url.absoluteString)
+                throw AppError.notFound(query: queryHint)
             }
             throw HTTPResponseError(
                 statusCode: httpResponse.statusCode,
