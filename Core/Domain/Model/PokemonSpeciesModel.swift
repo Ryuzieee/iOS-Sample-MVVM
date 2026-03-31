@@ -8,7 +8,7 @@
 import Foundation
 
 /// ポケモン種族情報（図鑑テキスト・分類など）。
-struct PokemonSpeciesModel: Equatable {
+struct PokemonSpeciesModel: Equatable, Sendable {
     let japaneseName: String
     let flavorText: String
     let genus: String
