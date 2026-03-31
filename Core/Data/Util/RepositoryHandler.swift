@@ -11,27 +11,42 @@ private let unauthorizedCode = 401
 private let forceUpdateCode = 426
 private let defaultStoreUrl = "https://apps.apple.com"
 
+/// キャッシュ読み書きの操作をまとめた型。handleWithCache の引数を整理する。
+struct CacheStrategy<E> {
+    let load: () async throws -> E?
+    let cachedAt: ((E) -> Date?)?
+    let save: ((E) async throws -> Void)?
+
+    init(
+        load: @escaping () async throws -> E?,
+        cachedAt: ((E) -> Date?)? = nil,
+        save: ((E) async throws -> Void)? = nil
+    ) {
+        self.load = load
+        self.cachedAt = cachedAt
+        self.save = save
+    }
+}
+
 /// キャッシュ付き Repository メソッドの共通ハンドラ。例外を AppError に変換する。
 func handleWithCache<D, E, R>(
     forceRefresh: Bool = false,
-    load: () async throws -> E?,
+    cache: CacheStrategy<E>,
     fetch: () async throws -> R,
     toEntity: (R) -> E,
-    toModel: (E) -> D,
-    cachedAt: ((E) -> Date?)? = nil,
-    save: ((E) async throws -> Void)? = nil
+    toModel: (E) -> D
 ) async throws -> D {
     try await appRun {
         if !forceRefresh {
-            if let entity = try await load(),
-               !CacheConfig.isExpired(cachedAt: cachedAt?(entity))
+            if let entity = try await cache.load(),
+               !CacheConfig.isExpired(cachedAt: cache.cachedAt?(entity))
             {
                 return toModel(entity)
             }
         }
         let raw = try await fetch()
         let entity = toEntity(raw)
-        try await save?(entity)
+        try await cache.save?(entity)
         return toModel(entity)
     }
 }

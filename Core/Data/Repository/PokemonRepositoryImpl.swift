@@ -31,12 +31,14 @@ final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
     func getPokemonDetail(name: String, forceRefresh: Bool) async throws -> PokemonDetailModel {
         try await handleWithCache(
             forceRefresh: forceRefresh,
-            load: { self.cacheStore.getPokemonDetail(name: name)?.data },
+            cache: CacheStrategy(
+                load: { self.cacheStore.getPokemonDetail(name: name)?.data },
+                cachedAt: { _ in self.cacheStore.getPokemonDetail(name: name)?.cachedAt },
+                save: { detail in self.cacheStore.savePokemonDetail(detail, name: name) }
+            ),
             fetch: { try await self.apiClient.getPokemonDetail(name: name) },
             toEntity: { PokemonDetailModel(from: $0) },
-            toModel: { $0 },
-            cachedAt: { _ in self.cacheStore.getPokemonDetail(name: name)?.cachedAt },
-            save: { detail in self.cacheStore.savePokemonDetail(detail, name: name) }
+            toModel: { $0 }
         )
     }
 
