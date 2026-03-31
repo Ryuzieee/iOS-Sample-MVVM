@@ -118,7 +118,7 @@ private struct SectionHeader: View {
         HStack {
             Text(title)
                 .font(.headline)
-                .padding(.leading, 16)
+                .padding(.leading, DesignTokens.sectionHorizontalPadding)
                 .padding(.bottom, 8)
             Spacer()
         }
@@ -136,7 +136,7 @@ private struct TypeBadges: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 4)
                     .background(Color(.systemGray5))
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .clipShape(RoundedRectangle(cornerRadius: DesignTokens.badgeCornerRadius))
             }
         }
     }
@@ -165,7 +165,7 @@ private struct StatRow: View {
                 .font(.caption)
                 .frame(width: 36, alignment: .trailing)
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, DesignTokens.sectionHorizontalPadding)
         .padding(.vertical, 2)
     }
 }
