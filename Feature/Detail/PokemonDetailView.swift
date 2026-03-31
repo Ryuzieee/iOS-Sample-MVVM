@@ -14,17 +14,11 @@ struct PokemonDetailView: View {
     @State private var showInfo = false
 
     var body: some View {
-        Group {
-            switch viewModel.content {
-            case .loading:
-                LoadingIndicator()
-            case let .error(appError):
-                ErrorContent(error: appError, onRetry: viewModel.retry)
-            case let .success(fullDetail):
-                detailContent(fullDetail)
-            case .idle:
-                EmptyView()
-            }
+        UiStateContent(
+            state: viewModel.content,
+            onRetry: viewModel.retry
+        ) { fullDetail in
+            detailContent(fullDetail)
         }
         .navigationTitle(viewModel.displayName)
         .navigationBarTitleDisplayMode(.inline)

@@ -22,22 +22,22 @@ struct SearchView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
 
-            switch viewModel.content {
-            case .idle:
-                EmptyContent(message: Strings.Search.searchIdleMessage)
-            case .loading:
-                LoadingIndicator()
-            case let .error(appError):
-                ErrorContent(error: appError, onRetry: viewModel.retrySearch)
-            case let .success(names):
-                List(names, id: \.self) { name in
-                    Button(action: { onPokemonTap(name) }) {
-                        Text(name.capitalized)
-                            .foregroundColor(.primary)
+            UiStateContent(
+                state: viewModel.content,
+                onRetry: viewModel.retrySearch,
+                successContent: { names in
+                    List(names, id: \.self) { name in
+                        Button(action: { onPokemonTap(name) }) {
+                            Text(name.capitalized)
+                                .foregroundColor(.primary)
+                        }
                     }
+                    .listStyle(.plain)
+                },
+                idleContent: {
+                    EmptyContent(message: Strings.Search.searchIdleMessage)
                 }
-                .listStyle(.plain)
-            }
+            )
         }
         .navigationTitle(Strings.List.searchDescription)
         .navigationBarTitleDisplayMode(.inline)

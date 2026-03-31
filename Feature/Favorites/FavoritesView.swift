@@ -14,28 +14,22 @@ struct FavoritesView: View {
     let onPokemonTap: (String) -> Void
 
     var body: some View {
-        Group {
-            switch viewModel.content {
-            case .loading:
-                LoadingIndicator()
-            case let .error(appError):
-                ErrorContent(error: appError, onRetry: viewModel.retry)
-            case let .success(favorites):
-                if favorites.isEmpty {
-                    EmptyContent(
-                        message: Strings.Favorites.emptyMessage,
-                        subMessage: Strings.Favorites.emptySubMessage
+        UiStateContent(
+            state: viewModel.content,
+            onRetry: viewModel.retry
+        ) { favorites in
+            if favorites.isEmpty {
+                EmptyContent(
+                    message: Strings.Favorites.emptyMessage,
+                    subMessage: Strings.Favorites.emptySubMessage
+                )
+            } else {
+                ScrollView {
+                    PokemonGrid(
+                        items: viewModel.gridItems,
+                        onPokemonTap: onPokemonTap
                     )
-                } else {
-                    ScrollView {
-                        PokemonGrid(
-                            items: viewModel.gridItems,
-                            onPokemonTap: onPokemonTap
-                        )
-                    }
                 }
-            case .idle:
-                EmptyView()
             }
         }
         .navigationTitle(Strings.Favorites.screenTitle)

@@ -46,6 +46,38 @@ struct PokemonListView: View {
         .refreshable {
             viewModel.refresh()
         }
+        .alert(
+            Strings.Common.errorTitle,
+            isPresented: refreshErrorBinding
+        ) {
+            Button(Strings.Common.retry) { viewModel.refresh() }
+            Button(Strings.Common.close, role: .cancel) {}
+        } message: {
+            Text(viewModel.refreshError?.errorDescription ?? Strings.Common.errorTitle)
+        }
+        .alert(
+            Strings.Common.errorTitle,
+            isPresented: loadMoreErrorBinding
+        ) {
+            Button(Strings.Common.retry) { viewModel.loadMore() }
+            Button(Strings.Common.close, role: .cancel) {}
+        } message: {
+            Text(viewModel.loadMoreError?.errorDescription ?? Strings.Common.errorTitle)
+        }
+    }
+
+    private var refreshErrorBinding: Binding<Bool> {
+        Binding(
+            get: { viewModel.refreshError != nil },
+            set: { if !$0 { viewModel.refreshError = nil } }
+        )
+    }
+
+    private var loadMoreErrorBinding: Binding<Bool> {
+        Binding(
+            get: { viewModel.loadMoreError != nil },
+            set: { if !$0 { viewModel.loadMoreError = nil } }
+        )
     }
 
     private var pokemonList: some View {
