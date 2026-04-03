@@ -58,25 +58,15 @@ final class GetPokemonFullDetailUseCase {
                 jaNames[index] = jaName
             }
 
-            let updatedAbilities = zip(detail.abilities, jaNames).map { ability, jaName in
+            var updated = detail
+            updated.abilities = zip(detail.abilities, jaNames).map { ability, jaName in
                 PokemonDetailModel.Ability(
                     name: ability.name,
                     japaneseName: jaName,
                     isHidden: ability.isHidden
                 )
             }
-
-            return PokemonDetailModel(
-                id: detail.id,
-                name: detail.name,
-                height: detail.height,
-                weight: detail.weight,
-                baseExperience: detail.baseExperience,
-                types: detail.types,
-                abilities: updatedAbilities,
-                imageUrl: detail.imageUrl,
-                stats: detail.stats
-            )
+            return updated
         }
     }
 }

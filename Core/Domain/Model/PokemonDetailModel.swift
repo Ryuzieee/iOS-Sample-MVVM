@@ -15,7 +15,7 @@ struct PokemonDetailModel: Identifiable, Equatable, Codable {
     let weight: Int
     let baseExperience: Int
     let types: [String]
-    let abilities: [Ability]
+    var abilities: [Ability]
     let imageUrl: String
     let stats: [Stat]
 
