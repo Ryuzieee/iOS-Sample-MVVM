@@ -13,7 +13,7 @@ struct MockScenarioSelector: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section(header: Text(Strings.Mock.sectionHeader)) {
                     ForEach(MockScenario.presets, id: \.scenario.id) { preset in
