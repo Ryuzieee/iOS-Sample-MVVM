@@ -18,7 +18,7 @@ final class PokemonListViewModelTests: XCTestCase {
 
     private func createViewModel() -> PokemonListViewModel {
         let useCase = GetPokemonListUseCase(repository: repository)
-        return PokemonListViewModel(getPokemonList: useCase)
+        return PokemonListViewModel(getPokemonListUseCase: useCase)
     }
 
     func test_初回読み込みでポケモン一覧を取得できる() async {

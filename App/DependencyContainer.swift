@@ -48,23 +48,23 @@ final class DependencyContainer {
     private lazy var toggleFavoriteUseCase = ToggleFavoriteUseCase(repository: favoriteRepository)
 
     func makePokemonListViewModel() -> PokemonListViewModel {
-        PokemonListViewModel(getPokemonList: getPokemonListUseCase)
+        PokemonListViewModel(getPokemonListUseCase: getPokemonListUseCase)
     }
 
     func makePokemonDetailViewModel(name: String) -> PokemonDetailViewModel {
         PokemonDetailViewModel(
             pokemonName: name,
-            getPokemonFullDetail: getPokemonFullDetailUseCase,
-            getIsFavorite: getIsFavoriteUseCase,
-            toggleFavorite: toggleFavoriteUseCase
+            getPokemonFullDetailUseCase: getPokemonFullDetailUseCase,
+            getIsFavoriteUseCase: getIsFavoriteUseCase,
+            toggleFavoriteUseCase: toggleFavoriteUseCase
         )
     }
 
     func makeSearchViewModel() -> SearchViewModel {
-        SearchViewModel(searchPokemon: searchPokemonUseCase)
+        SearchViewModel(searchPokemonUseCase: searchPokemonUseCase)
     }
 
     func makeFavoritesViewModel() -> FavoritesViewModel {
-        FavoritesViewModel(getFavorites: getFavoritesUseCase)
+        FavoritesViewModel(getFavoritesUseCase: getFavoritesUseCase)
     }
 }

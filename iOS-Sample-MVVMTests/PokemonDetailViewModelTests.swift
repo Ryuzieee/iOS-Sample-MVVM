@@ -37,9 +37,9 @@ final class PokemonDetailViewModelTests: XCTestCase {
 
         return PokemonDetailViewModel(
             pokemonName: name,
-            getPokemonFullDetail: fullDetailUseCase,
-            getIsFavorite: isFavoriteUseCase,
-            toggleFavorite: toggleFavoriteUseCase
+            getPokemonFullDetailUseCase: fullDetailUseCase,
+            getIsFavoriteUseCase: isFavoriteUseCase,
+            toggleFavoriteUseCase: toggleFavoriteUseCase
         )
     }
 

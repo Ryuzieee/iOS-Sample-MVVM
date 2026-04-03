@@ -23,12 +23,12 @@ final class PokemonListViewModel: ObservableObject {
         return items.map { PokemonGridItem(id: $0.id, name: $0.name, imageUrl: $0.imageUrl) }
     }
 
-    private let getPokemonList: GetPokemonListUseCase
+    private let getPokemonListUseCase: GetPokemonListUseCase
     private var hasMore = true
     private var loadTask: Task<Void, Never>?
 
-    init(getPokemonList: GetPokemonListUseCase) {
-        self.getPokemonList = getPokemonList
+    init(getPokemonListUseCase: GetPokemonListUseCase) {
+        self.getPokemonListUseCase = getPokemonListUseCase
     }
 
     deinit {
@@ -55,7 +55,7 @@ final class PokemonListViewModel: ObservableObject {
         loadMoreError = nil
         Task {
             do {
-                let result = try await getPokemonList(offset: lastItems.count, limit: AppConfig.pageSize)
+                let result = try await getPokemonListUseCase(offset: lastItems.count, limit: AppConfig.pageSize)
                 let merged = lastItems + result
                 lastItems = merged
                 content = .success(merged)
@@ -75,7 +75,7 @@ final class PokemonListViewModel: ObservableObject {
                 content = .loading
             }
             let state: UiState = await .from {
-                try await self.getPokemonList(offset: 0, limit: AppConfig.pageSize)
+                try await self.getPokemonListUseCase(offset: 0, limit: AppConfig.pageSize)
             }
             content = state
             if case let .success(result) = state {

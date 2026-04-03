@@ -18,7 +18,7 @@ final class SearchViewModelTests: XCTestCase {
 
     private func createViewModel() -> SearchViewModel {
         let useCase = SearchPokemonUseCase(repository: repository)
-        return SearchViewModel(searchPokemon: useCase)
+        return SearchViewModel(searchPokemonUseCase: useCase)
     }
 
     func test_初期状態はクエリが空でIdle状態になる() async {

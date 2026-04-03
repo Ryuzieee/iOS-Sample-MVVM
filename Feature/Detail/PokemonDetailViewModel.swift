@@ -26,21 +26,21 @@ final class PokemonDetailViewModel: ObservableObject {
         return pokemonName.capitalized
     }
 
-    private let getPokemonFullDetail: GetPokemonFullDetailUseCase
-    private let getIsFavorite: GetIsFavoriteUseCase
+    private let getPokemonFullDetailUseCase: GetPokemonFullDetailUseCase
+    private let getIsFavoriteUseCase: GetIsFavoriteUseCase
     private let toggleFavoriteUseCase: ToggleFavoriteUseCase
     private var loadTask: Task<Void, Never>?
 
     init(
         pokemonName: String,
-        getPokemonFullDetail: GetPokemonFullDetailUseCase,
-        getIsFavorite: GetIsFavoriteUseCase,
-        toggleFavorite: ToggleFavoriteUseCase
+        getPokemonFullDetailUseCase: GetPokemonFullDetailUseCase,
+        getIsFavoriteUseCase: GetIsFavoriteUseCase,
+        toggleFavoriteUseCase: ToggleFavoriteUseCase
     ) {
         self.pokemonName = pokemonName
-        self.getPokemonFullDetail = getPokemonFullDetail
-        self.getIsFavorite = getIsFavorite
-        toggleFavoriteUseCase = toggleFavorite
+        self.getPokemonFullDetailUseCase = getPokemonFullDetailUseCase
+        self.getIsFavoriteUseCase = getIsFavoriteUseCase
+        self.toggleFavoriteUseCase = toggleFavoriteUseCase
     }
 
     deinit {
@@ -83,7 +83,7 @@ final class PokemonDetailViewModel: ObservableObject {
             isRefreshing = forceRefresh
 
             let state: UiState = await .from {
-                try await getPokemonFullDetail(name: pokemonName, forceRefresh: forceRefresh)
+                try await getPokemonFullDetailUseCase(name: pokemonName, forceRefresh: forceRefresh)
             }
             content = state
             isRefreshing = false
@@ -96,7 +96,7 @@ final class PokemonDetailViewModel: ObservableObject {
     private func loadFavorite(pokemonId: Int) {
         Task { [weak self] in
             guard let self else { return }
-            isFavorite = await (try? getIsFavorite(id: pokemonId)) ?? false
+            isFavorite = await (try? getIsFavoriteUseCase(id: pokemonId)) ?? false
         }
     }
 }

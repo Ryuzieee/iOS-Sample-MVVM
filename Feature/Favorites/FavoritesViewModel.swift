@@ -20,11 +20,11 @@ final class FavoritesViewModel: ObservableObject {
         }
     }
 
-    private let getFavorites: GetFavoritesUseCase
+    private let getFavoritesUseCase: GetFavoritesUseCase
     private var loadTask: Task<Void, Never>?
 
-    init(getFavorites: GetFavoritesUseCase) {
-        self.getFavorites = getFavorites
+    init(getFavoritesUseCase: GetFavoritesUseCase) {
+        self.getFavoritesUseCase = getFavoritesUseCase
     }
 
     deinit {
@@ -49,7 +49,7 @@ final class FavoritesViewModel: ObservableObject {
         loadTask = Task {
             isRefreshing = forceRefresh
             content = await .from {
-                try await getFavorites()
+                try await getFavoritesUseCase()
             }
             isRefreshing = false
         }

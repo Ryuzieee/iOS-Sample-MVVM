@@ -18,7 +18,7 @@ final class FavoritesViewModelTests: XCTestCase {
 
     private func createViewModel() -> FavoritesViewModel {
         let useCase = GetFavoritesUseCase(repository: repository)
-        return FavoritesViewModel(getFavorites: useCase)
+        return FavoritesViewModel(getFavoritesUseCase: useCase)
     }
 
     func test_お気に入り取得成功時にSuccess状態になる() async {

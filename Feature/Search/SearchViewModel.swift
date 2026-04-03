@@ -14,12 +14,12 @@ final class SearchViewModel: ObservableObject {
     @Published var query = ""
     @Published var content: UiState<[String]> = .idle
 
-    private let searchPokemon: SearchPokemonUseCase
+    private let searchPokemonUseCase: SearchPokemonUseCase
     private var cancellables = Set<AnyCancellable>()
     private var searchTask: Task<Void, Never>?
 
-    init(searchPokemon: SearchPokemonUseCase) {
-        self.searchPokemon = searchPokemon
+    init(searchPokemonUseCase: SearchPokemonUseCase) {
+        self.searchPokemonUseCase = searchPokemonUseCase
 
         $query
             .debounce(for: .milliseconds(AppConfig.searchDebounceMs), scheduler: RunLoop.main)
@@ -50,7 +50,7 @@ final class SearchViewModel: ObservableObject {
         searchTask?.cancel()
         searchTask = Task {
             content = await .from {
-                try await searchPokemon(query: trimmed)
+                try await searchPokemonUseCase(query: trimmed)
             }
         }
     }
