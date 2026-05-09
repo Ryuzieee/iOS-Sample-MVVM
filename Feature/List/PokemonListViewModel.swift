@@ -48,6 +48,12 @@ final class PokemonListViewModel: ObservableObject {
         load(forceRefresh: true)
     }
 
+    func onItemAppear(index: Int) {
+        if index >= lastItems.count - AppConfig.paginationThreshold {
+            loadMore()
+        }
+    }
+
     func loadMore() {
         guard !isLoadingMore, hasMore else { return }
 
