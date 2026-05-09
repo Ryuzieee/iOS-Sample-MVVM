@@ -21,6 +21,16 @@ enum AppError: LocalizedError, Equatable {
         return false
     }
 
+    /// リトライで回復する可能性があるエラーかどうか。
+    var isRetryable: Bool {
+        switch self {
+        case .network, .server, .unknown:
+            true
+        case .notFound, .sessionExpired, .forceUpdate:
+            false
+        }
+    }
+
     var errorDescription: String? {
         switch self {
         case .network:
