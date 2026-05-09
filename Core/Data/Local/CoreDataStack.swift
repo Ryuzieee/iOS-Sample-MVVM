@@ -9,13 +9,23 @@ import CoreData
 import Foundation
 
 /// CoreData のスタックを管理するクラス。
+/// テスト時は `CoreDataStack(inMemory: true)` でインメモリストアを使用可能。
 final class CoreDataStack {
     static let shared = CoreDataStack()
 
     let container: NSPersistentContainer
 
-    private init() {
+    private convenience init() {
+        self.init(inMemory: false)
+    }
+
+    init(inMemory: Bool) {
         container = NSPersistentContainer(name: "iOS_Sample_MVVM")
+        if inMemory {
+            let description = NSPersistentStoreDescription()
+            description.type = NSInMemoryStoreType
+            container.persistentStoreDescriptions = [description]
+        }
         container.loadPersistentStores { _, error in
             if let error {
                 fatalError("CoreData load failed: \(error)")
