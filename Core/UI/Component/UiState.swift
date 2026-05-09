@@ -34,6 +34,21 @@ extension UiState {
         if case let .success(data) = self { return data }
         return nil
     }
+
+    var isLoading: Bool {
+        if case .loading = self { return true }
+        return false
+    }
+
+    var isIdle: Bool {
+        if case .idle = self { return true }
+        return false
+    }
+
+    var errorOrNil: AppError? {
+        if case let .error(appError) = self { return appError }
+        return nil
+    }
 }
 
 extension UiState where T == Bool {
