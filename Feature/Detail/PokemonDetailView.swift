@@ -105,7 +105,8 @@ struct PokemonDetailView: View {
     }
 }
 
-private struct SectionHeader: View {
+/// セクション見出し。再利用可能な共通コンポーネント。
+struct SectionHeader: View {
     let title: String
 
     var body: some View {
@@ -119,7 +120,8 @@ private struct SectionHeader: View {
     }
 }
 
-private struct TypeBadges: View {
+/// タイプバッジの横並び表示。
+struct TypeBadges: View {
     let types: [String]
 
     var body: some View {
@@ -136,7 +138,8 @@ private struct TypeBadges: View {
     }
 }
 
-private struct BaseStatsSection: View {
+/// ステータス一覧セクション。
+struct BaseStatsSection: View {
     let stats: [PokemonDetailModel.Stat]
 
     var body: some View {
@@ -146,7 +149,8 @@ private struct BaseStatsSection: View {
     }
 }
 
-private struct StatRow: View {
+/// ステータス1行 (名前 + プログレスバー + 数値)。
+struct StatRow: View {
     let stat: PokemonDetailModel.Stat
 
     var body: some View {
