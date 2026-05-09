@@ -29,7 +29,7 @@ struct ContentView: View {
                 onSearchTap: { showSearch = true },
                 onFavoritesTap: { showFavorites = true }
             )
-            .pokemonDetailDestination(container: container, path: $path)
+            .routeDestination(container: container, path: $path)
         }
         .sheet(isPresented: $showSearch, onDismiss: { searchPath = [] }) {
             NavigationStack(path: $searchPath) {
@@ -37,7 +37,7 @@ struct ContentView: View {
                     viewModel: container.makeSearchViewModel(),
                     onPokemonTap: { name in searchPath.append(.detail(name)) }
                 )
-                .pokemonDetailDestination(container: container, path: $searchPath)
+                .routeDestination(container: container, path: $searchPath)
             }
         }
         .sheet(isPresented: $showFavorites, onDismiss: { favoritesPath = [] }) {
@@ -46,7 +46,7 @@ struct ContentView: View {
                     viewModel: container.makeFavoritesViewModel(),
                     onPokemonTap: { name in favoritesPath.append(.detail(name)) }
                 )
-                .pokemonDetailDestination(container: container, path: $favoritesPath)
+                .routeDestination(container: container, path: $favoritesPath)
             }
         }
         #if MOCK
@@ -68,12 +68,15 @@ struct ContentView: View {
     }
 }
 
-/// ナビゲーションルート定義。
+/// ナビゲーションルート定義。新画面を追加する場合は case を追加し、
+/// RouteDestination の switch に対応するビューを記述する。
 enum Route: Hashable {
     case detail(String)
 }
 
-private struct PokemonDetailDestination: ViewModifier {
+/// Route に対応する遷移先ビューを解決する ViewModifier。
+/// NavigationStack ごとに `.routeDestination()` を付けるだけで全ルートが有効になる。
+private struct RouteDestination: ViewModifier {
     let container: DependencyContainer
     @Binding var path: [Route]
 
@@ -91,10 +94,10 @@ private struct PokemonDetailDestination: ViewModifier {
 }
 
 private extension View {
-    func pokemonDetailDestination(
+    func routeDestination(
         container: DependencyContainer,
         path: Binding<[Route]>
     ) -> some View {
-        modifier(PokemonDetailDestination(container: container, path: path))
+        modifier(RouteDestination(container: container, path: path))
     }
 }

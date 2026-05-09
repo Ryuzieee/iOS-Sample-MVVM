@@ -9,7 +9,6 @@ import SwiftUI
 
 /// お気に入り一覧画面。
 struct FavoritesView: View {
-    @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: FavoritesViewModel
     let onPokemonTap: (String) -> Void
 
@@ -34,11 +33,7 @@ struct FavoritesView: View {
         }
         .navigationTitle(Strings.Favorites.screenTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(Strings.Common.close) { dismiss() }
-            }
-        }
+        .dismissToolbar()
         .task {
             viewModel.loadIfNeeded()
         }

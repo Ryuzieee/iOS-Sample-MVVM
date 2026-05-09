@@ -7,10 +7,18 @@
 
 import Foundation
 
+/// ポケモンキャッシュストアのプロトコル。テスト時にモック差し替え可能。
+protocol PokemonCacheStoreProtocol: Sendable {
+    func getPokemonDetail(name: String) async -> CachedEntry<PokemonDetailModel>?
+    func savePokemonDetail(_ detail: PokemonDetailModel, name: String) async
+    func getPokemonNames() async -> CachedEntry<[String]>?
+    func savePokemonNames(_ names: [String]) async
+}
+
 /// ポケモンデータのローカルキャッシュ。Codable + FileManager ベース。
 /// Android の Room (PokemonDetailEntity / PokemonNameEntity) に相当。
 /// actor でスレッド安全性を保証する。
-actor PokemonCacheStore {
+actor PokemonCacheStore: PokemonCacheStoreProtocol {
     static let shared = PokemonCacheStore()
 
     private let fileManager = FileManager.default

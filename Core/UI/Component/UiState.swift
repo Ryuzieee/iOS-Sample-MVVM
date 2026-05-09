@@ -34,6 +34,21 @@ extension UiState {
         if case let .success(data) = self { return data }
         return nil
     }
+
+    var isLoading: Bool {
+        if case .loading = self { return true }
+        return false
+    }
+
+    var isIdle: Bool {
+        if case .idle = self { return true }
+        return false
+    }
+
+    var errorOrNil: AppError? {
+        if case let .error(appError) = self { return appError }
+        return nil
+    }
 }
 
 extension UiState where T == Bool {
@@ -41,4 +56,34 @@ extension UiState where T == Bool {
     static var loaded: UiState {
         .success(true)
     }
+}
+
+/// 非同期データ読み込みの共通パターンを提供するプロトコル。
+/// load/retry/refresh/Task キャンセルのボイラープレートを統一する。
+@MainActor
+protocol AsyncLoadable: ObservableObject {
+    associatedtype Content: Equatable
+    var content: UiState<Content> { get set }
+    var loadTask: Task<Void, Never>? { get set }
+
+    func fetchContent(forceRefresh: Bool) async throws -> Content
+}
+
+extension AsyncLoadable {
+    func load(forceRefresh: Bool = false) {
+        loadTask?.cancel()
+        loadTask = Task {
+            if !forceRefresh {
+                content = .loading
+            }
+            content = await .from {
+                try await fetchContent(forceRefresh: forceRefresh)
+            }
+        }
+    }
+
+    func retry() { load() }
+    func refresh() { load(forceRefresh: true) }
+
+    func cancelLoad() { loadTask?.cancel() }
 }

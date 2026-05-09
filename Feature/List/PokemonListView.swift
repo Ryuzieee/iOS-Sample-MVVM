@@ -23,11 +23,7 @@ struct PokemonListView: View {
                 PokemonGrid(
                     items: viewModel.gridItems,
                     onPokemonTap: onPokemonTap,
-                    onItemAppear: { index in
-                        if index >= viewModel.lastItems.count - AppConfig.paginationThreshold {
-                            viewModel.loadMore()
-                        }
-                    }
+                    onItemAppear: viewModel.onItemAppear
                 )
 
                 if viewModel.isLoadingMore {

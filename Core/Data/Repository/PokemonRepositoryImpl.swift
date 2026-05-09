@@ -12,9 +12,9 @@ private let pokemonListLimit = 2000
 /// PokemonRepositoryProtocol の実装クラス。
 final class PokemonRepositoryImpl: PokemonRepositoryProtocol {
     private let apiClient: PokeAPIClientProtocol
-    private let cacheStore: PokemonCacheStore
+    private let cacheStore: PokemonCacheStoreProtocol
 
-    init(apiClient: PokeAPIClientProtocol, cacheStore: PokemonCacheStore = .shared) {
+    init(apiClient: PokeAPIClientProtocol, cacheStore: PokemonCacheStoreProtocol = PokemonCacheStore.shared) {
         self.apiClient = apiClient
         self.cacheStore = cacheStore
     }
