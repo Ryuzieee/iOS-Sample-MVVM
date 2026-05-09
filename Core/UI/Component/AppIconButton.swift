@@ -23,6 +23,25 @@ struct AppIconButton: View {
     }
 }
 
+/// モーダル画面に「閉じる」ToolbarItem を追加する ViewModifier。
+struct DismissToolbar: ViewModifier {
+    @Environment(\.dismiss) private var dismiss
+
+    func body(content: Content) -> some View {
+        content.toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(Strings.Common.close) { dismiss() }
+            }
+        }
+    }
+}
+
+extension View {
+    func dismissToolbar() -> some View {
+        modifier(DismissToolbar())
+    }
+}
+
 #Preview {
     HStack(spacing: 16) {
         AppIconButton(systemName: "magnifyingglass", accessibilityLabel: "Search", action: {})
