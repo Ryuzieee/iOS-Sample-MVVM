@@ -10,9 +10,9 @@ import Foundation
 
 /// お気に入り一覧画面のViewModel。
 @MainActor
-final class FavoritesViewModel: ObservableObject {
+final class FavoritesViewModel: ObservableObject, AsyncLoadable {
     @Published var content: UiState<[FavoriteModel]> = .loading
-    @Published var isRefreshing = false
+    var loadTask: Task<Void, Never>?
 
     var gridItems: [PokemonGridItem] {
         (content.dataOrNil ?? []).map {
@@ -21,40 +21,19 @@ final class FavoritesViewModel: ObservableObject {
     }
 
     private let getFavoritesUseCase: GetFavoritesUseCase
-    private var loadTask: Task<Void, Never>?
 
     init(getFavoritesUseCase: GetFavoritesUseCase) {
         self.getFavoritesUseCase = getFavoritesUseCase
     }
 
-    deinit {
-        loadTask?.cancel()
-    }
+    deinit { cancelLoad() }
 
     func loadIfNeeded() {
-        guard case .loading = content else { return }
+        guard content.isLoading else { return }
         load()
     }
 
-    func retry() {
-        load()
-    }
-
-    func refresh() {
-        load(forceRefresh: true)
-    }
-
-    private func load(forceRefresh: Bool = false) {
-        loadTask?.cancel()
-        loadTask = Task {
-            if !forceRefresh {
-                content = .loading
-            }
-            isRefreshing = forceRefresh
-            content = await .from {
-                try await getFavoritesUseCase()
-            }
-            isRefreshing = false
-        }
+    func fetchContent(forceRefresh: Bool) async throws -> [FavoriteModel] {
+        try await getFavoritesUseCase()
     }
 }
